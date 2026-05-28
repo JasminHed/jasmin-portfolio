@@ -1,86 +1,218 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jasmin — Webb för småföretag</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/global.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jasmin Hedlund — Webb för småföretag</title>
+<meta name="description" content="Unika webbplatser till svenska småföretag. Handbyggd design, tillgänglig kod och löpande support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/global.css">
 </head>
 <body>
 
-<a class="skip-link" href="#main">Hoppa till innehåll</a>
+<a class="skip" href="#main">Hoppa till innehåll</a>
 
+<!-- NAV -->
 <nav role="navigation" aria-label="Huvudnavigation">
-  <a class="nav-logo" href="#">Jasmin</a>
-  <button class="nav-toggle" aria-label="Öppna meny" aria-expanded="false" aria-controls="nav-menu">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="nav-menu" role="list">
+  <a class="nav-logo" href="#" aria-label="Jasmin Hedlund — startsida">Jasmin Hedlund</a>
+  <ul class="nav-links" role="list">
     <li><a href="#teman">Teman</a></li>
-    <li><a href="#projekt">Tidigare projekt</a></li>
-    <li><a href="#hur">Hur det funkar</a></li>
+    <li><a href="#priser">Priser</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
+  <a href="#kontakt" class="nav-cta">Kom igång</a>
+  <button class="hamburger" id="ham" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav">
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
 </nav>
+
+<!-- MOBIL NAV -->
+<div class="mob-nav" id="mob-nav" role="dialog" aria-modal="true" aria-label="Meny">
+  <button class="mob-close" id="mob-close" aria-label="Stäng meny">Stäng</button>
+  <a href="#teman">Teman</a>
+  <a href="#priser">Priser</a>
+  <a href="#kontakt">Kontakt</a>
+</div>
 
 <main id="main">
 
 <!-- HERO -->
 <section class="hero" aria-label="Introduktion">
-  <div class="hero-left">
-    <p class="hero-eyebrow">Webb för småföretag</p>
-    <h1>Din sida,<br><em>byggd med</em><br>omsorg.</h1>
-    <p class="hero-desc">Jag bygger unika webbplatser till svenska småföretag — ingen mall, ingen kompromiss. Sedan tar jag hand om allt löpande för 500 kr/mån.</p>
-    <div class="hero-cta">
-      <a href="#kontakt" class="btn-primary">Kom igång</a>
-      <a href="#teman" class="btn-secondary">Se teman</a>
-    </div>
+  <p class="hero-eyebrow">Webb för småföretag</p>
+  <h1>Din sida,<br>byggd med omsorg.</h1>
+  <p class="hero-sub">
+    Jag bygger unika webbplatser till svenska småföretag.
+    Ingen mall, ingen kompromiss. Sedan tar jag hand om
+    allt löpande — du behöver inte tänka på det.
+  </p>
+  <div class="hero-price-note" aria-label="Prisinformation">
+    <span>Från 2 500 kr engång</span>
+    <span>500 kr per månad</span>
+    <span>Klar på 3–5 veckor</span>
   </div>
-  <div class="hero-right" aria-hidden="true">
-    <div class="hero-visual">
-      <div class="hero-card">
-        <p class="hero-card-label">Tema — Bokhandel</p>
-        <p class="hero-card-title">Ord &amp; Omslag</p>
-        <div class="hero-card-bar"></div>
-        <div class="hero-card-line"></div>
-        <div class="hero-card-line short"></div>
-        <div class="hero-card-line"></div>
-        <span class="hero-tag">Bokhandel</span>
-      </div>
-      <div class="floating-badge">3–5 veckor</div>
+  <div class="hero-ctas">
+    <a href="#kontakt" class="btn-primary">Kom igång</a>
+    <a href="#teman" class="btn-ghost">Se teman</a>
+  </div>
+</section>
+
+<!-- TEMPLATES -->
+<section class="templates" id="teman" aria-labelledby="teman-h">
+  <div class="templates-inner">
+    <div class="templates-hdr">
+      <p class="section-tag">Mina teman</p>
+      <h2 class="section-heading" id="teman-h">Tre riktningar,<br>inga likadana.</h2>
+    </div>
+    <p class="templates-sub">
+      Varje tema är byggt från grunden för sin bransch.
+      Färger, typsnitt och layout skiljer sig helt åt.
+      Allt anpassas till ditt företag.
+    </p>
+
+    <div class="tmpl-grid" role="list">
+
+      <!-- Yoga -->
+      <a href="yoga-studio.html" class="tmpl-card tmpl-yoga" role="listitem"
+         aria-label="Yoga och wellness-tema: Ro Studio — se demo">
+        <div class="tmpl-preview" aria-hidden="true">
+          <div class="tmpl-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="tmpl-mock-nav">
+            <div class="tmpl-mock-logo"></div>
+            <div class="tmpl-mock-links">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="tmpl-mock-hero"></div>
+          <div class="tmpl-mock-grid">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="tmpl-info">
+          <span class="tmpl-nisch">Yoga / Wellness</span>
+          <h3 class="tmpl-name">Ro Studio</h3>
+          <ul class="tmpl-features" aria-label="Vad som ingår">
+            <li>Schema och bokningssystem</li>
+            <li>Klasser, behandlingar och priser</li>
+            <li>Uthyrning av lokal</li>
+          </ul>
+          <span class="tmpl-link" aria-hidden="true">Se demo</span>
+        </div>
+      </a>
+
+      <!-- Bokhandel -->
+      <a href="sidvandaren.html" class="tmpl-card tmpl-bokhandel" role="listitem"
+         aria-label="Bokhandel och café-tema: Sidvändaren — se demo">
+        <div class="tmpl-preview" aria-hidden="true">
+          <div class="tmpl-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="tmpl-mock-nav">
+            <div class="tmpl-mock-logo"></div>
+            <div class="tmpl-mock-links">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="tmpl-mock-hero"></div>
+          <div class="tmpl-mock-grid">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="tmpl-info">
+          <span class="tmpl-nisch">Bokhandel / Café</span>
+          <h3 class="tmpl-name">Sidvändaren</h3>
+          <ul class="tmpl-features" aria-label="Vad som ingår">
+            <li>Webshop med varukorg och filter</li>
+            <li>Evenemang och kalender</li>
+            <li>Meny och öppettider</li>
+          </ul>
+          <span class="tmpl-link" aria-hidden="true">Se demo</span>
+        </div>
+      </a>
+
+      <!-- Smycken / E-handel -->
+      <a href="smycken.html" class="tmpl-card tmpl-smycken" role="listitem"
+         aria-label="E-handel och småbutik-tema: OREN — se demo">
+        <div class="tmpl-preview" aria-hidden="true">
+          <div class="tmpl-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="tmpl-mock-nav">
+            <div class="tmpl-mock-logo"></div>
+            <div class="tmpl-mock-links">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="tmpl-mock-hero"></div>
+          <div class="tmpl-mock-grid">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="tmpl-info">
+          <span class="tmpl-nisch">E-handel / Butik</span>
+          <h3 class="tmpl-name">OREN</h3>
+          <ul class="tmpl-features" aria-label="Vad som ingår">
+            <li>Produktgrid med filter och varukorg</li>
+            <li>Om oss och materialsektion</li>
+            <li>Nyhetsbrev och kassaklöde</li>
+          </ul>
+          <span class="tmpl-link" aria-hidden="true">Se demo</span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
 
-<!-- HUR DET FUNKAR -->
-<section class="section" id="hur" aria-labelledby="hur-heading">
-  <div class="section-inner">
-    <p class="section-label" aria-hidden="true">Hur det funkar</p>
-    <h2 id="hur-heading">Enkelt.<br><em>Utan krångel.</em></h2>
+<!-- PROCESS / PRISER -->
+<section class="process" id="priser" aria-labelledby="priser-h">
+  <div class="process-inner">
+    <div class="process-hdr">
+      <p class="section-tag">Hur det funkar</p>
+      <h2 class="section-heading" id="priser-h">Enkelt, utan krångel.</h2>
+    </div>
     <div class="process-grid">
 
-      <div class="process-step">
+      <div class="step">
         <p class="step-num" aria-hidden="true">01</p>
         <h3 class="step-title">Vi pratar</h3>
-        <p class="step-desc">Berätta om ditt företag, vad du behöver och vilken känsla du vill ha. Kostnadsfritt samtal, inga bindningar.</p>
+        <p class="step-desc">
+          Berätta om ditt företag, vad du behöver och vilken känsla
+          du vill ha. Kostnadsfritt samtal, inga bindningar.
+        </p>
       </div>
 
-      <div class="process-step">
+      <div class="step">
         <p class="step-num" aria-hidden="true">02</p>
         <h3 class="step-title">Du förbereder, jag bygger</h3>
-        <p class="step-desc">Innan vi sätter igång behöver du ha text, bilder och länkar redo. Sedan bygger jag din skräddarsydda sida på 3–5 veckor — du ser utkast längs vägen.</p>
+        <p class="step-desc">
+          Innan vi sätter igång behöver du ha text, bilder och
+          logotyp redo. Sedan bygger jag din skräddarsydda sida
+          på 3–5 veckor. Du ser utkast längs vägen.
+        </p>
         <div class="step-price">
           <span class="price-amount">2 500 kr</span>
           <span class="price-unit">engång</span>
         </div>
       </div>
 
-      <div class="process-step">
+      <div class="step">
         <p class="step-num" aria-hidden="true">03</p>
         <h3 class="step-title">Löpande underhåll</h3>
-        <p class="step-desc">Jag finns kvar och håller sidan uppdaterad, säker och snabb. Du slipper tänka på det.</p>
+        <p class="step-desc">
+          Jag finns kvar och håller sidan uppdaterad, säker
+          och snabb. Du slipper tänka på det — jag fixar allt.
+        </p>
         <div class="step-price">
           <span class="price-amount">500 kr</span>
           <span class="price-unit">/ mån</span>
@@ -88,184 +220,107 @@
       </div>
 
     </div>
-  </div>
-</section>
-
-<!-- TEMPLATES -->
-<section class="templates-section" id="teman" aria-labelledby="teman-heading">
-  <div class="templates-inner">
-    <p class="section-label gold-label" aria-hidden="true">Mina teman</p>
-    <h2 id="teman-heading" class="light-h2">Fem riktningar,<br><em>inga likadana.</em></h2>
-    <div class="templates-grid" role="list">
-
-      <a href="teman/bokhandel.html" class="template-card t-bokhandel" role="listitem" aria-label="Bokhandel-tema: Ord och Omslag — se demo">
-        <div class="template-bg" aria-hidden="true"></div>
-        <div class="fake-header" aria-hidden="true">
-          <div class="fake-logo"></div>
-          <div class="fake-nav"><span></span><span></span><span></span></div>
-        </div>
-        <div class="fake-img" aria-hidden="true"></div>
-        <div class="template-content">
-          <div class="t-accent" aria-hidden="true"></div>
-          <p class="t-nisch">Bokhandel</p>
-          <p class="t-name">Ord &amp;<br>Omslag</p>
-          <p class="t-soon">Demo →</p>
-        </div>
-      </a>
-
-      <a href="teman/bibliotek.html" class="template-card t-bibliotek" role="listitem" aria-label="Bibliotek-tema: Arkivet — se demo">
-        <div class="template-bg" aria-hidden="true"></div>
-        <div class="fake-header" aria-hidden="true">
-          <div class="fake-logo"></div>
-          <div class="fake-nav"><span></span><span></span><span></span></div>
-        </div>
-        <div class="fake-img" aria-hidden="true"></div>
-        <div class="template-content">
-          <div class="t-accent" aria-hidden="true"></div>
-          <p class="t-nisch">Bibliotek / Plattform</p>
-          <p class="t-name">Arkivet</p>
-          <p class="t-soon">Demo →</p>
-        </div>
-      </a>
-
-      <a href="teman/yoga.html" class="template-card t-yoga" role="listitem" aria-label="Yoga-tema: Rötter och Ro — se demo">
-        <div class="template-bg" aria-hidden="true"></div>
-        <div class="fake-header" aria-hidden="true">
-          <div class="fake-logo"></div>
-          <div class="fake-nav"><span></span><span></span><span></span></div>
-        </div>
-        <div class="fake-img" aria-hidden="true"></div>
-        <div class="template-content">
-          <div class="t-accent" aria-hidden="true"></div>
-          <p class="t-nisch yoga-nisch">Yoga / Wellness</p>
-          <p class="t-name yoga-name">Rötter &amp;<br>Ro</p>
-          <p class="t-soon yoga-soon">Demo →</p>
-        </div>
-      </a>
-
-      <a href="teman/butik.html" class="template-card t-butik" role="listitem" aria-label="Butik-tema: Petit Studio — se demo">
-        <div class="template-bg" aria-hidden="true"></div>
-        <div class="fake-header" aria-hidden="true">
-          <div class="fake-logo"></div>
-          <div class="fake-nav"><span></span><span></span><span></span></div>
-        </div>
-        <div class="fake-img" aria-hidden="true"></div>
-        <div class="template-content">
-          <div class="t-accent" aria-hidden="true"></div>
-          <p class="t-nisch">Butik / E-handel</p>
-          <p class="t-name">Petit<br>Studio</p>
-          <p class="t-soon">Demo →</p>
-        </div>
-      </a>
-
-      <a href="teman/konsult.html" class="template-card t-konsult" role="listitem" aria-label="Konsult-tema: Klar Kurs — se demo">
-        <div class="template-bg" aria-hidden="true"></div>
-        <div class="fake-header" aria-hidden="true">
-          <div class="fake-logo"></div>
-          <div class="fake-nav"><span></span><span></span><span></span></div>
-        </div>
-        <div class="fake-img" aria-hidden="true"></div>
-        <div class="template-content">
-          <div class="t-accent" aria-hidden="true"></div>
-          <p class="t-nisch">Konsult / Coach</p>
-          <p class="t-name">Klar<br>Kurs</p>
-          <p class="t-soon">Demo →</p>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- TIDIGARE PROJEKT -->
-<section class="previous-section" id="projekt" aria-labelledby="projekt-heading">
-  <div class="previous-inner">
-    <p class="section-label" aria-hidden="true">Tidigare arbeten</p>
-    <h2 id="projekt-heading">Projekt jag<br><em>är stolt över.</em></h2>
-    <div class="prev-grid">
-
-      <article class="prev-card">
-        <div class="prev-thumb allergi" aria-hidden="true">Unga Allergiker</div>
-        <div class="prev-info">
-          <p class="prev-platform">Squarespace</p>
-          <h3 class="prev-name">Unga Allergiker</h3>
-          <p class="prev-type">Ideell organisation</p>
-          <a href="#" class="prev-link" aria-label="Besök Unga Allergiker (öppnas i ny flik)">Besök sidan ↗</a>
-        </div>
-      </article>
-
-      <article class="prev-card">
-        <div class="prev-thumb zikki" aria-hidden="true">Zikki Design</div>
-        <div class="prev-info">
-          <p class="prev-platform">Squarespace · zikkidesign.com</p>
-          <h3 class="prev-name">Zikki Design</h3>
-          <p class="prev-type">Design &amp; Kreativt</p>
-          <a href="https://zikkidesign.com" class="prev-link" target="_blank" rel="noopener noreferrer" aria-label="Besök Zikki Design (öppnas i ny flik)">Besök sidan ↗</a>
-        </div>
-      </article>
-
-      <article class="prev-card">
-        <div class="prev-thumb yoga-prev" aria-hidden="true">Heidi Kay Yoga</div>
-        <div class="prev-info">
-          <p class="prev-platform">Squarespace · heidikayoga.com</p>
-          <h3 class="prev-name">Heidi Kay Yoga</h3>
-          <p class="prev-type">Yoga &amp; Wellness</p>
-          <a href="https://heidikayoga.com" class="prev-link" target="_blank" rel="noopener noreferrer" aria-label="Besök Heidi Kay Yoga (öppnas i ny flik)">Besök sidan ↗</a>
-        </div>
-      </article>
-
-    </div>
+    <p class="process-note">
+      Ingår i månadsavtalet: små textjusteringar, uppdateringar,
+      säkerhetskopior och teknisk support. Domän och hosting
+      tillkommer enligt leverantör.
+    </p>
   </div>
 </section>
 
 <!-- KONTAKT -->
-<section class="contact-section" id="kontakt" aria-labelledby="kontakt-heading">
+<section class="contact" id="kontakt" aria-labelledby="kontakt-h">
   <div class="contact-inner">
-    <p class="section-label center-label" aria-hidden="true">Kontakt</p>
-    <h2 id="kontakt-heading">Ska vi bygga<br><em>din sida?</em></h2>
-    <p class="contact-desc">Hör av dig så bokar vi ett kostnadsfritt samtal. Jag svarar inom 24 timmar.</p>
-    <div class="contact-box">
-      <div class="field-group">
-        <label class="field-label" for="name">Namn</label>
-        <input type="text" id="name" class="field-input" placeholder="Ditt namn" autocomplete="name">
+    <p class="section-tag">Kontakt</p>
+    <h2 class="section-heading" id="kontakt-h">Ska vi bygga<br>din sida?</h2>
+    <p class="contact-sub">
+      Hör av dig så bokar vi ett kostnadsfritt samtal.
+      Jag svarar inom 24 timmar.
+    </p>
+    <form class="contact-form" onsubmit="handleSubmit(event)"
+          aria-label="Kontaktformulär" novalidate>
+      <div class="f-group">
+        <label class="f-label" for="f-name">Namn</label>
+        <input type="text" id="f-name" class="f-input"
+               placeholder="Ditt namn" autocomplete="name"
+               required aria-required="true">
       </div>
-      <div class="field-group">
-        <label class="field-label" for="email">E-post</label>
-        <input type="email" id="email" class="field-input" placeholder="din@email.se" autocomplete="email">
+      <div class="f-group">
+        <label class="f-label" for="f-email">E-post</label>
+        <input type="email" id="f-email" class="f-input"
+               placeholder="din@email.se" autocomplete="email"
+               required aria-required="true">
       </div>
-      <div class="field-group">
-        <label class="field-label" for="message">Berätta lite</label>
-        <textarea id="message" class="field-input" placeholder="Vad gör ditt företag? Vilket tema gillar du?"></textarea>
+      <div class="f-group">
+        <label class="f-label" for="f-tema">Vilket tema gillar du?</label>
+        <select id="f-tema" class="f-select" aria-required="false">
+          <option value="">Välj ett tema</option>
+          <option value="yoga">Ro Studio — Yoga / Wellness</option>
+          <option value="bokhandel">Sidvändaren — Bokhandel / Café</option>
+          <option value="eshop">OREN — E-handel / Butik</option>
+          <option value="annan">Annat eller vet ej ännu</option>
+        </select>
       </div>
-      <button class="submit-btn" type="button">Skicka →</button>
-    </div>
+      <div class="f-group">
+        <label class="f-label" for="f-msg">Berätta lite</label>
+        <textarea id="f-msg" class="f-input"
+                  placeholder="Vad gör ditt företag? Vad behöver du?"></textarea>
+      </div>
+      <div class="f-submit">
+        <button type="submit" class="btn-primary">Skicka</button>
+      </div>
+      <p class="f-note">Jag svarar inom ett dygn på vardagar.</p>
+    </form>
   </div>
 </section>
 
 </main>
 
 <footer role="contentinfo">
-  <span class="footer-logo">Jasmin</span>
-  <span>Webb för småföretag · Sverige</span>
-  <span><a href="mailto:jasmin@webb.se">jasmin@webb.se</a></span>
+  <span class="footer-logo">Jasmin Hedlund</span>
+  <ul class="footer-links" role="list">
+    <li><a href="#teman">Teman</a></li>
+    <li><a href="#priser">Priser</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <span class="footer-credit">Webb av Jasmin Hedlund</span>
 </footer>
 
-<script>
-  const toggle = document.querySelector('.nav-toggle');
-  const menu = document.querySelector('.nav-links');
-  toggle.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-    toggle.setAttribute('aria-label', open ? 'Stäng meny' : 'Öppna meny');
-  });
-  menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('open');
-      toggle.setAttribute('aria-expanded', false);
-      toggle.setAttribute('aria-label', 'Öppna meny');
-    });
-  });
-</script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script>
+/* NAV MOBILE */
+const ham = document.getElementById('ham');
+const mobNav = document.getElementById('mob-nav');
+document.getElementById('mob-close').addEventListener('click', closeMob);
+ham.addEventListener('click', () => {
+  const open = mobNav.classList.toggle('open');
+  ham.setAttribute('aria-expanded', String(open));
+});
+mobNav.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMob));
+function closeMob() {
+  mobNav.classList.remove('open');
+  ham.setAttribute('aria-expanded', 'false');
+}
+
+/* CONTACT FORM */
+function handleSubmit(e) {
+  e.preventDefault();
+  e.target.reset();
+  const t = document.getElementById('toast');
+  t.textContent = 'Meddelande skickat. Jag hörs av mig inom ett dygn.';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+/* SMOOTH SCROLL för ankarlänkar */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
 </body>
 </html>

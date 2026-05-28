@@ -1,1010 +1,1206 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio Ro — Yoga Stockholm</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #FFFFFF;
-      --off: #F7F5F2;
-      --stone: #EAE6E0;
-      --ink: #1C1C1A;
-      --mid: #5C5C58;
-      --muted: #A0A09A;
-      --sage: #6B8C6B;
-      --sage-pale: #EDF2ED;
-      --border: rgba(28,28,26,0.1);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--white);
-      color: var(--ink);
-      font-weight: 300;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .skip-link {
-      position: absolute; top: -100%; left: 1rem;
-      background: var(--ink); color: white;
-      padding: 0.5rem 1rem; font-size: 0.85rem; z-index: 200; text-decoration: none;
-    }
-    .skip-link:focus { top: 0.5rem; }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 60px;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0 3rem;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; font-style: italic;
-      color: var(--ink); text-decoration: none; letter-spacing: 0.02em;
-    }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-
-    .nav-links a {
-      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none; transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a:focus { outline: 2px solid var(--sage); outline-offset: 3px; }
-
-    .nav-cta {
-      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: white; background: var(--sage);
-      padding: 0.55rem 1.25rem; text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-    .nav-cta:focus { outline: 2px solid var(--ink); outline-offset: 3px; }
-
-    .nav-toggle {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 0.25rem;
-    }
-    .nav-toggle span { display: block; width: 20px; height: 1px; background: var(--ink); }
-
-    .nav-mobile {
-      display: none; flex-direction: column;
-      position: fixed; inset: 0; background: white; z-index: 200;
-      padding: 5rem 2.5rem; justify-content: center;
-    }
-    .nav-mobile.open { display: flex; }
-    .nav-mobile-close {
-      position: absolute; top: 1.5rem; right: 2rem;
-      background: none; border: none; cursor: pointer;
-      font-size: 1.2rem; color: var(--muted);
-    }
-    .nav-mobile a {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3rem); font-style: italic;
-      color: var(--ink); text-decoration: none;
-      padding: 0.65rem 0; border-bottom: 1px solid var(--border);
-      transition: color 0.2s;
-    }
-    .nav-mobile a:hover { color: var(--sage); }
-
-    /* ── HERO — FULL BLEED ── */
-    .hero {
-      margin-top: 60px;
-      position: relative;
-      height: calc(100vh - 60px);
-      overflow: hidden;
-    }
-
-    .hero img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center 30%;
-      display: block;
-    }
-
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(28,28,26,0.15) 0%,
-        rgba(28,28,26,0.0) 40%,
-        rgba(28,28,26,0.55) 100%
-      );
-    }
-
-    .hero-content {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 3.5rem 3rem;
-      display: flex; justify-content: space-between;
-      align-items: flex-end; flex-wrap: wrap; gap: 2rem;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 6vw, 6rem);
-      font-weight: 400; font-style: italic;
-      line-height: 1.0; color: white;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-right-block {
-      max-width: 320px;
-    }
-
-    .hero-desc {
-      font-size: 0.9rem; color: rgba(255,255,255,0.75);
-      line-height: 1.8; margin-bottom: 1.5rem;
-    }
-
-    .btn-white {
-      display: inline-block; background: white; color: var(--ink);
-      padding: 0.85rem 1.75rem;
-      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-      font-weight: 500; text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .btn-white:hover { opacity: 0.85; }
-    .btn-white:focus { outline: 2px solid white; outline-offset: 3px; }
-
-    /* ── INFO STRIP ── */
-    .info-strip {
-      background: var(--sage); color: white;
-      display: flex; justify-content: center;
-      gap: 4rem; padding: 1rem 2rem;
-      flex-wrap: wrap;
-    }
-
-    .info-strip span {
-      font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
-      color: rgba(255,255,255,0.8);
-    }
-
-    /* ── CLASSES ── */
-    .classes { padding: 5rem 3rem; background: var(--white); }
-    .classes-inner { max-width: 1100px; margin: 0 auto; }
-
-    .section-top {
-      display: flex; justify-content: space-between; align-items: baseline;
-      margin-bottom: 2.5rem; padding-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-      font-weight: 400; font-style: italic; line-height: 1.2;
-    }
-
-    .link-text {
-      font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .link-text:hover { color: var(--ink); border-bottom-color: var(--ink); }
-    .link-text:focus { outline: 2px solid var(--sage); outline-offset: 3px; }
-
-    .classes-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .class-card {
-      position: relative; overflow: hidden; cursor: pointer;
-    }
-
-    .class-card:hover .class-img img { transform: scale(1.04); }
-    .class-card:hover .class-overlay { opacity: 1; }
-
-    .class-img {
-      aspect-ratio: 3/4; overflow: hidden; position: relative;
-    }
-
-    .class-img img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      display: block;
-      transition: transform 0.5s cubic-bezier(0.25,0.1,0.25,1);
-    }
-
-    .class-level {
-      position: absolute; top: 1rem; left: 1rem;
-      font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
-      background: white; color: var(--ink);
-      padding: 0.25rem 0.6rem;
-    }
-
-    .class-overlay {
-      position: absolute; inset: 0;
-      background: rgba(28,28,26,0.4);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: opacity 0.3s;
-    }
-
-    .class-overlay-btn {
-      background: white; color: var(--ink);
-      padding: 0.7rem 1.5rem;
-      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
-      border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-    }
-
-    .class-info { padding: 1rem 0; }
-
-    .class-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem; font-style: italic;
-      color: var(--ink); margin-bottom: 0.25rem;
-    }
-
-    .class-meta {
-      display: flex; justify-content: space-between;
-      font-size: 0.72rem; color: var(--muted);
-    }
-
-    /* ── SPLIT — IMAGE + TEXT ── */
-    .split {
-      display: grid; grid-template-columns: 1fr 1fr;
-    }
-
-    .split-img {
-      position: relative; overflow: hidden; min-height: 500px;
-    }
-
-    .split-img img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      display: block;
-    }
-
-    .split-text {
-      padding: 5rem 4rem;
-      display: flex; flex-direction: column; justify-content: center;
-      background: var(--off);
-    }
-
-    .eyebrow {
-      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--sage); margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 0.75rem;
-    }
-
-    .eyebrow::before {
-      content: ''; display: block; width: 20px; height: 1px;
-      background: var(--sage); flex-shrink: 0;
-    }
-
-    .split-body {
-      font-size: 0.9rem; color: var(--mid); line-height: 1.85;
-      margin-bottom: 1.25rem; max-width: 380px;
-    }
-
-    .btn-sage {
-      display: inline-block; background: var(--sage); color: white;
-      padding: 0.85rem 1.75rem;
-      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-      font-weight: 500; text-decoration: none; border: none; cursor: pointer;
-      transition: opacity 0.2s; align-self: flex-start; margin-top: 1rem;
-    }
-    .btn-sage:hover { opacity: 0.85; }
-    .btn-sage:focus { outline: 2px solid var(--ink); outline-offset: 3px; }
-
-    /* ── SCHEDULE ── */
-    .schedule { padding: 5rem 3rem; background: var(--off); }
-    .schedule-inner { max-width: 1100px; margin: 0 auto; }
-
-    .schedule-grid {
-      display: grid; grid-template-columns: repeat(5, 1fr);
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 2.5rem;
-    }
-
-    .day-col { background: var(--white); }
-
-    .day-head {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--border);
-      text-align: center;
-    }
-
-    .day-name {
-      font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--muted); display: block; margin-bottom: 0.15rem;
-    }
-
-    .day-date { font-size: 1.1rem; color: var(--ink); font-weight: 400; }
-
-    .day-body { padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
-
-    .class-slot {
-      padding: 0.65rem 0.75rem;
-      border-left: 2px solid var(--sage);
-      background: var(--sage-pale);
-      cursor: pointer; transition: background 0.15s;
-    }
-
-    .class-slot:hover { background: #dce8dc; }
-    .class-slot.full { border-left-color: var(--border); background: var(--off); cursor: default; }
-
-    .slot-time {
-      font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); display: block; margin-bottom: 0.2rem;
-    }
-
-    .slot-name {
-      font-size: 0.75rem; color: var(--ink); font-weight: 400; line-height: 1.3;
-    }
-
-    .slot-spots {
-      font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--sage); margin-top: 0.25rem; display: block;
-    }
-
-    .class-slot.full .slot-spots { color: var(--muted); }
-
-    /* ── PHOTO GRID ── */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 300px 300px;
-      gap: 4px;
-    }
-
-    .photo-item {
-      overflow: hidden; position: relative;
-    }
-
-    .photo-item img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      display: block;
-      transition: transform 0.5s cubic-bezier(0.25,0.1,0.25,1);
-    }
-
-    .photo-item:hover img { transform: scale(1.04); }
-
-    .photo-item.tall { grid-row: span 2; }
-
-    /* ── PRICING ── */
-    .pricing { padding: 5rem 3rem; background: var(--white); }
-    .pricing-inner { max-width: 1100px; margin: 0 auto; }
-
-    .pricing-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 2.5rem;
-    }
-
-    .price-card {
-      background: var(--white); padding: 2.5rem 2rem;
-    }
-
-    .price-card.featured { background: var(--ink); }
-
-    .price-label {
-      font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 0.5rem;
-    }
-
-    .price-card.featured .price-label { color: rgba(255,255,255,0.4); }
-
-    .price-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-style: italic; color: var(--ink);
-      margin-bottom: 1.5rem;
-    }
-
-    .price-card.featured .price-name { color: white; }
-
-    .price-amount {
-      font-size: 2.2rem; font-weight: 300; color: var(--ink); line-height: 1;
-    }
-
-    .price-card.featured .price-amount { color: white; }
-
-    .price-per {
-      font-size: 0.72rem; color: var(--muted); margin-bottom: 1.5rem;
-    }
-
-    .price-card.featured .price-per { color: rgba(255,255,255,0.4); }
-
-    .price-divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
-    .price-card.featured .price-divider { background: rgba(255,255,255,0.12); }
-
-    .price-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-
-    .price-features li {
-      font-size: 0.8rem; color: var(--mid);
-      display: flex; gap: 0.6rem; align-items: flex-start;
-    }
-
-    .price-card.featured .price-features li { color: rgba(255,255,255,0.6); }
-
-    .price-features li::before {
-      content: '–'; color: var(--sage); flex-shrink: 0;
-    }
-
-    .price-card.featured .price-features li::before { color: rgba(255,255,255,0.3); }
-
-    .price-cta {
-      display: block; margin-top: 2rem; padding: 0.8rem;
-      text-align: center; text-decoration: none;
-      font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
-      border: 1px solid var(--border); color: var(--ink);
-      transition: background 0.15s, color 0.15s; font-family: 'DM Sans', sans-serif;
-    }
-
-    .price-cta:hover { background: var(--ink); color: white; border-color: var(--ink); }
-    .price-cta:focus { outline: 2px solid var(--sage); outline-offset: 3px; }
-
-    .price-card.featured .price-cta {
-      background: white; color: var(--ink); border-color: white;
-    }
-
-    .price-card.featured .price-cta:hover { background: var(--stone); }
-
-    /* ── CONTACT ── */
-    .contact { padding: 5rem 3rem; background: var(--off); }
-    .contact-inner { max-width: 700px; margin: 0 auto; text-align: center; }
-
-    .contact-inner h2 { margin-bottom: 0.75rem; }
-
-    .contact-sub {
-      font-size: 0.88rem; color: var(--mid); margin-bottom: 2.5rem;
-      line-height: 1.8;
-    }
-
-    .contact-form {
-      display: flex; flex-direction: column; gap: 1rem; text-align: left;
-    }
-
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-    .field-group {}
-    .field-label {
-      display: block; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 0.4rem;
-    }
-    .field-input {
-      width: 100%; padding: 0.75rem 1rem;
-      border: 1px solid var(--border); background: white;
-      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ink);
-      outline: none; transition: border-color 0.2s;
-    }
-    .field-input:focus { border-color: var(--sage); }
-    textarea.field-input { resize: none; height: 100px; }
-
-    .submit-btn {
-      background: var(--sage); color: white; border: none;
-      padding: 0.9rem; width: 100%;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-      font-weight: 500; cursor: pointer; transition: opacity 0.2s;
-    }
-    .submit-btn:hover { opacity: 0.85; }
-    .submit-btn:focus { outline: 2px solid var(--ink); outline-offset: 3px; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink); padding: 2.5rem 3rem;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
-    }
-
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem; font-style: italic; color: white;
-    }
-
-    .footer-links { display: flex; gap: 2rem; list-style: none; }
-    .footer-links a {
-      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s;
-    }
-    .footer-links a:hover { color: rgba(255,255,255,0.75); }
-
-    .footer-credit { font-size: 0.65rem; color: rgba(255,255,255,0.2); }
-
-    .back-link {
-      position: fixed; bottom: 2rem; left: 2rem;
-      background: white; border: 1px solid var(--border);
-      color: var(--muted); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.55rem 0.9rem; text-decoration: none; z-index: 50; transition: color 0.2s;
-    }
-    .back-link:hover { color: var(--ink); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links, .nav-cta { display: none; }
-      .nav-toggle { display: flex; }
-
-      .hero { height: 75vw; min-height: 400px; }
-      .hero-content { padding: 2rem 1.5rem; }
-      .hero-right-block { display: none; }
-
-      .classes { padding: 4rem 1.5rem; }
-      .classes-grid { grid-template-columns: 1fr 1fr; }
-
-      .split { grid-template-columns: 1fr; }
-      .split-img { min-height: 300px; }
-      .split-text { padding: 3.5rem 2rem; }
-      .split-body { max-width: 100%; }
-
-      .schedule { padding: 4rem 1.5rem; }
-      .schedule-grid { grid-template-columns: repeat(3, 1fr); }
-      .day-col:nth-child(4), .day-col:nth-child(5) { display: none; }
-
-      .photo-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 220px 220px 220px;
-      }
-      .photo-item.tall { grid-row: span 1; }
-
-      .pricing { padding: 4rem 1.5rem; }
-      .pricing-grid { grid-template-columns: 1fr; }
-
-      .contact { padding: 4rem 1.5rem; }
-
-      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 0 1rem; }
-      h1 { font-size: 2.4rem; }
-      .hero { height: 90vw; }
-      .hero-content { padding: 2rem 1rem; }
-
-      .classes { padding: 3rem 1rem; }
-      .classes-grid { grid-template-columns: 1fr; }
-
-      .split-text { padding: 3rem 1.25rem; }
-
-      .schedule { padding: 3rem 1rem; }
-      .schedule-grid { grid-template-columns: repeat(3, 1fr); }
-
-      .photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 180px; }
-
-      .pricing { padding: 3rem 1rem; }
-      .contact { padding: 3rem 1rem; }
-      .field-row { grid-template-columns: 1fr; }
-
-      .info-strip { gap: 1.5rem; }
-
-      footer { padding: 2rem 1rem; }
-    }
-
-    @media (max-width: 360px) {
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.5rem; }
-      .schedule-grid { grid-template-columns: 1fr 1fr; }
-      .day-col:nth-child(3) { display: none; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
-      html { scroll-behavior: auto; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stillvatten Studio — Yoga & Rörelse Stockholm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@300;400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* WCAG AA: all text >= 4.5:1 contrast on background */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Navy backgrounds */
+  --navy:#0f2035;      /* background dark */
+  --navy2:#17304a;     /* slightly lighter dark */
+  /* Text on dark bg */
+  --on-dark:#e8f0f7;   /* 12.5:1 on navy  */
+  --on-dark-mid:#b0c8dd; /* 7:1 on navy */
+  --on-dark-muted:#7aa4bf; /* 4.6:1 on navy */
+  /* Light backgrounds */
+  --bg:#f4f7fa;
+  --bg2:#ffffff;
+  /* Text on light bg */
+  --text:#0f2035;      /* 14:1 on bg */
+  --text-mid:#2c4a63;  /* 7.5:1 on bg */
+  --text-muted:#4a6d87;/* 4.6:1 on bg */
+  /* Accent — sky blue, checked 4.6:1 on navy */
+  --accent:#5db3d5;
+  --accent-dark:#2c7da0; /* 4.7:1 on white for text use */
+  --border:#c5d8e8;
+  --border-dark:rgba(255,255,255,0.15);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:400;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Skip link - WCAG 2.4.1 */
+.skip{
+  position:absolute;top:-100%;left:1rem;
+  background:var(--navy);color:var(--on-dark);
+  padding:.6rem 1.2rem;font-size:.85rem;z-index:999;
+  text-decoration:none;border-radius:0 0 4px 4px;
+}
+.skip:focus{top:0}
+
+/* Focus visible - WCAG 2.4.7 */
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;
+  background:var(--navy);
+  border-bottom:1px solid var(--border-dark);
+}
+.logo{
+  font-family:'Source Serif 4',serif;
+  font-size:1.15rem;letter-spacing:.03em;font-weight:600;
+  color:var(--on-dark);text-decoration:none;
+}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-size:.8rem;letter-spacing:.05em;
+  color:var(--on-dark-mid);text-decoration:none;
+  transition:color .15s;padding:.25rem 0;
+  border-bottom:2px solid transparent;
+}
+.nav-links a:hover{color:var(--on-dark);border-bottom-color:var(--accent)}
+.nav-book{
+  font-size:.8rem;font-weight:500;
+  background:var(--accent);color:var(--navy);
+  padding:.55rem 1.3rem;text-decoration:none;
+  transition:background .15s;border:2px solid var(--accent);
+}
+.nav-book:hover{background:transparent;color:var(--accent)}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:.4rem;
+  color:var(--on-dark);
+}
+.hamburger span{display:block;width:22px;height:2px;background:var(--on-dark);transition:all .3s}
+.mobile-nav{
+  display:none;position:fixed;inset:0;background:var(--navy);z-index:200;
+  padding:5rem 2.5rem;flex-direction:column;justify-content:center;gap:0;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav a{
+  font-family:'Source Serif 4',serif;font-size:clamp(1.75rem,5vw,2.5rem);
+  font-weight:400;color:var(--on-dark);text-decoration:none;
+  padding:1rem 0;border-bottom:1px solid var(--border-dark);
+  transition:color .15s;
+}
+.mobile-nav a:hover{color:var(--accent)}
+.mob-close{
+  position:absolute;top:1.25rem;right:2rem;
+  background:none;border:none;color:var(--on-dark-mid);
+  font-size:1.5rem;cursor:pointer;line-height:1;
+}
+
+/* ── HERO ── */
+.hero{
+  margin-top:64px;
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - 64px);
+  background:var(--navy);
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:5rem 4rem 5rem 5rem;
+}
+.hero-tag{
+  font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.5rem;
+}
+.hero h1{
+  font-family:'Source Serif 4',serif;
+  font-size:clamp(2.6rem,4.5vw,4.5rem);
+  font-weight:600;line-height:1.1;
+  color:var(--on-dark);margin-bottom:1.5rem;
+  letter-spacing:-.01em;
+}
+.hero-sub{
+  font-size:1rem;color:var(--on-dark-mid);
+  max-width:360px;line-height:1.8;margin-bottom:2.5rem;
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-block;background:var(--accent);color:var(--navy);
+  padding:.85rem 2rem;font-size:.85rem;font-weight:500;
+  text-decoration:none;transition:all .15s;
+  border:2px solid var(--accent);
+}
+.btn-primary:hover{background:transparent;color:var(--accent)}
+.btn-ghost{
+  display:inline-block;background:transparent;color:var(--on-dark-mid);
+  padding:.85rem 2rem;font-size:.85rem;
+  border:2px solid var(--border-dark);text-decoration:none;transition:all .15s;
+}
+.btn-ghost:hover{border-color:var(--on-dark-mid);color:var(--on-dark)}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  display:block;
+}
+.hero-right::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,var(--navy) 0%,transparent 30%);
+}
+
+/* ── INFO BAR ── */
+.info-bar{
+  background:var(--navy2);
+  display:flex;justify-content:center;flex-wrap:wrap;
+}
+.info-item{
+  padding:1rem 2.5rem;
+  font-size:.75rem;font-weight:500;letter-spacing:.06em;
+  color:var(--on-dark-mid);
+  border-right:1px solid var(--border-dark);
+  display:flex;align-items:center;gap:.5rem;
+}
+.info-item:last-child{border-right:none}
+.info-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;flex-shrink:0;aria-hidden:true}
+
+/* ── SECTION ── */
+.section{padding:5.5rem 5rem}
+.section-inner{max-width:1180px;margin:0 auto}
+.section-eyebrow{
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-dark);margin-bottom:.75rem;
+}
+.section-dark .section-eyebrow{color:var(--accent)}
+h2{
+  font-family:'Source Serif 4',serif;
+  font-size:clamp(1.8rem,2.8vw,2.6rem);
+  font-weight:600;line-height:1.2;color:var(--text);
+}
+.section-dark h2{color:var(--on-dark)}
+.section-hdr{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:2rem;margin-bottom:3rem;padding-bottom:1.5rem;
+  border-bottom:1px solid var(--border);
+}
+.section-dark .section-hdr{border-bottom-color:var(--border-dark)}
+.link-sm{
+  font-size:.8rem;font-weight:500;color:var(--accent-dark);
+  text-decoration:underline;text-underline-offset:3px;white-space:nowrap;
+  transition:color .15s;
+}
+.link-sm:hover{color:var(--text)}
+.section-dark .link-sm{color:var(--accent)}
+.section-dark .link-sm:hover{color:var(--on-dark)}
+
+/* ── OM OSS ── */
+.om-section{background:var(--bg2);padding:5.5rem 5rem}
+.om-layout{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:300px 1fr;gap:5rem;align-items:start;
+}
+.om-img-wrap{position:relative}
+.om-img{
+  width:100%;display:block;
+  aspect-ratio:3/4;object-fit:cover;object-position:center top;
+  border-radius:2px;
+}
+.om-text{}
+.om-text h2{margin-bottom:1.25rem}
+.om-lead{font-size:1rem;color:var(--text-mid);line-height:1.85;margin-bottom:1rem}
+.om-body{font-size:.9rem;color:var(--text-muted);line-height:1.85;margin-bottom:1.5rem}
+
+/* ── KLASSER ── */
+.klasser-section{background:var(--bg)}
+.classes-tabs{
+  display:flex;gap:0;margin-bottom:0;
+  border-bottom:2px solid var(--border);
+  overflow-x:auto;
+}
+.tab-btn{
+  font-size:.8rem;font-weight:500;
+  background:none;border:none;cursor:pointer;
+  padding:.9rem 1.75rem;color:var(--text-muted);
+  position:relative;transition:color .15s;
+  font-family:'Inter',sans-serif;white-space:nowrap;
+}
+.tab-btn:hover{color:var(--text)}
+.tab-btn[aria-selected="true"]{color:var(--text)}
+.tab-btn[aria-selected="true"]::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:2px;background:var(--accent-dark);
+}
+.classes-panels .panel{display:none}
+.classes-panels .panel[hidden]{display:none}
+.classes-panels .panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:0}
+
+.class-item{
+  background:var(--bg2);padding:2rem;
+  border-left:3px solid transparent;transition:border-color .15s,background .15s;
+}
+.class-item:hover{background:var(--bg);border-left-color:var(--accent-dark)}
+.class-badge{
+  display:inline-block;font-size:.7rem;font-weight:500;
+  color:var(--accent-dark);background:rgba(44,125,160,.1);
+  padding:.2rem .65rem;margin-bottom:.85rem;border-radius:2px;
+}
+.class-name{
+  font-family:'Source Serif 4',serif;font-weight:600;
+  font-size:1.15rem;color:var(--text);margin-bottom:.5rem;
+}
+.class-desc{font-size:.85rem;color:var(--text-muted);line-height:1.75;margin-bottom:1rem}
+.class-meta-row{display:flex;gap:1.25rem;flex-wrap:wrap}
+.class-meta{font-size:.75rem;color:var(--text-muted)}
+.class-meta strong{color:var(--text-mid);font-weight:500}
+
+/* ── BEHANDLINGAR ── */
+.beh-section{background:var(--navy);padding:5.5rem 5rem}
+.beh-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--border-dark);
+  border:1px solid var(--border-dark);
+  margin-top:3rem;
+}
+.beh-card{
+  background:var(--navy2);padding:2.25rem;
+  transition:background .15s;cursor:pointer;
+}
+.beh-card:hover{background:rgba(255,255,255,.05)}
+.beh-card:focus{outline:3px solid var(--accent);outline-offset:-3px}
+.beh-num{
+  font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--on-dark-muted);margin-bottom:.75rem;
+}
+.beh-name{
+  font-family:'Source Serif 4',serif;font-weight:600;
+  font-size:1.2rem;color:var(--on-dark);margin-bottom:.6rem;
+}
+.beh-desc{font-size:.85rem;color:var(--on-dark-mid);line-height:1.8;margin-bottom:1rem}
+.beh-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.beh-dur{font-size:.75rem;font-weight:500;color:var(--on-dark-muted)}
+.beh-price{font-size:1.1rem;font-weight:500;color:var(--accent)}
+
+/* ── UTHYRNING ── */
+.uth-section{background:var(--bg2);padding:5.5rem 5rem}
+.uth-layout{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+.uth-img{overflow:hidden}
+.uth-img img{width:100%;display:block;object-fit:cover;height:500px}
+.uth-body h2{margin-bottom:1rem}
+.uth-lead{font-size:.95rem;color:var(--text-mid);line-height:1.85;margin-bottom:1.5rem}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}
+.feat-list li{
+  font-size:.85rem;color:var(--text-mid);
+  display:flex;gap:.75rem;align-items:flex-start;line-height:1.6;
+}
+.feat-list li::before{
+  content:'';display:block;width:5px;height:5px;
+  background:var(--accent-dark);border-radius:50%;
+  margin-top:.55rem;flex-shrink:0;
+}
+.price-strip{
+  background:var(--navy);color:var(--on-dark);
+  padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.price-strip-label{font-size:.75rem;font-weight:500;color:var(--on-dark-muted)}
+.price-strip-val{font-family:'Source Serif 4',serif;font-size:1.6rem;font-weight:600;color:var(--accent)}
+
+/* ── SCHEMA ── */
+.schema-section{background:var(--navy);padding:5.5rem 5rem}
+.week-nav{display:flex;align-items:center;gap:1rem}
+.week-btn{
+  background:none;border:1px solid var(--border-dark);color:var(--on-dark-mid);
+  width:36px;height:36px;cursor:pointer;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+}
+.week-btn:hover{border-color:var(--accent);color:var(--accent)}
+.week-lbl{font-size:.78rem;font-weight:500;color:var(--on-dark-muted)}
+
+.schema-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:1px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
+  margin-top:2rem;
+}
+.day-col{background:var(--navy2)}
+.day-head{
+  padding:.85rem .6rem;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.day-name{
+  font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--on-dark-muted);display:block;margin-bottom:.2rem;
+}
+.day-num{
+  font-family:'Source Serif 4',serif;font-size:1.35rem;font-weight:400;
+  color:var(--on-dark-mid);
+}
+.day-col.today .day-num{color:var(--accent)}
+.day-col.today .day-head{border-bottom-color:var(--accent)}
+.day-slots{padding:.5rem;display:flex;flex-direction:column;gap:.4rem;min-height:180px}
+.slot{
+  padding:.5rem .6rem;
+  border-left:2px solid var(--accent-dark);
+  background:rgba(255,255,255,.04);
+  cursor:pointer;transition:background .12s;
+}
+.slot:hover{background:rgba(93,179,213,.12)}
+.slot:focus{outline:2px solid var(--accent);outline-offset:2px}
+.slot.full{border-left-color:rgba(255,255,255,.12);background:rgba(255,255,255,.02);cursor:default;opacity:.55}
+.slot-time{font-size:.62rem;font-weight:500;letter-spacing:.06em;color:var(--on-dark-muted);display:block;margin-bottom:.12rem}
+.slot-name{font-size:.73rem;color:var(--on-dark);line-height:1.3}
+.slot-spots{font-size:.62rem;font-weight:500;color:var(--accent);display:block;margin-top:.15rem}
+.slot.full .slot-spots{color:var(--on-dark-muted)}
+
+/* ── PRISER ── */
+.priser-section{background:var(--bg);padding:5.5rem 5rem}
+.priser-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);margin-top:3rem;
+}
+.pris-card{background:var(--bg2);padding:2.25rem 1.75rem}
+.pris-card.featured{background:var(--navy)}
+.pris-tag{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.4rem}
+.pris-card.featured .pris-tag{color:var(--on-dark-muted)}
+.pris-name{font-family:'Source Serif 4',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin-bottom:1rem}
+.pris-card.featured .pris-name{color:var(--on-dark)}
+.pris-amount{font-family:'Source Serif 4',serif;font-size:2.5rem;font-weight:600;color:var(--text);line-height:1}
+.pris-card.featured .pris-amount{color:var(--accent)}
+.pris-per{font-size:.78rem;color:var(--text-muted);margin-bottom:1.5rem}
+.pris-card.featured .pris-per{color:var(--on-dark-muted)}
+.pris-div{height:1px;background:var(--border);margin-bottom:1.5rem}
+.pris-card.featured .pris-div{background:rgba(255,255,255,.12)}
+.pris-list{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.pris-list li{font-size:.8rem;color:var(--text-mid);display:flex;gap:.6rem;align-items:flex-start;line-height:1.55}
+.pris-card.featured .pris-list li{color:var(--on-dark-mid)}
+.pris-list li::before{content:'';display:block;width:5px;height:5px;background:var(--accent-dark);border-radius:50%;margin-top:.45rem;flex-shrink:0}
+.pris-card.featured .pris-list li::before{background:var(--accent)}
+.pris-cta{
+  display:block;margin-top:1.75rem;padding:.75rem;text-align:center;
+  text-decoration:none;font-size:.78rem;font-weight:500;
+  border:2px solid var(--border);color:var(--text);
+  transition:all .15s;
+}
+.pris-cta:hover{background:var(--navy);color:var(--on-dark);border-color:var(--navy)}
+.pris-card.featured .pris-cta{background:var(--accent);color:var(--navy);border-color:var(--accent)}
+.pris-card.featured .pris-cta:hover{background:#7ac7e0;border-color:#7ac7e0}
+
+/* ── KONTAKT ── */
+.kontakt-section{background:var(--navy);padding:5.5rem 5rem}
+.kontakt-inner{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;
+}
+.kontakt-left h2{margin-bottom:1rem;color:var(--on-dark)}
+.kontakt-lead{font-size:.95rem;color:var(--on-dark-mid);line-height:1.85;max-width:380px}
+.kontakt-list{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.5rem}
+.kontakt-lbl{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-muted);margin-bottom:.2rem}
+.kontakt-val{font-size:.9rem;color:var(--on-dark-mid)}
+
+.form-box{}
+.form-box h3{font-family:'Source Serif 4',serif;font-size:1.35rem;font-weight:600;color:var(--on-dark);margin-bottom:1.5rem}
+.f-group{margin-bottom:1.1rem}
+.f-label{display:block;font-size:.72rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--on-dark-muted);margin-bottom:.4rem}
+.f-input{
+  width:100%;padding:.75rem 1rem;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.15);
+  color:var(--on-dark);font-family:'Inter',sans-serif;font-size:.9rem;
+  outline:none;transition:border-color .15s;
+}
+.f-input:focus{border-color:var(--accent)}
+.f-input::placeholder{color:rgba(255,255,255,.25)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.f-select{
+  width:100%;padding:.75rem 1rem;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.15);
+  color:var(--on-dark);font-family:'Inter',sans-serif;font-size:.9rem;
+  outline:none;cursor:pointer;
+}
+.f-select option{background:var(--navy2)}
+.sub-btn{
+  width:100%;padding:.85rem;margin-top:.5rem;
+  background:var(--accent);color:var(--navy);
+  border:2px solid var(--accent);font-family:'Inter',sans-serif;
+  font-size:.85rem;font-weight:500;cursor:pointer;transition:all .15s;
+}
+.sub-btn:hover{background:transparent;color:var(--accent)}
+.f-note{font-size:.75rem;color:var(--on-dark-muted);text-align:center;margin-top:.85rem;line-height:1.6}
+
+/* ── BOKA MODAL ── */
+.boka-overlay{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(15,32,53,.9);backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:2rem;
+}
+.boka-overlay.open{display:flex}
+.boka-modal{
+  background:var(--navy2);width:100%;max-width:500px;
+  padding:2.75rem;position:relative;
+  border:1px solid var(--border-dark);
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+.m-close{
+  position:absolute;top:1.25rem;right:1.25rem;
+  background:none;border:none;color:var(--on-dark-muted);
+  font-size:1.2rem;cursor:pointer;line-height:1;transition:color .15s;
+}
+.m-close:hover{color:var(--on-dark)}
+.m-eye{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.m-title{font-family:'Source Serif 4',serif;font-size:1.5rem;font-weight:600;color:var(--on-dark);margin-bottom:1.75rem}
+.m-success{display:none;text-align:center;padding:1.5rem}
+.m-success-icon{font-size:2.5rem;color:var(--accent);margin-bottom:1rem}
+.m-success h2{font-family:'Source Serif 4',serif;font-size:1.5rem;font-weight:600;color:var(--on-dark);margin-bottom:.5rem}
+.m-success p{font-size:.88rem;color:var(--on-dark-mid);line-height:1.7}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--navy);border-top:1px solid var(--border-dark);
+  padding:2rem 5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.f-logo{font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;color:var(--on-dark-muted)}
+.f-links{display:flex;gap:2rem;list-style:none}
+.f-links a{font-size:.75rem;color:var(--on-dark-muted);text-decoration:none;transition:color .15s}
+.f-links a:hover{color:var(--on-dark)}
+.f-credit{font-size:.72rem;color:rgba(255,255,255,.25)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:600;
+  background:var(--accent);color:var(--navy);font-weight:500;
+  padding:.85rem 1.5rem;font-size:.8rem;
+  transform:translateY(100px);opacity:0;transition:all .3s;
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .section,.beh-section,.schema-section,.priser-section,.kontakt-section,.om-section,.uth-section{padding:4.5rem 3rem}
+  .kontakt-inner{grid-template-columns:1fr;gap:3rem}
+  .priser-grid{grid-template-columns:1fr 1fr}
+  footer{padding:2rem 3rem}
+}
+@media(max-width:900px){
+  nav{padding:0 1.5rem}
+  .nav-links,.nav-book{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{height:60vw;min-height:320px}
+  .hero-right::before{background:linear-gradient(180deg,var(--navy) 0%,transparent 40%)}
+  .hero-left{padding:3.5rem 2rem}
+  .om-layout{grid-template-columns:1fr;gap:2.5rem}
+  .om-img{aspect-ratio:4/3;max-height:320px}
+  .classes-panels .panel.active{grid-template-columns:1fr 1fr}
+  .beh-grid{grid-template-columns:1fr}
+  .uth-layout{grid-template-columns:1fr;gap:3rem}
+  .schema-grid{grid-template-columns:repeat(4,1fr)}
+  .day-col:nth-child(n+5){display:none}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}
+  .f-links{justify-content:center;flex-wrap:wrap}
+}
+@media(max-width:600px){
+  nav{padding:0 1rem}
+  .section,.beh-section,.schema-section,.priser-section,.kontakt-section,.om-section,.uth-section{padding:3.5rem 1.25rem}
+  .hero-left{padding:3rem 1.25rem}
+  .classes-panels .panel.active,.beh-grid,.priser-grid{grid-template-columns:1fr}
+  .schema-grid{grid-template-columns:repeat(3,1fr)}
+  .day-col:nth-child(n+4){display:none}
+  .f-row{grid-template-columns:1fr}
+  .info-item{padding:.85rem 1rem}
+  footer{padding:2rem 1rem}
+  .info-bar{flex-direction:column;align-items:stretch}
+  .info-item{border-right:none;border-bottom:1px solid var(--border-dark)}
+}
+@media(max-width:360px){
+  /* 320–360px: smallest phones */
+  nav{padding:0 .75rem}
+  .logo{font-size:1rem}
+  .section,.beh-section,.schema-section,.priser-section,.kontakt-section,.om-section,.uth-section{padding:3rem 1rem}
+  .hero-left{padding:2.5rem 1rem}
+  h2{font-size:1.55rem}
+  .hero h1{font-size:2.1rem}
+  /* Schema: 2 cols at 320px so slots aren't crushed */
+  .schema-grid{grid-template-columns:repeat(2,1fr)}
+  .day-col:nth-child(n+3){display:none}
+  .slot-name{font-size:.7rem}
+  .slot-time{font-size:.6rem}
+  /* Priser: single col */
+  .priser-grid{grid-template-columns:1fr}
+  /* Info bar */
+  .info-item{padding:.75rem 1rem}
+  /* Boka modal */
+  .boka-modal{padding:2rem 1.25rem}
+  footer{padding:1.75rem 1rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
 
-<a href="../index.html" class="back-link">← Portföljen</a>
-<a class="skip-link" href="#main">Hoppa till innehåll</a>
+<a class="skip" href="#main">Hoppa till huvudinnehåll</a>
 
 <nav role="navigation" aria-label="Huvudnavigation">
-  <a class="nav-logo" href="#">Studio Ro</a>
-  <ul class="nav-links">
-    <li><a href="#klasser">Klasser</a></li>
-    <li><a href="#schema">Schema</a></li>
+  <a class="logo" href="#" aria-label="Stillvatten Studio – startsida">Ro<span>Studio</span></a>
+  <ul class="nav-links" role="list">
     <li><a href="#om">Om oss</a></li>
+    <li><a href="#klasser">Klasser</a></li>
+    <li><a href="#behandlingar">Behandlingar</a></li>
+    <li><a href="#schema">Schema</a></li>
     <li><a href="#priser">Priser</a></li>
   </ul>
-  <a href="#kontakt" class="nav-cta">Boka</a>
-  <button class="nav-toggle" aria-label="Öppna meny" aria-expanded="false" aria-controls="mobile-nav">
-    <span></span><span></span><span></span>
+  <a href="#" class="nav-book" onclick="openBoka(null,'Välj klass');return false" aria-label="Boka en klass">Boka</a>
+  <button class="hamburger" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav" id="ham">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
 </nav>
 
-<div class="nav-mobile" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Meny">
-  <button class="nav-mobile-close" aria-label="Stäng meny">✕</button>
-  <a href="#klasser">Klasser</a>
-  <a href="#schema">Schema</a>
+<div class="mobile-nav" id="mob-nav" role="dialog" aria-modal="true" aria-label="Meny">
+  <button class="mob-close" id="mob-close" aria-label="Stäng meny">✕</button>
   <a href="#om">Om oss</a>
+  <a href="#klasser">Klasser</a>
+  <a href="#behandlingar">Behandlingar</a>
+  <a href="#uthyrning">Uthyrning</a>
+  <a href="#schema">Schema</a>
   <a href="#priser">Priser</a>
-  <a href="#kontakt">Boka</a>
+  <a href="#kontakt">Kontakt</a>
 </div>
 
 <main id="main">
 
 <!-- HERO -->
-<section class="hero" aria-label="Välkommen till Studio Ro">
-  <img
-    src="https://images.unsplash.com/photo-1573384666979-5e3df30b7c54?w=1400&q=80&auto=format&fit=crop"
-    alt="Yogastudio med naturligt ljus och träningsgolv">
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-content">
-    <h1>Yoga.<br>Närvaro.<br>Rörelse.</h1>
-    <div class="hero-right-block">
-      <p class="hero-desc">En lugn studio mitt i Stockholm. Klasser för alla nivåer, varje dag i veckan.</p>
-      <a href="#klasser" class="btn-white">Utforska klasser</a>
+<section class="hero" aria-label="Välkommen till Stillvatten Studio">
+  <div class="hero-left">
+    <p class="hero-tag">Stockholm · Östermalm</p>
+    <h1>Hitta din inre stillhet.</h1>
+    <p class="hero-sub">En liten studio byggd kring närvaro — yoga, andning och helande behandlingar i ett lugnt rum mitt i stan.</p>
+    <div class="hero-ctas">
+      <a href="#schema" class="btn-primary">Se schema och boka</a>
+      <a href="#klasser" class="btn-ghost">Utforska klasser</a>
     </div>
+  </div>
+  <div class="hero-right">
+    <img src="yoga_pose1.jpg" alt="Yogapraktik utomhus vid vattnet i Stockholm" width="900" height="1200">
   </div>
 </section>
 
-<!-- INFO STRIP -->
-<div class="info-strip" aria-label="Praktisk info">
-  <span>Mån–Fre · 06:30–20:00</span>
-  <span>Lör–Sön · 08:00–17:00</span>
-  <span>Kungsholmen, Stockholm</span>
-  <span>Matta ingår alltid</span>
+<!-- INFO BAR -->
+<div class="info-bar" role="complementary" aria-label="Öppettider och praktisk info">
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Mån–Fre 06:30–21:00</div>
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Lör–Sön 08:00–18:00</div>
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Östermalm, Stockholm</div>
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Matta ingår alltid</div>
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Max 12 per klass</div>
 </div>
 
-<!-- KLASSER -->
-<section class="classes" id="klasser" aria-labelledby="klasser-heading">
-  <div class="classes-inner">
-    <div class="section-top">
-      <h2 id="klasser-heading">Våra klasser</h2>
-      <a href="#schema" class="link-text">Se schema →</a>
-    </div>
-    <div class="classes-grid">
-
-      <article class="class-card">
-        <div class="class-img">
-          <img src="https://images.unsplash.com/photo-1447452001333-b672b4cdb5f6?w=600&q=80&auto=format&fit=crop"
-               alt="Yin yoga – stilla positioner nära golvet">
-          <span class="class-level">Alla nivåer</span>
-          <div class="class-overlay">
-            <button class="class-overlay-btn">Boka klass</button>
-          </div>
-        </div>
-        <div class="class-info">
-          <p class="class-name">Yin Yoga</p>
-          <div class="class-meta">
-            <span>60 min · Lugn</span>
-            <span>150 kr</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="class-card">
-        <div class="class-img">
-          <img src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=600&q=80&auto=format&fit=crop"
-               alt="Vinyasa flow – dynamisk rörelse">
-          <span class="class-level">Medel</span>
-          <div class="class-overlay">
-            <button class="class-overlay-btn">Boka klass</button>
-          </div>
-        </div>
-        <div class="class-info">
-          <p class="class-name">Vinyasa Flow</p>
-          <div class="class-meta">
-            <span>60 min · Medel</span>
-            <span>150 kr</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="class-card">
-        <div class="class-img">
-          <img src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=600&q=80&auto=format&fit=crop"
-               alt="Morgonyoga – starta dagen lugnt">
-          <span class="class-level">Nybörjare</span>
-          <div class="class-overlay">
-            <button class="class-overlay-btn">Boka klass</button>
-          </div>
-        </div>
-        <div class="class-info">
-          <p class="class-name">Morgonyoga</p>
-          <div class="class-meta">
-            <span>45 min · Lugn</span>
-            <span>130 kr</span>
-          </div>
-        </div>
-      </article>
-
+<!-- OM OSS -->
+<section class="om-section" id="om" aria-labelledby="om-h">
+  <div class="om-layout" style="grid-template-columns:1fr;max-width:720px">
+    <div class="om-text">
+      <p class="section-eyebrow">Om oss</p>
+      <h2 id="om-h">En plats att landa i.</h2>
+      <p class="om-lead">Stillvatten Studio grundades med en enkel idé: skapa en studio som välkomnar alla — oavsett erfarenhet, ålder eller form.</p>
+      <p class="om-body">Hos oss hittar du certifierade lärare, litet klassformat med max tolv deltagare och ett schema som passar vardagslivet. Studion finns på Östermalm med fina ljusförhållanden och noga utvald akustik.</p>
+      <p class="om-body">Mattan finns på plats. Du behöver bara vara nyfiken.</p>
+      <a href="#kontakt" class="btn-primary" style="align-self:flex-start;display:inline-block;margin-top:.5rem">Kontakta oss</a>
     </div>
   </div>
 </section>
 
-<!-- SPLIT — OM OSS -->
-<section class="split" id="om" aria-labelledby="om-heading">
-  <div class="split-img">
-    <img src="https://images.unsplash.com/photo-1463213954442-ba0e64e02ac0?w=800&q=80&auto=format&fit=crop"
-         alt="Instruktör guidar elev i yogaposition">
+<!-- KLASSER -->
+<section class="section klasser-section" id="klasser" aria-labelledby="kl-h">
+  <div class="section-inner">
+    <p class="section-eyebrow">Vad vi erbjuder</p>
+    <div class="section-hdr">
+      <h2 id="kl-h">Klasser för varje nivå</h2>
+      <a href="#schema" class="link-sm">Se schema och boka →</a>
+    </div>
+    <div class="classes-tabs" role="tablist" aria-label="Välj klasstyp">
+      <button class="tab-btn" role="tab" aria-selected="true" aria-controls="p-yoga" id="tab-yoga" data-tab="yoga">Yoga</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="p-andning" id="tab-andning" data-tab="andning">Andning</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="p-meditation" id="tab-meditation" data-tab="meditation">Meditation</button>
+    </div>
+    <div class="classes-panels">
+      <div class="panel active" id="p-yoga" role="tabpanel" aria-labelledby="tab-yoga">
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 60 min</div>
+          <h3 class="class-name">Yin Yoga</h3>
+          <p class="class-desc">Djupa, lugna positioner hållna länge. Arbetar med bindväv och leder. Perfekt för återhämtning och stressreducering.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Låg</span>
+            <span class="class-meta"><strong>Pris:</strong> 150 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Medel · 75 min</div>
+          <h3 class="class-name">Vinyasa Flow</h3>
+          <p class="class-desc">Rörelse synkroniserad med andning. Dynamiska flöden som värmer kroppen och skapar en meditativ rörelseupplevelse.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Medel</span>
+            <span class="class-meta"><strong>Pris:</strong> 150 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Nybörjare · 60 min</div>
+          <h3 class="class-name">Hatha Grunder</h3>
+          <p class="class-desc">Klassisk yoga med fokus på grundpositioner och rätt alignment. Lugnt tempo med utrymme att lära sig grunderna ordentligt.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Låg–Medel</span>
+            <span class="class-meta"><strong>Pris:</strong> 130 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 45 min</div>
+          <h3 class="class-name">Morgonyoga</h3>
+          <p class="class-desc">Starta dagen med intention. Mjuk rörelse och djup andning för att landa i kroppen innan dagen börjar.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Låg</span>
+            <span class="class-meta"><strong>Pris:</strong> 120 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Avancerad · 90 min</div>
+          <h3 class="class-name">Ashtanga</h3>
+          <p class="class-desc">Den traditionella ashtangasekvensen med fokus på disciplin, ujjayi-andning och bandhas. Kräver viss yogaerfarenhet.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Hög</span>
+            <span class="class-meta"><strong>Pris:</strong> 170 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 75 min</div>
+          <h3 class="class-name">Restorative Yoga</h3>
+          <p class="class-desc">Vila in i positioner stöttade av kuddar och bolsters. Djup vila för nervsystemet — en av våra mest uppskattade klasser.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Mycket låg</span>
+            <span class="class-meta"><strong>Pris:</strong> 160 kr</span>
+          </div>
+        </article>
+      </div>
+      <div class="panel" id="p-andning" role="tabpanel" aria-labelledby="tab-andning" hidden>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 60 min</div>
+          <h3 class="class-name">Pranayama</h3>
+          <p class="class-desc">Yogisk andning — den klassiska läran om prana genom medveten andning. Lugnar nervsystemet och ökar närvaron.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Stillsam</span>
+            <span class="class-meta"><strong>Pris:</strong> 140 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Nybörjare · 75 min</div>
+          <h3 class="class-name">Andningsworkshop</h3>
+          <p class="class-desc">Grundläggande andningstekniker från olika traditioner — box breathing, 4-7-8, alternativ näsborgsandning. Teori och praktik.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Stillsam</span>
+            <span class="class-meta"><strong>Pris:</strong> 200 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Medel · 90 min</div>
+          <h3 class="class-name">Breathwork och Yoga Nidra</h3>
+          <p class="class-desc">Aktiv andningspraktik följt av djup avslappning i yogisk sömn. Kraftfullt kombinerat för återhämtning och stressbearbetning.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Medel</span>
+            <span class="class-meta"><strong>Pris:</strong> 190 kr</span>
+          </div>
+        </article>
+      </div>
+      <div class="panel" id="p-meditation" role="tabpanel" aria-labelledby="tab-meditation" hidden>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 45 min</div>
+          <h3 class="class-name">Stillhet och närvaro</h3>
+          <p class="class-desc">Guidad meditation med fokus på mindfulness. Enkla tekniker för att stilla tankeflödet och hitta en inre lugn punkt.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Stillsam</span>
+            <span class="class-meta"><strong>Pris:</strong> 120 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 60 min</div>
+          <h3 class="class-name">Ljudbad</h3>
+          <p class="class-desc">Ligg på mattan och låt vibrationerna från tibetanska skålar, gong och kristallskålar guida dig in i ett djupt meditativt tillstånd.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Passiv</span>
+            <span class="class-meta"><strong>Pris:</strong> 220 kr</span>
+          </div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Nybörjare · 75 min</div>
+          <h3 class="class-name">Yoga Nidra</h3>
+          <p class="class-desc">Yogisk sömn — du befinner dig i tillståndet mellan vaka och sömn. En session sägs motsvara flera timmar vanlig sömn i återhämtning.</p>
+          <div class="class-meta-row">
+            <span class="class-meta"><strong>Intensitet:</strong> Passiv</span>
+            <span class="class-meta"><strong>Pris:</strong> 160 kr</span>
+          </div>
+        </article>
+      </div>
+    </div>
   </div>
-  <div class="split-text">
-    <p class="eyebrow">Om oss</p>
-    <h2 id="om-heading">En plats att<br>landa i.</h2>
-    <p class="split-body">Studio Ro öppnade 2018 med en enkel idé: skapa en studio som välkomnar alla — oavsett erfarenhet, ålder eller form. Hos oss hittar du certifierade lärare, litet klassformat och ett schema som passar vardagslivet.</p>
-    <p class="split-body">Studion finns på Kungsholmen och har plats för max 15 elever per klass. Du bokar online, mattan finns på plats.</p>
-    <a href="#kontakt" class="btn-sage">Kontakta oss</a>
+</section>
+
+<!-- BEHANDLINGAR -->
+<section class="beh-section section-dark" id="behandlingar" aria-labelledby="beh-h">
+  <div class="section-inner">
+    <p class="section-eyebrow">Helande</p>
+    <div class="section-hdr">
+      <h2 id="beh-h">Behandlingar och terapi</h2>
+      <a href="#" class="link-sm" onclick="openBoka(null,'Behandling');return false">Boka behandling →</a>
+    </div>
+    <div class="beh-grid">
+      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Massage och Bodywork','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Massage och Bodywork','Behandling')">
+        <p class="beh-num">Behandling 01</p>
+        <h3 class="beh-name">Massage och Bodywork</h3>
+        <p class="beh-desc">Helkroppsmassage med fokus på muskelspänningar och djupvävnad. Integreras med aromaterapiolja anpassad efter ditt behov.</p>
+        <div class="beh-footer">
+          <span class="beh-dur">60 min · 90 min</span>
+          <span class="beh-price">895–1 195 kr</span>
+        </div>
+      </div>
+      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Kraniosakral Terapi','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Kraniosakral Terapi','Behandling')">
+        <p class="beh-num">Behandling 02</p>
+        <h3 class="beh-name">Kraniosakral Terapi</h3>
+        <p class="beh-desc">Extremt lätt beröring längs ryggraden och kraniet. Arbetar med kroppens subtila rytm för att lösa upp spänningar i nervsystem och bindväv.</p>
+        <div class="beh-footer">
+          <span class="beh-dur">75 min</span>
+          <span class="beh-price">1 095 kr</span>
+        </div>
+      </div>
+      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Akupunktur','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Akupunktur','Behandling')">
+        <p class="beh-num">Behandling 03</p>
+        <h3 class="beh-name">Akupunktur</h3>
+        <p class="beh-desc">Traditionell kinesisk medicin för att balansera kroppens energiflöde. Effektivt vid stress, sömnproblem, smärta och hormonstörningar.</p>
+        <div class="beh-footer">
+          <span class="beh-dur">60 min</span>
+          <span class="beh-price">950 kr</span>
+        </div>
+      </div>
+      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Personlig Yogaterapi','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Personlig Yogaterapi','Behandling')">
+        <p class="beh-num">Behandling 04</p>
+        <h3 class="beh-name">Personlig Yogaterapi</h3>
+        <p class="beh-desc">En till en med en av våra yogaterapeuter. En skräddarsydd praktik för dig — anpassad till din kropp, dina mål och din livssituation.</p>
+        <div class="beh-footer">
+          <span class="beh-dur">75 min</span>
+          <span class="beh-price">1 295 kr</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UTHYRNING -->
+<section class="uth-section" id="uthyrning" aria-labelledby="uth-h">
+  <div class="uth-layout">
+    <div class="uth-img">
+      <img src="yoga_sit.jpg" alt="Lugn yogapraktik vid vattnet — stämningen i Stillvatten Studio" width="675" height="900">
+    </div>
+    <div class="uth-body">
+      <p class="section-eyebrow">Hyr lokalen</p>
+      <h2 id="uth-h">Din händelse, vår studio.</h2>
+      <p class="uth-lead">Stillvatten Studio hyrs ut för workshops, retreats, föreläsningar, fotografering och privata event — även utanför ordinarie öppettider.</p>
+      <ul class="feat-list" aria-label="Vad som ingår vid uthyrning">
+        <li>120 kvm öppen yta med björkträgolv och takfönster</li>
+        <li>Professionellt ljud- och ljussystem ingår</li>
+        <li>Fullutrustat omklädningsrum och dusch</li>
+        <li>Mattor, bolsters, kuddar och props tillgängliga</li>
+        <li>Köksyta med kaffe och te ingår</li>
+        <li>Centralt läge nära T-bana Östermalmstorg</li>
+      </ul>
+      <div class="price-strip">
+        <div>
+          <p class="price-strip-label">Från</p>
+          <p class="price-strip-val">1 800 kr / timme</p>
+        </div>
+        <a href="#" class="btn-primary" onclick="openBoka(null,'Uthyrning av lokal');return false">Skicka förfrågan</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- SCHEMA -->
-<section class="schedule" id="schema" aria-labelledby="schema-heading">
-  <div class="schedule-inner">
-    <div class="section-top">
-      <h2 id="schema-heading">Veckans schema</h2>
-      <a href="#kontakt" class="link-text">Boka din plats →</a>
+<section class="schema-section section-dark" id="schema" aria-labelledby="schema-h">
+  <div class="section-inner">
+    <p class="section-eyebrow">Denna vecka</p>
+    <div class="section-hdr">
+      <h2 id="schema-h">Veckoschemat</h2>
+      <div class="week-nav" aria-label="Bläddra i veckor">
+        <button class="week-btn" aria-label="Föregående vecka">‹</button>
+        <span class="week-lbl" id="week-lbl">Vecka 22 · Maj 2026</span>
+        <button class="week-btn" aria-label="Nästa vecka">›</button>
+      </div>
     </div>
-    <div class="schedule-grid" role="table" aria-label="Veckoschemat">
-
+    <div class="schema-grid" role="table" aria-label="Veckoschemat för klasser">
+      <div class="day-col today" role="columnheader">
+        <div class="day-head"><span class="day-name">Mån</span><span class="day-num" aria-label="25 maj, idag">25</span></div>
+        <div class="day-slots">
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')" aria-label="Boka Morgonyoga 06:30, 5 platser kvar">
+            <span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">5 platser kvar</span>
+          </div>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Pranayama 10:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Pranayama 10:00','Andning')" aria-label="Boka Pranayama 10:00, 8 platser kvar">
+            <span class="slot-time">10:00</span><span class="slot-name">Pranayama</span><span class="slot-spots">8 platser kvar</span>
+          </div>
+          <div class="slot full" aria-disabled="true" aria-label="Vinyasa Flow 18:30, fullbokat">
+            <span class="slot-time">18:30</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">Fullbokat</span>
+          </div>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Yin Yoga 20:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Yin Yoga 20:00','Yoga')" aria-label="Boka Yin Yoga 20:00, 3 platser kvar">
+            <span class="slot-time">20:00</span><span class="slot-name">Yin Yoga</span><span class="slot-spots">3 platser kvar</span>
+          </div>
+        </div>
+      </div>
       <div class="day-col" role="columnheader">
-        <div class="day-head">
-          <span class="day-name">Mån</span>
-          <span class="day-date">9</span>
-        </div>
-        <div class="day-body">
-          <div class="class-slot">
-            <span class="slot-time">06:30</span>
-            <span class="slot-name">Morgonyoga</span>
-            <span class="slot-spots">4 platser kvar</span>
+        <div class="day-head"><span class="day-name">Tis</span><span class="day-num">26</span></div>
+        <div class="day-slots">
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')">
+            <span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">7 platser kvar</span>
           </div>
-          <div class="class-slot">
-            <span class="slot-time">12:00</span>
-            <span class="slot-name">Vinyasa Flow</span>
-            <span class="slot-spots">8 platser kvar</span>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Hatha Grunder 12:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Hatha Grunder 12:00','Yoga')">
+            <span class="slot-time">12:00</span><span class="slot-name">Hatha Grunder</span><span class="slot-spots">10 platser kvar</span>
           </div>
-          <div class="class-slot full">
-            <span class="slot-time">18:30</span>
-            <span class="slot-name">Yin Yoga</span>
-            <span class="slot-spots">Fullbokat</span>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Yoga Nidra 19:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Yoga Nidra 19:00','Meditation')">
+            <span class="slot-time">19:00</span><span class="slot-name">Yoga Nidra</span><span class="slot-spots">4 platser kvar</span>
           </div>
         </div>
       </div>
-
-      <div class="day-col">
-        <div class="day-head">
-          <span class="day-name">Tis</span>
-          <span class="day-date">10</span>
-        </div>
-        <div class="day-body">
-          <div class="class-slot">
-            <span class="slot-time">06:30</span>
-            <span class="slot-name">Morgonyoga</span>
-            <span class="slot-spots">6 platser kvar</span>
+      <div class="day-col" role="columnheader">
+        <div class="day-head"><span class="day-name">Ons</span><span class="day-num">27</span></div>
+        <div class="day-slots">
+          <div class="slot full" aria-disabled="true">
+            <span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">Fullbokat</span>
           </div>
-          <div class="class-slot">
-            <span class="slot-time">17:30</span>
-            <span class="slot-name">Vinyasa Flow</span>
-            <span class="slot-spots">3 platser kvar</span>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Stillhet och närvaro 10:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Stillhet och närvaro 10:00','Meditation')">
+            <span class="slot-time">10:00</span><span class="slot-name">Stillhet och närvaro</span><span class="slot-spots">9 platser kvar</span>
+          </div>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Ashtanga 18:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Ashtanga 18:00','Yoga')">
+            <span class="slot-time">18:00</span><span class="slot-name">Ashtanga</span><span class="slot-spots">2 platser kvar</span>
+          </div>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Yin Yoga 20:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Yin Yoga 20:00','Yoga')">
+            <span class="slot-time">20:00</span><span class="slot-name">Yin Yoga</span><span class="slot-spots">6 platser kvar</span>
           </div>
         </div>
       </div>
-
-      <div class="day-col">
-        <div class="day-head">
-          <span class="day-name">Ons</span>
-          <span class="day-date">11</span>
-        </div>
-        <div class="day-body">
-          <div class="class-slot full">
-            <span class="slot-time">07:00</span>
-            <span class="slot-name">Morgonyoga</span>
-            <span class="slot-spots">Fullbokat</span>
+      <div class="day-col" role="columnheader">
+        <div class="day-head"><span class="day-name">Tor</span><span class="day-num">28</span></div>
+        <div class="day-slots">
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')">
+            <span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">6 platser kvar</span>
           </div>
-          <div class="class-slot">
-            <span class="slot-time">12:00</span>
-            <span class="slot-name">Yin Yoga</span>
-            <span class="slot-spots">10 platser kvar</span>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Breathwork och Nidra 12:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Breathwork och Nidra 12:00','Andning')">
+            <span class="slot-time">12:00</span><span class="slot-name">Breathwork och Nidra</span><span class="slot-spots">5 platser kvar</span>
           </div>
-          <div class="class-slot">
-            <span class="slot-time">19:00</span>
-            <span class="slot-name">Vinyasa Flow</span>
-            <span class="slot-spots">5 platser kvar</span>
+          <div class="slot full" aria-disabled="true">
+            <span class="slot-time">18:30</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">Fullbokat</span>
           </div>
         </div>
       </div>
-
-      <div class="day-col">
-        <div class="day-head">
-          <span class="day-name">Tor</span>
-          <span class="day-date">12</span>
-        </div>
-        <div class="day-body">
-          <div class="class-slot">
-            <span class="slot-time">06:30</span>
-            <span class="slot-name">Morgonyoga</span>
-            <span class="slot-spots">7 platser kvar</span>
+      <div class="day-col" role="columnheader">
+        <div class="day-head"><span class="day-name">Fre</span><span class="day-num">29</span></div>
+        <div class="day-slots">
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')">
+            <span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">8 platser kvar</span>
           </div>
-          <div class="class-slot">
-            <span class="slot-time">18:30</span>
-            <span class="slot-name">Yin Yoga</span>
-            <span class="slot-spots">2 platser kvar</span>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Restorative Yoga 12:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Restorative Yoga 12:00','Yoga')">
+            <span class="slot-time">12:00</span><span class="slot-name">Restorative Yoga</span><span class="slot-spots">11 platser kvar</span>
+          </div>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Ljudbad 19:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Ljudbad 19:00','Meditation')">
+            <span class="slot-time">19:00</span><span class="slot-name">Ljudbad</span><span class="slot-spots">3 platser kvar</span>
           </div>
         </div>
       </div>
-
-      <div class="day-col">
-        <div class="day-head">
-          <span class="day-name">Fre</span>
-          <span class="day-date">13</span>
-        </div>
-        <div class="day-body">
-          <div class="class-slot">
-            <span class="slot-time">06:30</span>
-            <span class="slot-name">Morgonyoga</span>
-            <span class="slot-spots">8 platser kvar</span>
+      <div class="day-col" role="columnheader">
+        <div class="day-head"><span class="day-name">Lör</span><span class="day-num">30</span></div>
+        <div class="day-slots">
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Vinyasa Flow 09:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Vinyasa Flow 09:00','Yoga')">
+            <span class="slot-time">09:00</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">4 platser kvar</span>
           </div>
-          <div class="class-slot full">
-            <span class="slot-time">12:00</span>
-            <span class="slot-name">Vinyasa Flow</span>
-            <span class="slot-spots">Fullbokat</span>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Andningsworkshop 11:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Andningsworkshop 11:00','Andning')">
+            <span class="slot-time">11:00</span><span class="slot-name">Andningsworkshop</span><span class="slot-spots">7 platser kvar</span>
           </div>
-          <div class="class-slot">
-            <span class="slot-time">17:30</span>
-            <span class="slot-name">Yin Yoga</span>
-            <span class="slot-spots">5 platser kvar</span>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Yin Yoga 14:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Yin Yoga 14:00','Yoga')">
+            <span class="slot-time">14:00</span><span class="slot-name">Yin Yoga</span><span class="slot-spots">9 platser kvar</span>
           </div>
         </div>
       </div>
-
+      <div class="day-col" role="columnheader">
+        <div class="day-head"><span class="day-name">Sön</span><span class="day-num">31</span></div>
+        <div class="day-slots">
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Restorative Yoga 10:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Restorative Yoga 10:00','Yoga')">
+            <span class="slot-time">10:00</span><span class="slot-name">Restorative Yoga</span><span class="slot-spots">10 platser kvar</span>
+          </div>
+          <div class="slot full" aria-disabled="true">
+            <span class="slot-time">12:00</span><span class="slot-name">Ljudbad</span><span class="slot-spots">Fullbokat</span>
+          </div>
+          <div class="slot" role="button" tabindex="0" onclick="openBoka('Yoga Nidra 15:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Yoga Nidra 15:00','Meditation')">
+            <span class="slot-time">15:00</span><span class="slot-name">Yoga Nidra</span><span class="slot-spots">5 platser kvar</span>
+          </div>
+        </div>
+      </div>
     </div>
+    <p style="margin-top:1.5rem;font-size:.78rem;color:var(--on-dark-muted)">Klicka på en tidslucka för att boka din plats. Fullbokade klasser kan du ställa dig på väntelista via kontaktformuläret.</p>
   </div>
 </section>
 
-<!-- PHOTO GRID -->
-<div class="photo-grid" aria-hidden="true">
-  <div class="photo-item tall">
-    <img src="https://images.unsplash.com/photo-1604480132736-44c188fe4d20?w=800&q=80&auto=format&fit=crop"
-         alt="Yogastudio interiör">
-  </div>
-  <div class="photo-item">
-    <img src="https://images.unsplash.com/photo-1510894347713-fc3ed6fdf539?w=600&q=80&auto=format&fit=crop"
-         alt="Yogaposition vid fönster">
-  </div>
-  <div class="photo-item">
-    <img src="https://images.unsplash.com/photo-1522898467493-49726bf28798?w=600&q=80&auto=format&fit=crop"
-         alt="Grupp i yogaklass">
-  </div>
-  <div class="photo-item">
-    <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=600&q=80&auto=format&fit=crop"
-         alt="Detalj yogamatta">
-  </div>
-  <div class="photo-item">
-    <img src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=600&q=80&auto=format&fit=crop"
-         alt="Balanspose utomhus">
-  </div>
-</div>
-
 <!-- PRISER -->
-<section class="pricing" id="priser" aria-labelledby="priser-heading">
-  <div class="pricing-inner">
-    <div class="section-top">
-      <h2 id="priser-heading">Priser</h2>
+<section class="section priser-section" id="priser" aria-labelledby="pris-h">
+  <div class="section-inner">
+    <p class="section-eyebrow">Priser och medlemskap</p>
+    <div class="section-hdr">
+      <h2 id="pris-h">Välj det som passar dig</h2>
     </div>
-    <div class="pricing-grid">
-
-      <div class="price-card">
-        <p class="price-label">Enstaka</p>
-        <p class="price-name">Drop-in</p>
-        <p class="price-amount">150</p>
-        <p class="price-per">kr per klass</p>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Valfri klass</li>
-          <li>Matta ingår</li>
-          <li>Boka online</li>
-        </ul>
-        <a href="#kontakt" class="price-cta">Boka klass</a>
-      </div>
-
-      <div class="price-card featured">
-        <p class="price-label">Populärast</p>
-        <p class="price-name">Månadsmedlem</p>
-        <p class="price-amount">895</p>
-        <p class="price-per">kr per månad</p>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Obegränsat antal klasser</li>
+    <div class="priser-grid">
+      <div class="pris-card">
+        <p class="pris-tag">Enstaka</p>
+        <p class="pris-name">Drop-in</p>
+        <p class="pris-amount">120–220</p>
+        <p class="pris-per">kr per klass</p>
+        <div class="pris-div" role="separator"></div>
+        <ul class="pris-list" aria-label="Ingår i drop-in">
+          <li>Valfri klass varje dag</li>
           <li>Matta ingår alltid</li>
-          <li>Prioriterad bokning</li>
-          <li>10% på workshops</li>
+          <li>Boka upp till 7 dagar i förväg</li>
         </ul>
-        <a href="#kontakt" class="price-cta">Bli medlem</a>
+        <a href="#" class="pris-cta" onclick="openBoka(null,'Drop-in');return false" aria-label="Boka drop-in klass">Boka nu</a>
       </div>
-
-      <div class="price-card">
-        <p class="price-label">Klippkort</p>
-        <p class="price-name">10 klasser</p>
-        <p class="price-amount">1 200</p>
-        <p class="price-per">kr · giltigt 6 mån</p>
-        <div class="price-divider"></div>
-        <ul class="price-features">
+      <div class="pris-card featured" aria-label="Populärast">
+        <p class="pris-tag">Populärast</p>
+        <p class="pris-name">Månadsmedlem</p>
+        <p class="pris-amount">895</p>
+        <p class="pris-per">kr per månad, obegränsat</p>
+        <div class="pris-div" role="separator"></div>
+        <ul class="pris-list" aria-label="Ingår i månadsmedlemskap">
+          <li>Obegränsat antal klasser</li>
+          <li>Prioriterad bokning 14 dagar i förväg</li>
+          <li>20 procent rabatt på behandlingar</li>
+          <li>Tillgång till lounge och bibliotek</li>
+          <li>Matta ingår alltid</li>
+        </ul>
+        <a href="#" class="pris-cta" onclick="openBoka(null,'Månadsmedlemskap');return false" aria-label="Bli månadsmedlem">Bli medlem</a>
+      </div>
+      <div class="pris-card">
+        <p class="pris-tag">Klippkort</p>
+        <p class="pris-name">10 klasser</p>
+        <p class="pris-amount">1 100</p>
+        <p class="pris-per">kr, giltigt 6 månader</p>
+        <div class="pris-div" role="separator"></div>
+        <ul class="pris-list" aria-label="Ingår i klippkort">
           <li>10 valfria klasser</li>
+          <li>Kan delas med en vän</li>
           <li>Matta ingår</li>
-          <li>Kan delas med vän</li>
         </ul>
-        <a href="#kontakt" class="price-cta">Köp klippkort</a>
+        <a href="#" class="pris-cta" onclick="openBoka(null,'Klippkort 10 klasser');return false">Köp klippkort</a>
       </div>
-
+      <div class="pris-card">
+        <p class="pris-tag">Årsmedlem</p>
+        <p class="pris-name">Årspass</p>
+        <p class="pris-amount">7 900</p>
+        <p class="pris-per">kr per år, spara 25 procent</p>
+        <div class="pris-div" role="separator"></div>
+        <ul class="pris-list" aria-label="Ingår i årspass">
+          <li>Allt i månadsmedlemskapet</li>
+          <li>En gratis behandling per kvartal</li>
+          <li>Inbjudan till exklusiva events</li>
+          <li>Namnbricka i studion</li>
+        </ul>
+        <a href="#" class="pris-cta" onclick="openBoka(null,'Årspass');return false">Välj årspass</a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- KONTAKT -->
-<section class="contact" id="kontakt" aria-labelledby="kontakt-heading">
-  <div class="contact-inner">
-    <p class="eyebrow" style="justify-content:center">Kontakt</p>
-    <h2 id="kontakt-heading">Boka din plats</h2>
-    <p class="contact-sub">Fyll i formuläret så återkommer vi med bokningsbekräftelse inom 24 timmar.</p>
-    <form class="contact-form" aria-label="Bokningsformulär" onsubmit="return false;">
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="name">Namn</label>
-          <input type="text" id="name" class="field-input" placeholder="Ditt namn" autocomplete="name">
+<section class="kontakt-section section-dark" id="kontakt" aria-labelledby="kontakt-h">
+  <div class="kontakt-inner">
+    <div class="kontakt-left">
+      <p class="section-eyebrow">Kontakt</p>
+      <h2 id="kontakt-h">Vi hörs.</h2>
+      <p class="kontakt-lead">Frågor om klasser, behandlingar, uthyrning eller medlemskap? Vi svarar inom 24 timmar på vardagar.</p>
+      <dl class="kontakt-list">
+        <div><dt class="kontakt-lbl">Adress</dt><dd class="kontakt-val">Strandvägen 12, 114 56 Stockholm</dd></div>
+        <div><dt class="kontakt-lbl">E-post</dt><dd class="kontakt-val">hej@stillvattenstudio.se</dd></div>
+        <div><dt class="kontakt-lbl">Telefon</dt><dd class="kontakt-val">08-123 45 67</dd></div>
+        <div><dt class="kontakt-lbl">Öppettider</dt><dd class="kontakt-val">Mån–Fre 06:30–21:00 &middot; Lör–Sön 08:00–18:00</dd></div>
+      </dl>
+    </div>
+    <div class="form-box">
+      <h3>Skicka ett meddelande</h3>
+      <form onsubmit="handleKontakt(event)" aria-label="Kontaktformulär" novalidate>
+        <div class="f-row">
+          <div class="f-group">
+            <label class="f-label" for="k-namn">Namn</label>
+            <input type="text" id="k-namn" class="f-input" placeholder="Ditt namn" autocomplete="name" required aria-required="true">
+          </div>
+          <div class="f-group">
+            <label class="f-label" for="k-email">E-post</label>
+            <input type="email" id="k-email" class="f-input" placeholder="din@email.se" autocomplete="email" required aria-required="true">
+          </div>
         </div>
-        <div class="field-group">
-          <label class="field-label" for="email">E-post</label>
-          <input type="email" id="email" class="field-input" placeholder="din@email.se" autocomplete="email">
+        <div class="f-group">
+          <label class="f-label" for="k-amne">Ämne</label>
+          <select id="k-amne" class="f-input f-select">
+            <option value="">Välj ämne</option>
+            <option>Klasser och schema</option>
+            <option>Behandlingar</option>
+            <option>Uthyrning av lokal</option>
+            <option>Medlemskap</option>
+            <option>Övrigt</option>
+          </select>
         </div>
-      </div>
-      <div class="field-group">
-        <label class="field-label" for="klass">Klass / Fråga</label>
-        <input type="text" id="klass" class="field-input" placeholder="Vilken klass eller fråga?">
-      </div>
-      <div class="field-group">
-        <label class="field-label" for="message">Meddelande</label>
-        <textarea id="message" class="field-input" placeholder="Berätta lite om dig…"></textarea>
-      </div>
-      <button type="submit" class="submit-btn">Skicka →</button>
-    </form>
+        <div class="f-group">
+          <label class="f-label" for="k-msg">Meddelande</label>
+          <textarea id="k-msg" class="f-input" rows="4" placeholder="Berätta mer…"></textarea>
+        </div>
+        <button type="submit" class="sub-btn">Skicka meddelande</button>
+        <p class="f-note">Vi svarar inom ett dygn på vardagar.</p>
+      </form>
+    </div>
   </div>
 </section>
 
 </main>
 
 <footer role="contentinfo">
-  <span class="footer-logo">Studio Ro</span>
-  <ul class="footer-links">
+  <span class="f-logo">Ro Studio</span>
+  <ul class="f-links" role="list">
+    <li><a href="#om">Om oss</a></li>
     <li><a href="#klasser">Klasser</a></li>
+    <li><a href="#behandlingar">Behandlingar</a></li>
     <li><a href="#schema">Schema</a></li>
     <li><a href="#priser">Priser</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
-  <span class="footer-credit">Webb av Jasmin</span>
+  <span class="f-credit">Design av Jasmin Hedlund</span>
 </footer>
 
+<!-- BOKNINGSMODAL -->
+<div class="boka-overlay" id="boka-overlay" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="boka-modal">
+    <button class="m-close" id="m-close" aria-label="Stäng bokningsdialog">✕</button>
+    <div id="m-form-wrap">
+      <p class="m-eye" id="m-eye">Yoga</p>
+      <h2 class="m-title" id="m-title">Boka din plats</h2>
+      <form onsubmit="handleBoka(event)" aria-label="Bokningsformulär" novalidate>
+        <div class="f-row">
+          <div class="f-group">
+            <label class="f-label" for="b-namn">Namn</label>
+            <input type="text" id="b-namn" class="f-input" placeholder="Ditt namn" autocomplete="name" required aria-required="true">
+          </div>
+          <div class="f-group">
+            <label class="f-label" for="b-email">E-post</label>
+            <input type="email" id="b-email" class="f-input" placeholder="din@email.se" autocomplete="email" required aria-required="true">
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label" for="b-tel">Telefon</label>
+          <input type="tel" id="b-tel" class="f-input" placeholder="07X-XXX XX XX" autocomplete="tel">
+        </div>
+        <div class="f-group">
+          <label class="f-label" for="b-klass">Klass eller tjänst</label>
+          <input type="text" id="b-klass" class="f-input" placeholder="Välj klass">
+        </div>
+        <div class="f-group">
+          <label class="f-label" for="b-medl">Betalningssätt</label>
+          <select id="b-medl" class="f-input f-select">
+            <option>Betalar per klass</option>
+            <option>Klippkort</option>
+            <option>Månadsmedlem</option>
+            <option>Årsmedlem</option>
+          </select>
+        </div>
+        <button type="submit" class="sub-btn">Bekräfta bokning</button>
+        <p class="f-note">Bekräftelse skickas via e-post. Avbokning senast 4 timmar före klassen.</p>
+      </form>
+    </div>
+    <div class="m-success" id="m-success" role="alert" aria-live="assertive">
+      <div class="m-success-icon" aria-hidden="true">✓</div>
+      <h2>Bokning mottagen!</h2>
+      <p>Vi skickar en bekräftelse till din e-post inom kort. Välkommen till Stillvatten.</p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Meddelande skickat — vi hör av oss!</div>
+
 <script>
-  const toggle = document.querySelector('.nav-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
-  const closeBtn = document.querySelector('.nav-mobile-close');
+const ham=document.getElementById('ham');
+const mobNav=document.getElementById('mob-nav');
+document.getElementById('mob-close').addEventListener('click',closeMob);
+ham.addEventListener('click',()=>{
+  const open=mobNav.classList.toggle('open');
+  ham.setAttribute('aria-expanded',String(open));
+});
+mobNav.querySelectorAll('a').forEach(l=>l.addEventListener('click',closeMob));
+function closeMob(){mobNav.classList.remove('open');ham.setAttribute('aria-expanded','false')}
 
-  toggle.addEventListener('click', () => {
-    const open = mobileNav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-    toggle.setAttribute('aria-label', open ? 'Stäng meny' : 'Öppna meny');
+// Tabs — WCAG 4.1.2
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>{
+      b.classList.remove('active');b.setAttribute('aria-selected','false');
+    });
+    document.querySelectorAll('.panel').forEach(p=>{
+      p.classList.remove('active');p.hidden=true;
+    });
+    btn.classList.add('active');btn.setAttribute('aria-selected','true');
+    const panel=document.getElementById('p-'+btn.dataset.tab);
+    panel.classList.add('active');panel.hidden=false;
   });
-
-  closeBtn.addEventListener('click', () => {
-    mobileNav.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Öppna meny');
+  btn.addEventListener('keydown',e=>{
+    const tabs=[...document.querySelectorAll('.tab-btn')];
+    const i=tabs.indexOf(btn);
+    if(e.key==='ArrowRight'){tabs[(i+1)%tabs.length].focus();tabs[(i+1)%tabs.length].click()}
+    if(e.key==='ArrowLeft'){tabs[(i-1+tabs.length)%tabs.length].focus();tabs[(i-1+tabs.length)%tabs.length].click()}
   });
+});
 
-  mobileNav.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
-    mobileNav.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  }));
+// Modal
+const overlay=document.getElementById('boka-overlay');
+document.getElementById('m-close').addEventListener('click',closeBoka);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeBoka()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeBoka()});
+
+function openBoka(klass,typ){
+  document.getElementById('m-form-wrap').style.display='block';
+  document.getElementById('m-success').style.display='none';
+  if(klass)document.getElementById('b-klass').value=klass;
+  if(typ)document.getElementById('m-eye').textContent=typ;
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('m-close').focus();
+}
+function closeBoka(){
+  overlay.classList.remove('open');
+  document.body.style.overflow='';
+}
+function handleBoka(e){
+  e.preventDefault();
+  document.getElementById('m-form-wrap').style.display='none';
+  document.getElementById('m-success').style.display='block';
+  document.getElementById('m-success').focus();
+}
+function handleKontakt(e){
+  e.preventDefault();
+  e.target.reset();
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
 </script>
-
 </body>
 </html>

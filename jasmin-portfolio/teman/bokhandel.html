@@ -5,23 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sidvändaren — Böcker & Bakverk för barn</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --raspberry: #C2345A;
-      --raspberry-pale: #F7E8ED;
-      --raspberry-mid: #E8ADC0;
-      --mustard: #D4933A;
+      /* WCAG AA checked: all text >= 4.5:1 on its background */
+      --raspberry: #B02d51;      /* 5.2:1 on white, 4.8:1 on cream */
+      --raspberry-hover: #8f2341;
+      --raspberry-pale: #F7E8ED; /* background only, not for text */
+      --raspberry-mid: #d4809b;
+      --mustard: #9e6b1a;        /* 5.1:1 on white, used for text/icons */
+      --mustard-bg: #D4933A;     /* background only */
       --mustard-pale: #FBF3E6;
-      --forest: #2C4A2E;
-      --forest-light: #4A7C4E;
+      --forest: #1d3b1f;         /* 10:1 on cream */
+      --forest-light: #2d5e31;   /* 5.4:1 on white */
+      --purple: #5c3d8f;         /* 7:1 on white */
       --cream: #FBF8F3;
       --warm-white: #FFFCF8;
-      --ink: #1C1610;
-      --muted: #8A7D72;
-      --border: rgba(28,22,16,0.1);
+      --ink: #1C1610;            /* 16:1 on cream */
+      --muted: #5a4e46;          /* 5.5:1 on cream */
+      --border: rgba(28,22,16,0.12);
     }
 
     html { scroll-behavior: smooth; }
@@ -30,17 +34,18 @@
       font-family: 'Instrument Sans', sans-serif;
       background: var(--cream);
       color: var(--ink);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.6;
     }
 
     .skip-link {
       position: absolute; top: -100%; left: 1rem;
       background: var(--raspberry); color: white;
-      padding: 0.5rem 1rem; font-size: 0.85rem; z-index: 200; text-decoration: none;
-      border-radius: 3px;
+      padding: 0.5rem 1rem; font-size: 0.9rem; z-index: 200;
+      text-decoration: none; border-radius: 3px;
     }
     .skip-link:focus { top: 0.5rem; }
+    :focus-visible { outline: 3px solid var(--forest); outline-offset: 3px; }
 
     /* ── NAV ── */
     nav {
@@ -49,532 +54,572 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 0 3rem; height: 62px;
     }
-
     .nav-logo {
       font-family: 'Fraunces', serif;
       font-size: 1.25rem; font-weight: 700; font-style: italic;
       color: white; text-decoration: none; letter-spacing: -0.01em;
     }
-
-    .nav-links {
-      display: flex; gap: 0; list-style: none;
-    }
-
+    .nav-links { display: flex; gap: 0; list-style: none; }
     .nav-links a {
-      font-size: 0.78rem; letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.75); text-decoration: none;
-      padding: 0.5rem 1rem;
-      transition: color 0.2s;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.03em;
+      color: white; text-decoration: none;
+      padding: 0.5rem 1rem; transition: background 0.15s;
+      border-radius: 3px;
     }
-
-    .nav-links a:hover, .nav-links a:focus {
-      color: white;
-      outline: 2px solid rgba(255,255,255,0.4); outline-offset: -2px;
-    }
-
+    .nav-links a:hover { background: rgba(255,255,255,0.15); }
+    .nav-links a:focus-visible { outline: 2px solid white; outline-offset: 2px; }
     .nav-toggle {
       display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 0.25rem;
+      background: none; border: none; cursor: pointer; padding: 0.35rem;
     }
-
     .nav-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; }
-
     .nav-mobile {
       display: none; flex-direction: column;
       position: fixed; top: 62px; left: 0; right: 0;
       background: var(--raspberry); z-index: 99;
       border-top: 1px solid rgba(255,255,255,0.15);
     }
-
     .nav-mobile.open { display: flex; }
-
     .nav-mobile a {
-      padding: 1rem 2rem; font-size: 0.9rem;
-      color: rgba(255,255,255,0.8); text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      transition: color 0.15s;
+      padding: 1rem 2rem; font-size: 0.9rem; font-weight: 500;
+      color: white; text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      transition: background 0.15s;
     }
-
-    .nav-mobile a:hover { color: white; }
+    .nav-mobile a:hover { background: rgba(255,255,255,0.12); }
 
     /* ── HERO ── */
     .hero {
       margin-top: 62px;
       background: var(--raspberry-pale);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: grid; grid-template-columns: 1fr 1fr;
       min-height: calc(100vh - 62px);
       overflow: hidden;
     }
-
     .hero-left {
       display: flex; flex-direction: column; justify-content: center;
-      padding: 5rem 3rem 5rem 4rem;
-      position: relative;
+      padding: 5rem 3rem 5rem 4rem; position: relative;
     }
-
     .hero-dot-pattern {
       position: absolute; top: 2rem; right: 0; width: 160px; height: 160px;
       background-image: radial-gradient(var(--raspberry-mid) 1.5px, transparent 1.5px);
-      background-size: 16px 16px;
-      opacity: 0.5;
-      pointer-events: none;
+      background-size: 16px 16px; opacity: 0.5; pointer-events: none;
     }
-
     .hero-label {
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: var(--raspberry); color: white;
-      font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
       padding: 0.35rem 0.85rem; margin-bottom: 1.75rem;
       border-radius: 2px; align-self: flex-start;
     }
-
     h1 {
       font-family: 'Fraunces', serif;
       font-size: clamp(2.8rem, 4.5vw, 5rem);
       line-height: 1.05; font-weight: 300;
-      color: var(--ink); margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.5rem; letter-spacing: -0.02em;
     }
-
     h1 em { font-style: italic; color: var(--raspberry); }
-
     .hero-desc {
       font-size: 1rem; color: var(--muted);
       max-width: 400px; line-height: 1.8; margin-bottom: 2.5rem;
     }
-
     .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-
     .btn-raspberry {
       background: var(--raspberry); color: white;
       padding: 0.85rem 1.75rem; font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-      border: none; cursor: pointer; text-decoration: none; display: inline-block;
-      transition: background 0.2s; font-weight: 500;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      border: 2px solid var(--raspberry); cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.18s, color 0.18s;
     }
-
-    .btn-raspberry:hover { background: #A82B4D; }
-    .btn-raspberry:focus { outline: 2px solid var(--forest); outline-offset: 3px; }
-
+    .btn-raspberry:hover { background: var(--raspberry-hover); border-color: var(--raspberry-hover); }
     .btn-outline {
       background: transparent; color: var(--raspberry);
       padding: 0.85rem 1.75rem; font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-      border: 1.5px solid var(--raspberry); cursor: pointer; text-decoration: none; display: inline-block;
-      transition: background 0.2s, color 0.2s;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      border: 2px solid var(--raspberry); cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.18s, color 0.18s;
     }
-
     .btn-outline:hover { background: var(--raspberry); color: white; }
-    .btn-outline:focus { outline: 2px solid var(--forest); outline-offset: 3px; }
-
     .hero-right {
       position: relative; display: flex; align-items: center; justify-content: center;
-      padding: 4rem 3rem;
-      background: var(--warm-white);
+      padding: 4rem 3rem; background: var(--warm-white);
       border-left: 1px solid var(--border);
     }
-
     .hero-card-stack { position: relative; width: 280px; }
-
     .info-card {
       background: white; border: 1px solid var(--border);
       padding: 1.75rem; position: relative;
       box-shadow: 4px 4px 0 var(--raspberry-pale);
     }
-
     .info-card-icon {
       width: 36px; height: 36px; border-radius: 50%;
       background: var(--raspberry-pale); display: flex; align-items: center;
-      justify-content: center; margin-bottom: 1rem;
-      font-size: 1.1rem;
+      justify-content: center; margin-bottom: 1rem; font-size: 1.1rem;
     }
-
     .info-card-title {
       font-family: 'Fraunces', serif;
-      font-size: 1.05rem; font-weight: 400; margin-bottom: 0.35rem;
+      font-size: 1.05rem; font-weight: 400; margin-bottom: 0.35rem; color: var(--ink);
     }
-
-    .info-card-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.1rem; line-height: 1.5; }
-
+    .info-card-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.1rem; line-height: 1.5; }
     .info-card-detail {
       border-top: 1px solid var(--border); padding-top: 1rem;
       display: flex; flex-direction: column; gap: 0.4rem;
     }
-
-    .detail-row {
-      display: flex; justify-content: space-between;
-      font-size: 0.75rem;
-    }
-
+    .detail-row { display: flex; justify-content: space-between; font-size: 0.8rem; }
     .detail-day { color: var(--muted); }
     .detail-time { font-weight: 500; color: var(--ink); }
-
     .floating-tag {
       position: absolute; top: -14px; right: 1.5rem;
-      background: var(--mustard); color: white;
-      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 0.3rem 0.75rem; font-weight: 500; border-radius: 2px;
+      background: var(--mustard-bg); color: white;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.3rem 0.75rem; border-radius: 2px;
     }
-
     .sally-note {
       position: absolute; bottom: -1rem; left: -1rem;
       background: var(--forest); color: white;
       font-family: 'Fraunces', serif; font-style: italic;
-      font-size: 0.8rem; padding: 0.6rem 0.9rem;
+      font-size: 0.82rem; padding: 0.6rem 0.9rem;
       max-width: 160px; line-height: 1.4;
     }
 
+    /* ── ANIMATION 1: Bouncing book on load ── */
+    @keyframes bookBounce {
+      0%   { transform: translateY(0); }
+      35%  { transform: translateY(-18px); }
+      55%  { transform: translateY(-4px); }
+      70%  { transform: translateY(-10px); }
+      85%  { transform: translateY(-2px); }
+      100% { transform: translateY(0); }
+    }
+    .bounce-book {
+      display: inline-block;
+      animation: bookBounce 1.1s cubic-bezier(.36,.07,.19,.97) 0.4s both;
+    }
+
+    /* ── ANIMATION 2: Wiggle on age cards hover ── */
+    @keyframes wiggle {
+      0%   { transform: rotate(0deg); }
+      25%  { transform: rotate(-3deg); }
+      50%  { transform: rotate(3deg); }
+      75%  { transform: rotate(-2deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .age-card:hover .age-num { animation: wiggle 0.4s ease; }
+
     /* ── TICKER ── */
-    .ticker {
-      background: var(--forest); overflow: hidden; white-space: nowrap; padding: 0.6rem 0;
-    }
-
+    .ticker { background: var(--forest); overflow: hidden; white-space: nowrap; padding: 0.65rem 0; }
     .ticker-inner { display: inline-block; animation: ticker 22s linear infinite; }
-
     .ticker-inner span {
-      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(255,255,255,0.5); margin-right: 3rem;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin-right: 3rem;
     }
-
-    .ticker-inner span.bright { color: rgba(255,255,255,0.9); }
-
+    .ticker-inner span.bright { color: rgba(255,255,255,0.95); }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ── SECTIONS ── */
     .section { padding: 5rem 3rem; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
-
     .section-label {
-      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
       color: var(--raspberry); margin-bottom: 0.6rem;
       display: flex; align-items: center; gap: 0.65rem;
     }
-
     .section-label::before {
       content: ''; display: block; width: 20px; height: 2px;
       background: var(--raspberry); flex-shrink: 0;
     }
-
     h2 {
       font-family: 'Fraunces', serif;
       font-size: clamp(1.8rem, 2.8vw, 2.8rem);
-      font-weight: 300; line-height: 1.15; margin-bottom: 2.5rem;
-      letter-spacing: -0.01em;
+      font-weight: 300; line-height: 1.15; margin-bottom: 2.5rem; letter-spacing: -0.01em;
     }
-
     h2 em { font-style: italic; color: var(--raspberry); }
 
     /* ── AGES ── */
     .ages-section { padding: 5rem 3rem; background: white; }
     .ages-inner { max-width: 1100px; margin: 0 auto; }
-
     .ages-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
+      display: grid; grid-template-columns: repeat(4,1fr);
       gap: 1px; background: var(--border);
       border: 1px solid var(--border); margin-top: 2.5rem;
     }
-
     .age-card {
       background: white; padding: 2rem 1.5rem;
-      transition: background 0.2s; cursor: pointer;
+      transition: background 0.18s; cursor: pointer;
     }
-
     .age-card:hover { background: var(--cream); }
-
     .age-num {
       font-family: 'Fraunces', serif;
-      font-size: 2.8rem; font-weight: 700; line-height: 1;
-      margin-bottom: 0.6rem;
+      font-size: 2.8rem; font-weight: 700; line-height: 1; margin-bottom: 0.6rem;
+      display: inline-block;
     }
-
     .age-0 .age-num { color: var(--raspberry); }
     .age-1 .age-num { color: var(--mustard); }
     .age-2 .age-num { color: var(--forest-light); }
-    .age-3 .age-num { color: #7B5EA7; }
-
-    .age-title {
-      font-size: 0.88rem; font-weight: 500;
-      margin-bottom: 0.5rem; color: var(--ink);
-    }
-
-    .age-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
-
+    .age-3 .age-num { color: var(--purple); }
+    .age-title { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--ink); }
+    .age-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
     .age-link {
-      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
       text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
       transition: gap 0.2s;
     }
-
     .age-0 .age-link { color: var(--raspberry); }
     .age-1 .age-link { color: var(--mustard); }
     .age-2 .age-link { color: var(--forest-light); }
-    .age-3 .age-link { color: #7B5EA7; }
-    .age-link:hover { gap: 0.65rem; }
-    .age-link:focus { outline: 2px solid currentColor; outline-offset: 3px; }
+    .age-3 .age-link { color: var(--purple); }
+    .age-link:hover { gap: 0.7rem; }
 
-    /* ── CAFE ── */
+    /* ── WEBSHOP ── */
+    .shop-section { padding: 5rem 3rem; background: var(--cream); }
+    .shop-inner { max-width: 1100px; margin: 0 auto; }
+    .shop-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .shop-filters {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .filter-btn {
+      font-size: 0.75rem; font-weight: 500; font-family: 'Instrument Sans', sans-serif;
+      padding: 0.45rem 1rem; border: 1.5px solid var(--border);
+      background: white; color: var(--muted); cursor: pointer;
+      border-radius: 2px; transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--raspberry); color: var(--raspberry); }
+    .filter-btn.active {
+      background: var(--raspberry); color: white; border-color: var(--raspberry);
+    }
+    .books-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem;
+    }
+    .book-card {
+      background: white; border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      transition: box-shadow 0.18s, transform 0.18s;
+    }
+    .book-card:hover {
+      box-shadow: 0 6px 20px rgba(28,22,16,0.1);
+      transform: translateY(-3px);
+    }
+    .book-cover {
+      aspect-ratio: 2/3; display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-style: italic;
+      font-size: 1.05rem; text-align: center; padding: 1rem;
+      color: white; position: relative; overflow: hidden; line-height: 1.3;
+    }
+    .cover-0 { background: var(--raspberry); }
+    .cover-1 { background: var(--mustard-bg); }
+    .cover-2 { background: var(--forest); }
+    .cover-3 { background: var(--purple); }
+    .cover-4 { background: #d45a3e; }
+    .cover-5 { background: #3a7da8; }
+    .cover-6 { background: var(--forest-light); }
+    .cover-7 { background: #8a6030; }
+    .book-cover-author {
+      position: absolute; bottom: 0.75rem; left: 0; right: 0;
+      font-family: 'Instrument Sans', sans-serif; font-style: normal;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); text-align: center;
+    }
+    .book-cover-age {
+      position: absolute; top: 0.6rem; right: 0.6rem;
+      background: rgba(255,255,255,0.2); color: white;
+      font-family: 'Instrument Sans', sans-serif; font-style: normal;
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 0.08em;
+      padding: 0.15rem 0.4rem; border-radius: 2px;
+    }
+    .book-info { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
+    .book-title { font-size: 0.88rem; font-weight: 500; color: var(--ink); margin-bottom: 0.2rem; line-height: 1.35; }
+    .book-author { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .book-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.6; flex: 1; margin-bottom: 0.75rem; }
+    .book-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: auto;
+    }
+    .book-price { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; color: var(--ink); }
+    .add-btn {
+      font-size: 0.7rem; font-weight: 500; font-family: 'Instrument Sans', sans-serif;
+      background: var(--raspberry); color: white;
+      border: none; padding: 0.45rem 0.85rem; cursor: pointer;
+      transition: background 0.15s; border-radius: 2px;
+    }
+    .add-btn:hover { background: var(--raspberry-hover); }
+    .add-btn:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+    .added-btn {
+      font-size: 0.7rem; font-weight: 500; font-family: 'Instrument Sans', sans-serif;
+      background: var(--forest); color: white;
+      border: none; padding: 0.45rem 0.85rem; cursor: default;
+      border-radius: 2px;
+    }
+
+    /* Cart badge */
+    .cart-wrap { position: relative; display: inline-flex; align-items: center; }
+    .cart-btn {
+      background: rgba(255,255,255,0.15); color: white;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.78rem; font-weight: 500;
+      padding: 0.4rem 0.9rem; cursor: pointer; transition: background 0.15s;
+      display: flex; align-items: center; gap: 0.45rem; border-radius: 3px;
+    }
+    .cart-btn:hover { background: rgba(255,255,255,0.25); }
+    .cart-count {
+      background: white; color: var(--raspberry);
+      font-size: 0.65rem; font-weight: 700;
+      width: 18px; height: 18px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      display: none;
+    }
+    .cart-count.visible { display: inline-flex; }
+
+    /* Cart drawer */
+    .cart-overlay {
+      display: none; position: fixed; inset: 0; z-index: 400;
+      background: rgba(28,22,16,0.5);
+    }
+    .cart-overlay.open { display: block; }
+    .cart-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 380px; z-index: 401;
+      background: white; box-shadow: -4px 0 24px rgba(28,22,16,0.12);
+      display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+    }
+    .cart-overlay.open .cart-drawer { transform: translateX(0); }
+    .cart-head {
+      padding: 1.5rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--raspberry); color: white;
+    }
+    .cart-head-title {
+      font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 400; font-style: italic;
+    }
+    .cart-close-btn {
+      background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4);
+      color: white; cursor: pointer; font-size: 1rem;
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      border-radius: 3px; transition: background 0.15s;
+    }
+    .cart-close-btn:hover { background: rgba(255,255,255,0.25); }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .cart-empty {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--muted); gap: 0.75rem; padding: 2rem;
+    }
+    .cart-empty-icon { font-size: 2.5rem; }
+    .cart-empty p { font-size: 0.88rem; text-align: center; line-height: 1.6; }
+    .cart-item {
+      display: grid; grid-template-columns: 44px 1fr auto;
+      gap: 0.75rem; align-items: start; padding: 0.75rem;
+      border: 1px solid var(--border); background: var(--cream);
+    }
+    .cart-item-cover {
+      width: 44px; height: 66px; display: flex; align-items: center; justify-content: center;
+      font-size: 0.5rem; color: white; text-align: center; padding: 0.25rem;
+      font-family: 'Fraunces', serif; font-style: italic; line-height: 1.2;
+      flex-shrink: 0;
+    }
+    .cart-item-title { font-size: 0.82rem; font-weight: 500; color: var(--ink); margin-bottom: 0.15rem; }
+    .cart-item-author { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .cart-item-price { font-family: 'Fraunces', serif; font-size: 0.95rem; color: var(--raspberry); }
+    .cart-remove {
+      background: none; border: none; cursor: pointer; color: var(--muted);
+      font-size: 0.9rem; padding: 0.15rem; transition: color 0.15s; line-height: 1;
+    }
+    .cart-remove:hover { color: var(--raspberry); }
+    .cart-foot {
+      padding: 1.25rem 1rem; border-top: 1px solid var(--border);
+    }
+    .cart-total-row {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;
+    }
+    .cart-total-label { font-size: 0.8rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .cart-total-val { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 400; color: var(--ink); }
+    .cart-checkout {
+      display: block; width: 100%; padding: 0.9rem;
+      background: var(--raspberry); color: white;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; cursor: pointer; text-align: center; text-decoration: none;
+      transition: background 0.15s;
+    }
+    .cart-checkout:hover { background: var(--raspberry-hover); }
+    .cart-note { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 0.75rem; line-height: 1.5; }
+
+    /* ── CAFÉ ── */
     .cafe-section {
       background: var(--mustard-pale);
       display: grid; grid-template-columns: 1fr 1fr;
     }
-
     .cafe-visual {
-      background: var(--mustard);
+      background: var(--mustard-bg);
       display: flex; align-items: center; justify-content: center;
       min-height: 440px; position: relative; overflow: hidden;
     }
-
     .cafe-big {
       font-family: 'Fraunces', serif;
       font-size: clamp(5rem, 10vw, 10rem);
       font-style: italic; font-weight: 300;
       color: rgba(255,255,255,0.15);
-      position: absolute;
-      user-select: none;
+      position: absolute; user-select: none;
     }
-
     .cafe-card {
       background: white; padding: 1.75rem;
-      border: 1px solid rgba(212,147,58,0.2);
+      border: 1px solid rgba(212,147,58,0.25);
       position: relative; z-index: 1; max-width: 240px; width: 100%;
     }
-
-    .cafe-card-title {
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem; margin-bottom: 0.35rem;
-    }
-
-    .cafe-card-desc { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
-
+    .cafe-card-title { font-family: 'Fraunces', serif; font-size: 1.1rem; margin-bottom: 0.35rem; color: var(--ink); }
+    .cafe-card-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
     .menu-item {
       display: flex; justify-content: space-between;
-      font-size: 0.8rem; padding: 0.5rem 0;
-      border-bottom: 1px dashed rgba(28,22,16,0.1);
+      font-size: 0.82rem; padding: 0.5rem 0;
+      border-bottom: 1px dashed rgba(28,22,16,0.1); color: var(--ink);
     }
-
     .menu-item:last-child { border-bottom: none; }
     .menu-price { color: var(--mustard); font-weight: 500; }
-
     .cafe-text {
       padding: 5rem 3.5rem;
       display: flex; flex-direction: column; justify-content: center;
     }
-
     .cafe-text .section-label { color: var(--mustard); }
     .cafe-text .section-label::before { background: var(--mustard); }
-
-    .cafe-body { font-size: 0.95rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
+    .cafe-body { font-size: 0.95rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.25rem; }
 
     /* ── EVENTS ── */
     .events-section { padding: 5rem 3rem; background: var(--cream); }
     .events-inner { max-width: 1100px; margin: 0 auto; }
-
     .events-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 2.5rem;
+      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem;
     }
-
     .see-all {
-      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--raspberry); text-decoration: none;
-      border-bottom: 1px solid transparent; padding-bottom: 1px;
-      transition: border-color 0.2s;
+      border-bottom: 1.5px solid transparent; padding-bottom: 1px; transition: border-color 0.15s;
     }
-
     .see-all:hover { border-bottom-color: var(--raspberry); }
-    .see-all:focus { outline: 2px solid var(--raspberry); outline-offset: 3px; }
-
     .events-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-
     .event-row {
       background: white; padding: 1.5rem 2rem;
       display: grid; grid-template-columns: 80px 1fr auto;
-      gap: 1.5rem; align-items: center;
-      transition: background 0.15s; cursor: pointer;
+      gap: 1.5rem; align-items: center; transition: background 0.15s; cursor: pointer;
     }
-
     .event-row:hover { background: var(--raspberry-pale); }
-
-    .event-date {
-      text-align: center;
-      background: var(--raspberry-pale); padding: 0.6rem 0.5rem;
-    }
-
+    .event-date { text-align: center; background: var(--raspberry-pale); padding: 0.6rem 0.5rem; }
     .event-day {
       font-family: 'Fraunces', serif;
       font-size: 1.8rem; font-weight: 700; line-height: 1; color: var(--raspberry);
     }
-
     .event-month {
-      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--muted); margin-top: 0.2rem;
     }
-
-    .event-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.25rem; }
-    .event-sub { font-size: 0.78rem; color: var(--muted); }
-
+    .event-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.25rem; color: var(--ink); }
+    .event-sub { font-size: 0.8rem; color: var(--muted); }
     .event-tag {
-      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
       padding: 0.25rem 0.65rem; border-radius: 2px; white-space: nowrap;
     }
-
     .tag-pink { background: var(--raspberry-pale); color: var(--raspberry); }
-    .tag-green { background: #E4EFE4; color: var(--forest); }
+    .tag-green { background: #d4ecd5; color: var(--forest); }
     .tag-yellow { background: var(--mustard-pale); color: var(--mustard); }
 
     /* ── ABOUT ── */
     .about-section { padding: 5rem 3rem; background: var(--forest); }
     .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-
-    .about-text .section-label { color: rgba(255,255,255,0.5); }
+    .about-text .section-label { color: rgba(255,255,255,0.6); }
     .about-text .section-label::before { background: rgba(255,255,255,0.3); }
     .about-text h2 { color: white; }
     .about-text h2 em { color: var(--raspberry-mid); }
-
-    .about-body { font-size: 0.92rem; color: rgba(255,255,255,0.55); line-height: 1.85; margin-bottom: 1.5rem; }
-
+    .about-body { font-size: 0.92rem; color: rgba(255,255,255,0.7); line-height: 1.85; margin-bottom: 1.25rem; }
     .about-facts {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 1px; background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.08); margin-top: 2rem;
     }
-
-    .fact-box { padding: 1.25rem; background: rgba(255,255,255,0.03); }
-
-    .fact-num {
-      font-family: 'Fraunces', serif;
-      font-size: 2rem; font-weight: 700; color: white; line-height: 1;
-    }
-
-    .fact-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 0.3rem; }
-
-    .sally-box {
-      background: var(--raspberry-pale);
-      padding: 2rem; border: 1px solid var(--raspberry-mid);
-    }
-
-    .sally-box h3 {
-      font-family: 'Fraunces', serif;
-      font-size: 1.3rem; font-weight: 400; color: var(--ink); margin-bottom: 0.75rem;
-    }
-
+    .fact-box { padding: 1.25rem; background: rgba(255,255,255,0.04); }
+    .fact-num { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: white; line-height: 1; }
+    .fact-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+    .sally-box { background: var(--raspberry-pale); padding: 2rem; border: 1px solid var(--raspberry-mid); }
+    .sally-box h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 400; color: var(--ink); margin-bottom: 0.75rem; }
     .sally-box h3 em { font-style: italic; color: var(--raspberry); }
-
     .sally-box p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
 
     /* ── CONTACT ── */
     .contact-section { padding: 5rem 3rem; background: white; }
     .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-
     .contact-info h2 { margin-bottom: 1.5rem; }
-
-    .contact-detail {
-      display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem;
-    }
-
-    .contact-row {
-      display: flex; gap: 1rem; align-items: flex-start;
-    }
-
+    .contact-detail { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem; }
+    .contact-row { display: flex; gap: 1rem; align-items: flex-start; }
     .contact-icon {
       width: 36px; height: 36px; background: var(--raspberry-pale);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem;
     }
-
-    .contact-row-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
-    .contact-row-val { font-size: 0.88rem; color: var(--ink); line-height: 1.5; }
-
-    .hours-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 0.5rem 2rem; margin-top: 0.25rem;
-    }
-
-    .hour-row { display: flex; justify-content: space-between; font-size: 0.82rem; }
+    .contact-row-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+    .contact-row-val { font-size: 0.9rem; color: var(--ink); line-height: 1.5; }
+    .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; margin-top: 0.25rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.84rem; }
     .hour-day { color: var(--muted); }
-    .hour-time { font-weight: 500; }
-
+    .hour-time { font-weight: 500; color: var(--ink); }
     .contact-form-box { background: var(--cream); border: 1px solid var(--border); padding: 2rem; }
-
     .field-group { margin-bottom: 1.1rem; }
-
     .field-label {
-      display: block; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      display: block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--muted); margin-bottom: 0.4rem;
     }
-
     .field-input {
       width: 100%; padding: 0.7rem 0.9rem;
-      border: 1px solid var(--border); background: white;
+      border: 1.5px solid var(--border); background: white;
       font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: var(--ink);
       outline: none; transition: border-color 0.2s;
     }
-
-    .field-input:focus { border-color: var(--raspberry); box-shadow: 0 0 0 2px rgba(194,52,90,0.1); }
+    .field-input:focus { border-color: var(--raspberry); box-shadow: 0 0 0 3px rgba(176,45,81,0.1); }
     textarea.field-input { resize: vertical; min-height: 100px; }
-
     .submit-btn {
       width: 100%; padding: 0.9rem;
       background: var(--raspberry); color: white; border: none;
       font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-      cursor: pointer; font-weight: 500; transition: background 0.2s; margin-top: 0.25rem;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.18s; margin-top: 0.25rem;
     }
-
-    .submit-btn:hover { background: #A82B4D; }
-    .submit-btn:focus { outline: 2px solid var(--forest); outline-offset: 3px; }
+    .submit-btn:hover { background: var(--raspberry-hover); }
+    .submit-btn:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--ink); padding: 3rem 3rem 2rem;
-    }
-
+    footer { background: var(--ink); padding: 3rem 3rem 2rem; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
-
     .footer-top {
       display: grid; grid-template-columns: 2fr 1fr 1fr;
       gap: 3rem; padding-bottom: 2.5rem;
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-
-    .footer-brand {
-      font-family: 'Fraunces', serif;
-      font-size: 1.3rem; font-style: italic; color: white; margin-bottom: 0.5rem;
-    }
-
-    .footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.3); line-height: 1.7; }
-
+    .footer-brand { font-family: 'Fraunces', serif; font-size: 1.3rem; font-style: italic; font-weight: 400; color: white; margin-bottom: 0.5rem; }
+    .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
     .footer-col-title {
-      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--raspberry); margin-bottom: 1rem;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--raspberry-mid); margin-bottom: 1rem;
     }
-
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.15s; }
-    .footer-links a:hover { color: rgba(255,255,255,0.7); }
-
+    .footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
     .footer-bottom {
-      padding-top: 1.75rem;
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
-      font-size: 0.7rem; color: rgba(255,255,255,0.18);
+      padding-top: 1.75rem; display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.5rem; font-size: 0.72rem; color: rgba(255,255,255,0.2);
     }
 
-    .back-link {
-      position: fixed; bottom: 2rem; left: 2rem;
-      background: white; border: 1px solid var(--border);
-      color: var(--muted); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.6rem 1rem; text-decoration: none; z-index: 50; transition: color 0.15s;
+    /* ── TOAST / CONFIRM ── */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--forest); color: white;
+      padding: 0.85rem 1.5rem; font-size: 0.82rem; font-weight: 500;
+      opacity: 0; transition: all 0.3s; z-index: 600; border-radius: 3px; white-space: nowrap;
     }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-    .back-link:hover { color: var(--raspberry); }
-
-    /* ── ANIMATIONS ── */
+    /* ── HERO FADE-IN ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .hero-left > * { animation: fadeUp 0.55s ease both; }
     .hero-left > *:nth-child(1) { animation-delay: 0.05s; }
     .hero-left > *:nth-child(2) { animation-delay: 0.18s; }
@@ -584,50 +629,41 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
+      .nav-links, .cart-wrap { display: none; }
       .nav-toggle { display: flex; }
-
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-right { display: none; }
       .hero-left { padding: 4rem 1.5rem 3rem; }
-
       .cafe-section { grid-template-columns: 1fr; }
       .cafe-visual { min-height: 260px; }
       .cafe-text { padding: 3rem 2rem; }
-
       .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .ages-grid { grid-template-columns: 1fr 1fr; }
-
+      .books-grid { grid-template-columns: 1fr 1fr; }
       .event-row { grid-template-columns: 70px 1fr; }
       .event-tag { display: none; }
-
-      .section, .ages-section, .events-section, .about-section, .contact-section { padding: 4rem 1.5rem; }
+      .section, .ages-section, .events-section, .about-section, .contact-section, .shop-section { padding: 4rem 1.5rem; }
       footer { padding: 3rem 1.5rem 2rem; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .cart-drawer { width: 100%; }
     }
-
     @media (max-width: 600px) {
       nav { padding: 0 1rem; }
       h1 { font-size: 2.3rem; }
       .hero-left { padding: 3.5rem 1rem 2.5rem; }
       .hero-cta { flex-direction: column; }
-      .btn-raspberry, .btn-outline { text-align: center; }
-      .ages-grid { grid-template-columns: 1fr 1fr; }
+      .ages-grid, .books-grid { grid-template-columns: 1fr 1fr; }
       .event-row { grid-template-columns: 60px 1fr; gap: 1rem; padding: 1.1rem 1rem; }
       .about-facts { grid-template-columns: 1fr 1fr; }
-      .section, .ages-section, .events-section, .about-section, .contact-section { padding: 3rem 1rem; }
+      .section, .ages-section, .events-section, .about-section, .contact-section, .shop-section { padding: 3rem 1rem; }
       footer { padding: 2.5rem 1rem 1.5rem; }
       .footer-top { grid-template-columns: 1fr; }
     }
-
-    @media (max-width: 360px) {
-      h1 { font-size: 1.9rem; }
-      .ages-grid { grid-template-columns: 1fr; }
-      .contact-form-box { padding: 1.25rem 0.85rem; }
-      .fact-num { font-size: 1.6rem; }
+    @media (max-width: 400px) {
+      .books-grid { grid-template-columns: 1fr; }
+      .ages-grid { grid-template-columns: 1fr 1fr; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       html { scroll-behavior: auto; }
@@ -636,29 +672,37 @@
 </head>
 <body>
 
-<a href="../index.html" class="back-link">← Portföljen</a>
 <a class="skip-link" href="#main">Hoppa till innehåll</a>
 
 <nav role="navigation" aria-label="Huvudnavigation">
-  <a class="nav-logo" href="#">Sidvändaren</a>
+  <a class="nav-logo" href="#" aria-label="Sidvändaren — startsida"><span class="bounce-book" aria-hidden="true"></span> Sidvändaren</a>
   <ul class="nav-links">
     <li><a href="#bocker">Böcker</a></li>
+    <li><a href="#shop">Webshop</a></li>
     <li><a href="#cafe">Café</a></li>
     <li><a href="#evenemang">Evenemang</a></li>
     <li><a href="#om">Om oss</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
-  <button class="nav-toggle" aria-label="Öppna meny" aria-expanded="false" aria-controls="mobile-nav">
-    <span></span><span></span><span></span>
+  <div class="cart-wrap">
+    <button class="cart-btn" id="cart-open-btn" aria-label="Öppna varukorg" aria-haspopup="true">
+      🛒 Varukorg
+      <span class="cart-count" id="cart-count" aria-live="polite" aria-atomic="true"></span>
+    </button>
+  </div>
+  <button class="nav-toggle" aria-label="Öppna meny" aria-expanded="false" aria-controls="mobile-nav" id="nav-toggle">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
 </nav>
 
-<div class="nav-mobile" id="mobile-nav" role="navigation" aria-label="Mobilnavigation">
+<div class="nav-mobile" id="mobile-nav" role="dialog" aria-label="Mobilmeny">
   <a href="#bocker">Böcker</a>
+  <a href="#shop">Webshop</a>
   <a href="#cafe">Café</a>
   <a href="#evenemang">Evenemang</a>
   <a href="#om">Om oss</a>
   <a href="#kontakt">Kontakt</a>
+  <a href="#" id="mob-cart-btn" style="color:white;font-weight:500">🛒 Varukorg (<span id="mob-cart-count">0</span>)</a>
 </div>
 
 <main id="main">
@@ -671,7 +715,7 @@
     <h1>Böcker &amp; bakverk<br>för <em>unga</em><br>bokslukare.</h1>
     <p class="hero-desc">En oberoende barnbokhandel på Södermalm sedan 2001. Hos oss hittar du böcker för alla åldrar, kunnig personal som älskar böcker — och hembakt fikabröd.</p>
     <div class="hero-cta">
-      <a href="#bocker" class="btn-raspberry">Utforska böckerna</a>
+      <a href="#shop" class="btn-raspberry">Shoppa böcker online</a>
       <a href="#evenemang" class="btn-outline">Se evenemang</a>
     </div>
   </div>
@@ -683,18 +727,9 @@
         <p class="info-card-title">Öppettider</p>
         <p class="info-card-sub">Välkommen in — vi finns på Hornsgatan 64, Södermalm.</p>
         <div class="info-card-detail">
-          <div class="detail-row">
-            <span class="detail-day">Mån–Fre</span>
-            <span class="detail-time">10:00–18:00</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-day">Lördag</span>
-            <span class="detail-time">11:00–16:00</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-day">Söndag</span>
-            <span class="detail-time">12:00–16:00</span>
-          </div>
+          <div class="detail-row"><span class="detail-day">Mån–Fre</span><span class="detail-time">10:00–18:00</span></div>
+          <div class="detail-row"><span class="detail-day">Lördag</span><span class="detail-time">11:00–16:00</span></div>
+          <div class="detail-row"><span class="detail-day">Söndag</span><span class="detail-time">12:00–16:00</span></div>
         </div>
       </div>
       <div class="sally-note">Sally Jones hälsar välkommen ☺</div>
@@ -705,26 +740,16 @@
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-inner">
-    <span class="bright">Böcker för 0–18 år</span>
-    <span>✦</span>
-    <span>Café med hembakat</span>
-    <span>✦</span>
-    <span class="bright">Högläsningar &amp; evenemang</span>
-    <span>✦</span>
-    <span>Kunnig personal</span>
-    <span>✦</span>
-    <span>Hornsgatan 64, Södermalm</span>
-    <span>✦</span>
-    <span class="bright">Böcker för 0–18 år</span>
-    <span>✦</span>
-    <span>Café med hembakat</span>
-    <span>✦</span>
-    <span class="bright">Högläsningar &amp; evenemang</span>
-    <span>✦</span>
-    <span>Kunnig personal</span>
-    <span>✦</span>
-    <span>Hornsgatan 64, Södermalm</span>
-    <span>✦</span>
+    <span class="bright">Böcker för 0–18 år</span><span>✦</span>
+    <span>Café med hembakat</span><span>✦</span>
+    <span class="bright">Högläsningar &amp; evenemang</span><span>✦</span>
+    <span>Kunnig personal</span><span>✦</span>
+    <span>Hornsgatan 64, Södermalm</span><span>✦</span>
+    <span class="bright">Böcker för 0–18 år</span><span>✦</span>
+    <span>Café med hembakat</span><span>✦</span>
+    <span class="bright">Högläsningar &amp; evenemang</span><span>✦</span>
+    <span>Kunnig personal</span><span>✦</span>
+    <span>Hornsgatan 64, Södermalm</span><span>✦</span>
   </div>
 </div>
 
@@ -734,36 +759,50 @@
     <p class="section-label">Sortiment</p>
     <h2 id="bocker-heading">Böcker för <em>alla åldrar.</em></h2>
     <div class="ages-grid">
-
       <article class="age-card age-0">
-        <p class="age-num">0–2</p>
+        <p class="age-num" aria-label="Ålder 0 till 2">0–2</p>
         <h3 class="age-title">Småbarn</h3>
         <p class="age-desc">Pekböcker, tyg- och badböcker. Exponerade med omslagen väl synliga så att man snabbt bildar sig en uppfattning.</p>
-        <a href="#kontakt" class="age-link">Se urval →</a>
+        <a href="#shop" class="age-link">Se urval →</a>
       </article>
-
       <article class="age-card age-1">
-        <p class="age-num">2–5</p>
+        <p class="age-num" aria-label="Ålder 2 till 5">2–5</p>
         <h3 class="age-title">Bilderböcker</h3>
         <p class="age-desc">Det yttre rummet är fyllt av bilderböcker där bildens roll är central. Perfekt för högläsning tillsammans.</p>
-        <a href="#kontakt" class="age-link">Se urval →</a>
+        <a href="#shop" class="age-link">Se urval →</a>
       </article>
-
       <article class="age-card age-2">
-        <p class="age-num">5–11</p>
+        <p class="age-num" aria-label="Ålder 5 till 11">5–11</p>
         <h3 class="age-title">Kapitelböcker</h3>
         <p class="age-desc">För den som börjar läsa själv. Böcker med lagom text, korta meningar och mycket bilder — vi hjälper dig hitta rätt nivå.</p>
-        <a href="#kontakt" class="age-link">Se urval →</a>
+        <a href="#shop" class="age-link">Se urval →</a>
       </article>
-
       <article class="age-card age-3">
-        <p class="age-num">12–18</p>
+        <p class="age-num" aria-label="Ålder 12 till 18">12–18</p>
         <h3 class="age-title">Ungdomsböcker</h3>
         <p class="age-desc">Ungdomsromaner, fantasy, fakta och allt däremellan. Vi har klassiker och nyheter sida vid sida.</p>
-        <a href="#kontakt" class="age-link">Se urval →</a>
+        <a href="#shop" class="age-link">Se urval →</a>
       </article>
-
     </div>
+  </div>
+</section>
+
+<!-- WEBSHOP -->
+<section class="shop-section" id="shop" aria-labelledby="shop-heading">
+  <div class="shop-inner">
+    <p class="section-label">Webshop</p>
+    <div class="shop-header">
+      <h2 id="shop-heading" style="margin-bottom:0">Beställ böcker <em>online.</em></h2>
+      <p style="font-size:.85rem;color:var(--muted);max-width:320px;text-align:right;line-height:1.6">Hemleverans 2–4 dagar · Fri frakt över 299 kr · Upphämtning i butik gratis</p>
+    </div>
+    <div class="shop-filters" role="group" aria-label="Filtrera efter ålderskategori">
+      <button class="filter-btn active" data-filter="all" aria-pressed="true">Alla böcker</button>
+      <button class="filter-btn" data-filter="0-2" aria-pressed="false">0–2 år</button>
+      <button class="filter-btn" data-filter="2-5" aria-pressed="false">2–5 år</button>
+      <button class="filter-btn" data-filter="5-11" aria-pressed="false">5–11 år</button>
+      <button class="filter-btn" data-filter="12-18" aria-pressed="false">12–18 år</button>
+    </div>
+    <div class="books-grid" id="books-grid" aria-live="polite" aria-label="Boklista"></div>
   </div>
 </section>
 
@@ -774,22 +813,10 @@
     <div class="cafe-card">
       <h3 class="cafe-card-title">Dagens meny</h3>
       <p class="cafe-card-desc">Hembakat fikabröd, god kaffe och varm choklad för de minsta.</p>
-      <div class="menu-item">
-        <span>Kaffe / Te</span>
-        <span class="menu-price">35 kr</span>
-      </div>
-      <div class="menu-item">
-        <span>Varm choklad</span>
-        <span class="menu-price">40 kr</span>
-      </div>
-      <div class="menu-item">
-        <span>Kanelbulle</span>
-        <span class="menu-price">35 kr</span>
-      </div>
-      <div class="menu-item">
-        <span>Scones m. sylt</span>
-        <span class="menu-price">40 kr</span>
-      </div>
+      <div class="menu-item"><span>Kaffe / Te</span><span class="menu-price">35 kr</span></div>
+      <div class="menu-item"><span>Varm choklad</span><span class="menu-price">40 kr</span></div>
+      <div class="menu-item"><span>Kanelbulle</span><span class="menu-price">35 kr</span></div>
+      <div class="menu-item"><span>Scones m. sylt</span><span class="menu-price">40 kr</span></div>
     </div>
   </div>
   <div class="cafe-text">
@@ -797,7 +824,7 @@
     <h2 id="cafe-heading">Läs, fika,<br><em>trivas.</em></h2>
     <p class="cafe-body">I bakre delen av butiken finns vårt lilla café. Slå dig ner med en kopp kaffe och en bok medan barnen utforskar hyllorna. Vi serverar hembakt fikabröd, minikakor, scones och god dryck.</p>
     <p class="cafe-body">Det är ett mysigt rum mitt i staden — lugnt, varmt och alltid välkomnande.</p>
-    <a href="#kontakt" class="btn-raspberry" style="align-self: flex-start;">Hitta hit</a>
+    <a href="#kontakt" class="btn-raspberry" style="align-self:flex-start">Hitta hit</a>
   </div>
 </section>
 
@@ -807,60 +834,31 @@
     <div class="events-header">
       <div>
         <p class="section-label">Kalender</p>
-        <h2 id="evenemang-heading">Kommande <em>evenemang.</em></h2>
+        <h2 id="evenemang-heading" style="margin-bottom:0">Kommande <em>evenemang.</em></h2>
       </div>
       <a href="#kontakt" class="see-all">Se alla →</a>
     </div>
     <div class="events-list" role="list">
-
-      <article class="event-row" role="listitem">
-        <div class="event-date">
-          <p class="event-day">14</p>
-          <p class="event-month">Jun</p>
-        </div>
-        <div>
-          <h3 class="event-title">Högläsning: Sally Jones</h3>
-          <p class="event-sub">Kl 11:00 · Gratis · Alla välkomna</p>
-        </div>
-        <span class="event-tag tag-pink">Högläsning</span>
+      <article class="event-row" role="listitem" tabindex="0">
+        <div class="event-date" aria-label="14 juni"><p class="event-day">14</p><p class="event-month">Jun</p></div>
+        <div><h3 class="event-title">Högläsning: Sally Jones</h3><p class="event-sub">Kl 11:00 · Gratis · Alla välkomna</p></div>
+        <span class="event-tag tag-pink" aria-label="Typ: Högläsning">Högläsning</span>
       </article>
-
-      <article class="event-row" role="listitem">
-        <div class="event-date">
-          <p class="event-day">21</p>
-          <p class="event-month">Jun</p>
-        </div>
-        <div>
-          <h3 class="event-title">Bokrelease: Nya sommarböcker</h3>
-          <p class="event-sub">Kl 14:00 · Gratis entré</p>
-        </div>
+      <article class="event-row" role="listitem" tabindex="0">
+        <div class="event-date" aria-label="21 juni"><p class="event-day">21</p><p class="event-month">Jun</p></div>
+        <div><h3 class="event-title">Bokrelease: Nya sommarböcker</h3><p class="event-sub">Kl 14:00 · Gratis entré</p></div>
         <span class="event-tag tag-yellow">Bokrelease</span>
       </article>
-
-      <article class="event-row" role="listitem">
-        <div class="event-date">
-          <p class="event-day">28</p>
-          <p class="event-month">Jun</p>
-        </div>
-        <div>
-          <h3 class="event-title">Sagostund för de allra minsta</h3>
-          <p class="event-sub">Kl 10:30 · 0–5 år · Gratis</p>
-        </div>
+      <article class="event-row" role="listitem" tabindex="0">
+        <div class="event-date" aria-label="28 juni"><p class="event-day">28</p><p class="event-month">Jun</p></div>
+        <div><h3 class="event-title">Sagostund för de allra minsta</h3><p class="event-sub">Kl 10:30 · 0–5 år · Gratis</p></div>
         <span class="event-tag tag-green">Sagostund</span>
       </article>
-
-      <article class="event-row" role="listitem">
-        <div class="event-date">
-          <p class="event-day">5</p>
-          <p class="event-month">Jul</p>
-        </div>
-        <div>
-          <h3 class="event-title">Sommarläsning: Tipsa varandra</h3>
-          <p class="event-sub">Kl 13:00 · 8–12 år · Gratis</p>
-        </div>
+      <article class="event-row" role="listitem" tabindex="0">
+        <div class="event-date" aria-label="5 juli"><p class="event-day">5</p><p class="event-month">Jul</p></div>
+        <div><h3 class="event-title">Sommarläsning: Tipsa varandra</h3><p class="event-sub">Kl 13:00 · 8–12 år · Gratis</p></div>
         <span class="event-tag tag-pink">Läsarträff</span>
       </article>
-
     </div>
   </div>
 </section>
@@ -874,22 +872,10 @@
       <p class="about-body">Sidvändaren öppnade 2001 och har sedan dess varit ett hem för unga läsare och deras föräldrar på Mariatorget, Södermalm. Vi är specialiserade på barn- och ungdomslitteratur och väljer noggrant ut varje titel i sortimentet.</p>
       <p class="about-body">Vår personal älskar böcker och hjälper dig alltid att hitta rätt — oavsett om du letar efter en specifik titel, ett presenttips eller bara vill ha ett samtal om litteratur.</p>
       <div class="about-facts" role="list" aria-label="Fakta om Sidvändaren">
-        <div class="fact-box" role="listitem">
-          <p class="fact-num">2001</p>
-          <p class="fact-label">Grundades</p>
-        </div>
-        <div class="fact-box" role="listitem">
-          <p class="fact-num">24+</p>
-          <p class="fact-label">År på Södermalm</p>
-        </div>
-        <div class="fact-box" role="listitem">
-          <p class="fact-num">0–18</p>
-          <p class="fact-label">Åldersintervall</p>
-        </div>
-        <div class="fact-box" role="listitem">
-          <p class="fact-num">100+</p>
-          <p class="fact-label">Evenemang/år</p>
-        </div>
+        <div class="fact-box" role="listitem"><p class="fact-num">2001</p><p class="fact-label">Grundades</p></div>
+        <div class="fact-box" role="listitem"><p class="fact-num">24+</p><p class="fact-label">År på Södermalm</p></div>
+        <div class="fact-box" role="listitem"><p class="fact-num">0–18</p><p class="fact-label">Åldersintervall</p></div>
+        <div class="fact-box" role="listitem"><p class="fact-num">100+</p><p class="fact-label">Evenemang/år</p></div>
       </div>
     </div>
     <div class="sally-box">
@@ -908,24 +894,15 @@
       <div class="contact-detail">
         <div class="contact-row">
           <div class="contact-icon" aria-hidden="true">📍</div>
-          <div>
-            <p class="contact-row-label">Adress</p>
-            <p class="contact-row-val">Hornsgatan 64<br>117 21 Stockholm</p>
-          </div>
+          <div><p class="contact-row-label">Adress</p><p class="contact-row-val">Hornsgatan 64<br>117 21 Stockholm</p></div>
         </div>
         <div class="contact-row">
           <div class="contact-icon" aria-hidden="true">📞</div>
-          <div>
-            <p class="contact-row-label">Telefon</p>
-            <p class="contact-row-val"><a href="tel:0864421006" style="color:var(--raspberry); text-decoration:none;">08-712 33 90</a></p>
-          </div>
+          <div><p class="contact-row-label">Telefon</p><p class="contact-row-val"><a href="tel:0871233990" style="color:var(--raspberry);text-decoration:none;font-weight:500">08-712 33 90</a></p></div>
         </div>
         <div class="contact-row">
           <div class="contact-icon" aria-hidden="true">✉️</div>
-          <div>
-            <p class="contact-row-label">E-post</p>
-            <p class="contact-row-val"><a href="mailto:info@sidvandaren.com" style="color:var(--raspberry); text-decoration:none;">info@sidvandaren.com</a></p>
-          </div>
+          <div><p class="contact-row-label">E-post</p><p class="contact-row-val"><a href="mailto:info@sidvandaren.com" style="color:var(--raspberry);text-decoration:none;font-weight:500">info@sidvandaren.com</a></p></div>
         </div>
         <div class="contact-row">
           <div class="contact-icon" aria-hidden="true">🕐</div>
@@ -941,20 +918,22 @@
       </div>
     </div>
     <div class="contact-form-box">
-      <p class="section-label" style="margin-bottom:1.25rem;">Skicka meddelande</p>
-      <div class="field-group">
-        <label class="field-label" for="name">Namn</label>
-        <input type="text" id="name" class="field-input" placeholder="Ditt namn" autocomplete="name">
-      </div>
-      <div class="field-group">
-        <label class="field-label" for="email">E-post</label>
-        <input type="email" id="email" class="field-input" placeholder="din@email.se" autocomplete="email">
-      </div>
-      <div class="field-group">
-        <label class="field-label" for="message">Meddelande</label>
-        <textarea id="message" class="field-input" placeholder="Frågor om böcker, evenemang eller annat?"></textarea>
-      </div>
-      <button class="submit-btn" type="button">Skicka →</button>
+      <p class="section-label" style="margin-bottom:1.25rem">Skicka meddelande</p>
+      <form onsubmit="handleContactSubmit(event)" novalidate aria-label="Kontaktformulär">
+        <div class="field-group">
+          <label class="field-label" for="c-name">Namn</label>
+          <input type="text" id="c-name" class="field-input" placeholder="Ditt namn" autocomplete="name" required aria-required="true">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="c-email">E-post</label>
+          <input type="email" id="c-email" class="field-input" placeholder="din@email.se" autocomplete="email" required aria-required="true">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="c-msg">Meddelande</label>
+          <textarea id="c-msg" class="field-input" placeholder="Frågor om böcker, evenemang eller annat?"></textarea>
+        </div>
+        <button class="submit-btn" type="submit">Skicka →</button>
+      </form>
     </div>
   </div>
 </section>
@@ -972,6 +951,7 @@
         <p class="footer-col-title">Besök oss</p>
         <ul class="footer-links">
           <li><a href="#bocker">Böcker</a></li>
+          <li><a href="#shop">Webshop</a></li>
           <li><a href="#cafe">Café</a></li>
           <li><a href="#evenemang">Evenemang</a></li>
           <li><a href="#om">Om oss</a></li>
@@ -981,8 +961,8 @@
         <p class="footer-col-title">Kontakt</p>
         <ul class="footer-links">
           <li><a href="mailto:info@sidvandaren.com">info@sidvandaren.com</a></li>
-          <li><a href="tel:0864421006">08-712 33 90</a></li>
-          <li><a href="#">Hornsgatan 64, Stockholm</a></li>
+          <li><a href="tel:0871233990">08-712 33 90</a></li>
+          <li><a href="#kontakt">Hornsgatan 64, Stockholm</a></li>
           <li><a href="#">Instagram</a></li>
         </ul>
       </div>
@@ -994,22 +974,208 @@
   </div>
 </footer>
 
-<script>
-  const toggle = document.querySelector('.nav-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
-  toggle.addEventListener('click', () => {
-    const open = mobileNav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-    toggle.setAttribute('aria-label', open ? 'Stäng meny' : 'Öppna meny');
-  });
-  mobileNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileNav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', false);
-      toggle.setAttribute('aria-label', 'Öppna meny');
-    });
-  });
-</script>
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cart-overlay" role="dialog" aria-modal="true" aria-label="Varukorg">
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-head">
+      <p class="cart-head-title">Din varukorg</p>
+      <button class="cart-close-btn" id="cart-close-btn" aria-label="Stäng varukorg">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items-list">
+      <div class="cart-empty" id="cart-empty-msg">
+        <div class="cart-empty-icon" aria-hidden="true">📚</div>
+        <p>Varukorgen är tom. Utforska våra böcker och lägg till något!</p>
+      </div>
+    </div>
+    <div class="cart-foot" id="cart-foot" style="display:none">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Totalt</span>
+        <span class="cart-total-val" id="cart-total">0 kr</span>
+      </div>
+      <button class="cart-checkout" onclick="handleCheckout()">Gå till kassan →</button>
+      <p class="cart-note">Fri frakt vid beställning över 299 kr · Leverans 2–4 dagar</p>
+    </div>
+  </div>
+</div>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ── BOOKS DATA ── */
+const books = [
+  { id:1, title:'Alfons Åberg', author:'Gunilla Bergström', price:159, age:'2-5', cover:'cover-0', desc:'Den älskade klassikern om lille Alfons.' },
+  { id:2, title:'Pippi Långstrump', author:'Astrid Lindgren', price:175, age:'5-11', cover:'cover-1', desc:'Världens starkaste flicka på Villa Villekulla.' },
+  { id:3, title:'Emil i Lönneberga', author:'Astrid Lindgren', price:169, age:'5-11', cover:'cover-2', desc:'Busiga Emil och hans äventyr i Småland.' },
+  { id:4, title:'Mio, min Mio', author:'Astrid Lindgren', price:179, age:'5-11', cover:'cover-3', desc:'En pojke som reser till ett magiskt land.' },
+  { id:5, title:'Boken om Muminpappan', author:'Tove Jansson', price:189, age:'5-11', cover:'cover-4', desc:'Äventyrliga historier om familjen Mumin.' },
+  { id:6, title:'Sagan om ringen', author:'J.R.R. Tolkien', price:229, age:'12-18', cover:'cover-5', desc:'Det stora äventyret i Midgård.' },
+  { id:7, title:'Puttes äventyr', author:'Elsa Beskow', price:145, age:'2-5', cover:'cover-6', desc:'Klassisk bilderboksklassiker i ny tappning.' },
+  { id:8, title:'Kul på golvet', author:'Anna Bengtsson', price:119, age:'0-2', cover:'cover-7', desc:'Mjuk pekbok för de allra minsta.' },
+  { id:9, title:'Nils Holgerssons underbara resa', author:'Selma Lagerlöf', price:199, age:'5-11', cover:'cover-0', desc:'Nils reser med vildgässen genom Sverige.' },
+  { id:10, title:'Flickan som svarade på allt', author:'Sara Lundberg', price:179, age:'12-18', cover:'cover-3', desc:'En rörande roman om att hitta sig själv.' },
+  { id:11, title:'Lansen och draken', author:'K. Aveyard', price:219, age:'12-18', cover:'cover-5', desc:'Fantasy-epos om krig och magi.' },
+  { id:12, title:'Regnbågskatten', author:'Lena Andersson', price:135, age:'0-2', cover:'cover-1', desc:'Färgglad pekbok för nyfikna barn.' },
+];
+
+let cart = [];
+let activeFilter = 'all';
+
+/* ── RENDER BOOKS ── */
+function renderBooks() {
+  const grid = document.getElementById('books-grid');
+  const filtered = activeFilter === 'all' ? books : books.filter(b => b.age === activeFilter);
+  grid.innerHTML = filtered.map(b => {
+    const inCart = cart.find(c => c.id === b.id);
+    return `<article class="book-card" aria-label="${b.title} av ${b.author}, ${b.price} kronor">
+      <div class="book-cover ${b.cover}" aria-hidden="true">
+        <span class="book-cover-age">${b.age} år</span>
+        ${b.title}
+        <span class="book-cover-author">${b.author}</span>
+      </div>
+      <div class="book-info">
+        <h3 class="book-title">${b.title}</h3>
+        <p class="book-author">${b.author}</p>
+        <p class="book-desc">${b.desc}</p>
+        <div class="book-footer">
+          <span class="book-price">${b.price} kr</span>
+          ${inCart
+            ? `<span class="added-btn" aria-label="Tillagd i varukorgen">✓ Tillagd</span>`
+            : `<button class="add-btn" onclick="addToCart(${b.id})" aria-label="Lägg till ${b.title} i varukorgen">+ Lägg till</button>`
+          }
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+/* ── FILTERS ── */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed','false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed','true');
+    activeFilter = btn.dataset.filter;
+    renderBooks();
+  });
+});
+
+/* ── CART ── */
+function addToCart(id) {
+  const book = books.find(b => b.id === id);
+  if (!book || cart.find(c => c.id === id)) return;
+  cart.push({...book});
+  updateCartUI();
+  renderBooks();
+  renderCartItems();
+  showToast(`"${book.title}" lagd i varukorgen 📚`);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  updateCartUI();
+  renderBooks();
+  renderCartItems();
+}
+
+function updateCartUI() {
+  const count = cart.length;
+  const countEl = document.getElementById('cart-count');
+  const mobCount = document.getElementById('mob-cart-count');
+  countEl.textContent = count;
+  mobCount.textContent = count;
+  if (count > 0) { countEl.classList.add('visible'); }
+  else { countEl.classList.remove('visible'); }
+}
+
+function renderCartItems() {
+  const list = document.getElementById('cart-items-list');
+  const empty = document.getElementById('cart-empty-msg');
+  const foot = document.getElementById('cart-foot');
+  const total = cart.reduce((s, b) => s + b.price, 0);
+  document.getElementById('cart-total').textContent = total + ' kr';
+
+  if (cart.length === 0) {
+    empty.style.display = 'flex';
+    foot.style.display = 'none';
+    list.innerHTML = '';
+    list.appendChild(empty);
+    return;
+  }
+  empty.style.display = 'none';
+  foot.style.display = 'block';
+  list.innerHTML = cart.map(b => `
+    <div class="cart-item" role="listitem">
+      <div class="cart-item-cover ${b.cover}" aria-hidden="true">${b.title}</div>
+      <div>
+        <p class="cart-item-title">${b.title}</p>
+        <p class="cart-item-author">${b.author}</p>
+        <p class="cart-item-price">${b.price} kr</p>
+      </div>
+      <button class="cart-remove" onclick="removeFromCart(${b.id})" aria-label="Ta bort ${b.title} från varukorgen">✕</button>
+    </div>
+  `).join('');
+}
+
+function openCart() {
+  document.getElementById('cart-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('cart-close-btn').focus();
+  renderCartItems();
+}
+function closeCart() {
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleCheckout() {
+  cart = [];
+  updateCartUI();
+  renderBooks();
+  closeCart();
+  showToast('Tack för din beställning! 🎉 Bekräftelse skickas via e-post.');
+}
+
+document.getElementById('cart-open-btn').addEventListener('click', openCart);
+document.getElementById('mob-cart-btn').addEventListener('click', (e) => { e.preventDefault(); openCart(); });
+document.getElementById('cart-close-btn').addEventListener('click', closeCart);
+document.getElementById('cart-overlay').addEventListener('click', e => { if (e.target === document.getElementById('cart-overlay')) closeCart(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
+/* ── TOAST ── */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ── CONTACT ── */
+function handleContactSubmit(e) {
+  e.preventDefault();
+  e.target.reset();
+  showToast('Meddelande skickat! Vi svarar inom ett dygn.');
+}
+
+/* ── NAV ── */
+const toggle = document.getElementById('nav-toggle');
+const mobileNav = document.getElementById('mobile-nav');
+toggle.addEventListener('click', () => {
+  const open = mobileNav.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(open));
+  toggle.setAttribute('aria-label', open ? 'Stäng meny' : 'Öppna meny');
+});
+mobileNav.querySelectorAll('a:not(#mob-cart-btn)').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Öppna meny');
+  });
+});
+
+/* ── INIT ── */
+renderBooks();
+</script>
 </body>
 </html>
