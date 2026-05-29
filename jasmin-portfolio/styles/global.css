@@ -25,8 +25,7 @@
     --shadow-lg:   rgba(26,24,21,.14);
   }
   
-  @media (prefers-color-scheme: dark) {
-    :root {
+  html.dark {
       --bg:          #131210;
       --bg2:         #1C1A17;
       --surface:     #222019;
@@ -41,7 +40,6 @@
       --shadow:      rgba(0,0,0,.25);
       --shadow-lg:   rgba(0,0,0,.4);
     }
-  }
   
   /* ----------------------------------------------------------------
      2. RESET OCH BAS
@@ -185,7 +183,7 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    padding: 5rem 2rem;
+    padding: 7rem 2rem;
   }
   .mob-nav.open { display: flex; }
   
@@ -297,7 +295,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 6rem 2rem;
+    padding: 8rem 2rem;
     background: var(--bg);
     position: relative;
   }
@@ -389,7 +387,7 @@
      8. TEMPLATES SECTION
      ---------------------------------------------------------------- */
   .templates {
-    padding: 6rem 3rem;
+    padding: 8rem 3rem;
     background: var(--surface);
   }
   
@@ -590,7 +588,7 @@
      9. PROCESS / PRISER
      ---------------------------------------------------------------- */
   .process {
-    padding: 6rem 3rem;
+    padding: 8rem 3rem;
     background: var(--bg);
   }
   
@@ -677,7 +675,7 @@
      10. KONTAKT
      ---------------------------------------------------------------- */
   .contact {
-    padding: 6rem 3rem;
+    padding: 8rem 3rem;
     background: var(--surface);
   }
   
@@ -835,9 +833,9 @@
   
   /* Tablet */
   @media (max-width: 1024px) {
-    .templates { padding: 5rem 2.5rem; }
-    .process { padding: 5rem 2.5rem; }
-    .contact { padding: 5rem 2.5rem; }
+    .templates { padding: 7rem 2.5rem; }
+    .process { padding: 7rem 2.5rem; }
+    .contact { padding: 7rem 2.5rem; }
     nav { padding: 0 2rem; }
   }
   
@@ -858,7 +856,7 @@
   /* Mobil */
   @media (max-width: 600px) {
     nav { padding: 0 1.25rem; }
-    .hero { padding: 5rem 1.25rem 4rem; }
+    .hero { padding: 7rem 1.25rem 4rem; }
     .hero h1 { letter-spacing: -.015em; }
     .hero-ctas { flex-direction: column; align-items: stretch; }
     .btn-primary, .btn-ghost { text-align: center; }

@@ -30,8 +30,7 @@
   --nav-h:       58px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+html.dark {
     --bg:          #0E0D16;
     --bg2:         #16151F;
     --surface:     #1E1D28;
@@ -43,7 +42,6 @@
     --shadow:      rgba(0,0,0,.4);
     --shadow-lg:   rgba(0,0,0,.6);
   }
-}
 
 /* ── RESET ─────────────────────────────────────────────────────── */
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -146,7 +144,7 @@ nav {
 }
 .hero h1 {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(3rem, 5vw, 6rem);
+  font-size: clamp(3.5rem, 5.5vw, 7.5rem);
   font-weight: 300; line-height: 1.05; letter-spacing: -.02em;
   color: var(--on-dark); margin-bottom: 1.75rem;
 }
@@ -193,7 +191,7 @@ nav {
 .strip-sep { color: rgba(244,243,239,.35) !important; font-size: .5rem !important; }
 
 /* ── SEKTION GEMENSAMT ──────────────────────────────────────────── */
-.section { padding: 5.5rem 3rem; }
+.section { padding: 7.5rem 3rem; }
 .section-inner { max-width: 1280px; margin: 0 auto; }
 .eyebrow {
   font-size: .65rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
@@ -202,7 +200,7 @@ nav {
 .eyebrow-dark { color: var(--gold-bright); }
 h2 {
   font-family: 'Outfit', sans-serif; font-weight: 400;
-  font-size: clamp(1.75rem, 2.8vw, 2.6rem);
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
   color: var(--text); line-height: 1.15; letter-spacing: -.01em;
 }
 h2.on-dark { color: var(--on-dark); }
@@ -323,7 +321,7 @@ h2.on-dark { color: var(--on-dark); }
 
 /* ── EDITORIAL — MÖRK SEKTION ───────────────────────────────────── */
 .editorial {
-  background: var(--dark); padding: 5.5rem 3rem;
+  background: var(--dark); padding: 7.5rem 3rem;
   display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
 }
 .editorial-img { overflow: hidden; }
@@ -343,7 +341,7 @@ h2.on-dark { color: var(--on-dark); }
 .promise-list li::before { content: ''; display: block; width: 16px; height: 1px; background: var(--gold-bright); margin-top: .75rem; flex-shrink: 0; }
 
 /* ── QUALITY ────────────────────────────────────────────────────── */
-.quality-section { background: var(--bg2); padding: 5.5rem 3rem; }
+.quality-section { background: var(--bg2); padding: 7.5rem 3rem; }
 .quality-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem;
@@ -355,7 +353,7 @@ h2.on-dark { color: var(--on-dark); }
 .quality-desc { font-size: .82rem; color: var(--text-soft); line-height: 1.8; }
 
 /* ── NYHETSBREV ─────────────────────────────────────────────────── */
-.nl-section { background: var(--surface); padding: 5rem 3rem; text-align: center; }
+.nl-section { background: var(--surface); padding: 7rem 3rem; text-align: center; }
 .nl-inner { max-width: 480px; margin: 0 auto; }
 .nl-inner h2 { margin-bottom: .75rem; font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
 .nl-sub { font-size: .88rem; color: var(--text-soft); line-height: 1.8; margin-bottom: 2rem; }
@@ -396,6 +394,24 @@ footer { background: var(--dark); padding: 3.5rem 3rem 2rem; }
   opacity: 0; transition: all .25s; z-index: 600; white-space: nowrap;
 }
 .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+
+/* ── THEME TOGGLE ────────────────────────────────────────────────── */
+.theme-btn {
+  background: none;
+  border: 1.5px solid rgba(234,233,240,.3);
+  color: var(--on-dark-soft);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .35rem .85rem;
+  cursor: pointer;
+  transition: border-color .15s, color .15s;
+  flex-shrink: 0;
+}
+.theme-btn:hover { border-color: var(--gold-bright); color: var(--gold-bright); }
 
 /* ── RESPONSIVITET ──────────────────────────────────────────────── */
 @media (max-width: 1100px) {

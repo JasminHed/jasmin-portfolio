@@ -42,6 +42,7 @@
     <button class="cart-btn" id="open-cart" aria-label="Öppna varukorg">
       Varukorg <span class="cart-badge" id="cart-badge" aria-live="polite" aria-atomic="true"></span>
     </button>
+    <button class="theme-btn" id="theme-btn" aria-label="Byt till mörkt läge" aria-pressed="false">Mörkt</button>
     <button class="hamburger" id="ham" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav">
       <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
@@ -302,6 +303,32 @@ function handleNl(e){e.preventDefault();e.target.reset();showToast('Tack. Du är
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 
 renderProducts();
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-btn');
+  var html = document.documentElement;
+  function apply(dark) {
+    if (dark) {
+      html.classList.add('dark');
+      btn.textContent = 'Ljust';
+      btn.setAttribute('aria-label', 'Byt till ljust l\u00e4ge');
+      btn.setAttribute('aria-pressed', 'true');
+    } else {
+      html.classList.remove('dark');
+      btn.textContent = 'M\u00f6rkt';
+      btn.setAttribute('aria-label', 'Byt till m\u00f6rkt l\u00e4ge');
+      btn.setAttribute('aria-pressed', 'false');
+    }
+  }
+  apply(localStorage.getItem('theme') === 'dark');
+  btn.addEventListener('click', function() {
+    var dark = !html.classList.contains('dark');
+    apply(dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  });
+})();
 </script>
 </body>
 </html>

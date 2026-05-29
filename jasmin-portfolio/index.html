@@ -22,6 +22,7 @@
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
   <a href="#kontakt" class="nav-cta">Kom igång</a>
+  <button class="theme-btn" id="theme-btn" aria-label="Byt till mörkt läge" aria-pressed="false">Mörkt</button>
   <button class="hamburger" id="ham" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav">
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
@@ -321,6 +322,32 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-btn');
+  var html = document.documentElement;
+  function apply(dark) {
+    if (dark) {
+      html.classList.add('dark');
+      btn.textContent = 'Ljust';
+      btn.setAttribute('aria-label', 'Byt till ljust l\u00e4ge');
+      btn.setAttribute('aria-pressed', 'true');
+    } else {
+      html.classList.remove('dark');
+      btn.textContent = 'M\u00f6rkt';
+      btn.setAttribute('aria-label', 'Byt till m\u00f6rkt l\u00e4ge');
+      btn.setAttribute('aria-pressed', 'false');
+    }
+  }
+  apply(localStorage.getItem('theme') === 'dark');
+  btn.addEventListener('click', function() {
+    var dark = !html.classList.contains('dark');
+    apply(dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  });
+})();
 </script>
 </body>
 </html>
