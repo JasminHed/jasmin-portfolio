@@ -499,11 +499,13 @@
   }
   
   /* Yoga preview colours */
-  .tmpl-yoga .tmpl-preview { background: #0f2035; }
+  .tmpl-yoga .tmpl-preview { background: #F8F7F3; }
+  .tmpl-yoga .tmpl-bar { background: rgba(60,91,52,.15); }
+  .tmpl-yoga .tmpl-bar span { background: rgba(60,91,52,.3); }
   .tmpl-yoga .tmpl-mock-logo,
   .tmpl-yoga .tmpl-mock-links span,
   .tmpl-yoga .tmpl-mock-hero,
-  .tmpl-yoga .tmpl-mock-grid span { background: #5db3d5; }
+  .tmpl-yoga .tmpl-mock-grid span { background: #3C5B34; }
   
   /* Bokhandel preview colours */
   .tmpl-bokhandel .tmpl-preview { background: #B02d51; }
@@ -513,13 +515,13 @@
   .tmpl-bokhandel .tmpl-mock-grid span { background: #F7E8ED; }
   
   /* Smycken preview colours */
-  .tmpl-smycken .tmpl-preview { background: #EDE7DA; }
-  .tmpl-smycken .tmpl-bar { background: rgba(42,35,24,.2); }
-  .tmpl-smycken .tmpl-bar span { background: rgba(42,35,24,.35); }
+  .tmpl-smycken .tmpl-preview { background: #12111A; }
+  .tmpl-smycken .tmpl-bar { background: rgba(0,0,0,.4); }
+  .tmpl-smycken .tmpl-bar span { background: rgba(234,233,240,.25); }
   .tmpl-smycken .tmpl-mock-logo,
   .tmpl-smycken .tmpl-mock-links span,
   .tmpl-smycken .tmpl-mock-hero,
-  .tmpl-smycken .tmpl-mock-grid span { background: #2A2318; }
+  .tmpl-smycken .tmpl-mock-grid span { background: #C9A54D; }
   
   .tmpl-info {
     padding: 1.75rem 1.5rem 2rem;

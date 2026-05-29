@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stillvatten Studio — Yoga och Rörelse Stockholm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/yoga.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Hoppa till innehåll</a>
+
+<nav role="navigation" aria-label="Huvudnavigation">
+  <a class="logo" href="#" aria-label="Stillvatten Studio startsida">Stilla<span>vatten</span></a>
+  <ul class="nav-links" role="list">
+    <li><a href="#om">Om oss</a></li>
+    <li><a href="#klasser">Klasser</a></li>
+    <li><a href="#behandlingar">Behandlingar</a></li>
+    <li><a href="#schema">Schema</a></li>
+    <li><a href="#priser">Priser</a></li>
+  </ul>
+  <a href="#" class="nav-book" onclick="openBoka(null,'Boka');return false" aria-label="Boka en klass">Boka</a>
+  <button class="hamburger" id="ham" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+  </button>
+</nav>
+
+<div class="mob-nav" id="mob-nav" role="dialog" aria-modal="true" aria-label="Meny">
+  <button class="mob-close" id="mob-close" aria-label="Stäng meny">Stäng</button>
+  <a href="#om">Om oss</a>
+  <a href="#klasser">Klasser</a>
+  <a href="#behandlingar">Behandlingar</a>
+  <a href="#uthyrning">Uthyrning</a>
+  <a href="#schema">Schema</a>
+  <a href="#priser">Priser</a>
+  <a href="#kontakt">Kontakt</a>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-label="Välkommen till Stillvatten Studio">
+  <div class="hero-left">
+    <p class="hero-tag">Stockholm · Östermalm</p>
+    <h1>Hitta din<br>inre stillhet.</h1>
+    <p class="hero-sub">En liten studio byggd kring närvaro — yoga, andning och helande behandlingar i ett lugnt rum mitt i stan.</p>
+    <div class="hero-ctas">
+      <a href="#schema" class="btn-primary">Se schema och boka</a>
+      <a href="#klasser" class="btn-ghost">Utforska klasser</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="yoga_pose1.jpg" alt="Yogapraktik utomhus vid vattnet" width="900" height="1200">
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar" role="complementary" aria-label="Praktisk information">
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Mån–Fre 06:30–21:00</div>
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Lör–Sön 08:00–18:00</div>
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Östermalm, Stockholm</div>
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Matta ingår alltid</div>
+  <div class="info-item"><span class="info-dot" aria-hidden="true"></span>Max 12 per klass</div>
+</div>
+
+<!-- OM OSS -->
+<section class="om-section" id="om" aria-labelledby="om-h">
+  <div class="om-inner">
+    <p class="eyebrow">Om oss</p>
+    <h2 id="om-h">En plats att landa i.</h2>
+    <p class="om-lead">Stillvatten Studio grundades med en enkel idé: skapa en studio som välkomnar alla — oavsett erfarenhet, ålder eller form.</p>
+    <p class="om-body">Hos oss hittar du certifierade lärare, litet klassformat med max tolv deltagare och ett schema som passar vardagslivet. Studion finns på Östermalm med fina ljusförhållanden och noga utvald akustik.</p>
+    <p class="om-body">Mattan finns på plats. Du behöver bara vara nyfiken.</p>
+    <a href="#kontakt" class="btn-primary" style="display:inline-block;margin-top:1rem">Kontakta oss</a>
+  </div>
+</section>
+
+<!-- KLASSER -->
+<section class="section klasser-section" id="klasser" aria-labelledby="kl-h">
+  <div class="section-inner">
+    <p class="eyebrow">Vad vi erbjuder</p>
+    <div class="section-hdr">
+      <h2 id="kl-h">Klasser för varje nivå</h2>
+      <a href="#schema" class="link-sm">Se schema och boka</a>
+    </div>
+    <div class="tabs-nav" role="tablist" aria-label="Välj klasstyp">
+      <button class="tab-btn" role="tab" aria-selected="true" aria-controls="p-yoga" id="tab-yoga" data-tab="yoga">Yoga</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="p-andning" id="tab-andning" data-tab="andning">Andning</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="p-meditation" id="tab-meditation" data-tab="meditation">Meditation</button>
+    </div>
+    <div class="classes-panels">
+      <div class="panel active" id="p-yoga" role="tabpanel" aria-labelledby="tab-yoga">
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 60 min</div>
+          <h3 class="class-name">Yin Yoga</h3>
+          <p class="class-desc">Djupa, lugna positioner hållna länge. Arbetar med bindväv och leder. Perfekt för återhämtning och stressreducering.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Intensitet:</strong> Låg</span><span class="class-meta"><strong>Pris:</strong> 150 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Medel · 75 min</div>
+          <h3 class="class-name">Vinyasa Flow</h3>
+          <p class="class-desc">Rörelse synkroniserad med andning. Dynamiska flöden som värmer kroppen och skapar en meditativ rörelseupplevelse.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Intensitet:</strong> Medel</span><span class="class-meta"><strong>Pris:</strong> 150 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Nybörjare · 60 min</div>
+          <h3 class="class-name">Hatha Grunder</h3>
+          <p class="class-desc">Klassisk yoga med fokus på grundpositioner och rätt alignment. Lugnt tempo med utrymme att lära.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Intensitet:</strong> Låg–Medel</span><span class="class-meta"><strong>Pris:</strong> 130 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 45 min</div>
+          <h3 class="class-name">Morgonyoga</h3>
+          <p class="class-desc">Starta dagen med intention. Mjuk rörelse och djup andning för att landa i kroppen innan dagen börjar.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Intensitet:</strong> Låg</span><span class="class-meta"><strong>Pris:</strong> 120 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Avancerad · 90 min</div>
+          <h3 class="class-name">Ashtanga</h3>
+          <p class="class-desc">Den traditionella ashtangasekvensen med fokus på disciplin och bandhas. Kräver viss yogaerfarenhet.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Intensitet:</strong> Hög</span><span class="class-meta"><strong>Pris:</strong> 170 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 75 min</div>
+          <h3 class="class-name">Restorative Yoga</h3>
+          <p class="class-desc">Vila in i positioner stöttade av kuddar och bolsters. Djup vila för nervsystemet.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Intensitet:</strong> Mycket låg</span><span class="class-meta"><strong>Pris:</strong> 160 kr</span></div>
+        </article>
+      </div>
+      <div class="panel" id="p-andning" role="tabpanel" aria-labelledby="tab-andning" hidden>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 60 min</div>
+          <h3 class="class-name">Pranayama</h3>
+          <p class="class-desc">Yogisk andning. Lugnar nervsystemet och ökar närvaron.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Pris:</strong> 140 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Nybörjare · 75 min</div>
+          <h3 class="class-name">Andningsworkshop</h3>
+          <p class="class-desc">Grundläggande andningstekniker från olika traditioner. Teori och praktik.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Pris:</strong> 200 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Medel · 90 min</div>
+          <h3 class="class-name">Breathwork och Nidra</h3>
+          <p class="class-desc">Aktiv andningspraktik följt av djup avslappning i yogisk sömn.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Pris:</strong> 190 kr</span></div>
+        </article>
+      </div>
+      <div class="panel" id="p-meditation" role="tabpanel" aria-labelledby="tab-meditation" hidden>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 45 min</div>
+          <h3 class="class-name">Stillhet och närvaro</h3>
+          <p class="class-desc">Guidad meditation med fokus på mindfulness.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Pris:</strong> 120 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Alla nivåer · 60 min</div>
+          <h3 class="class-name">Ljudbad</h3>
+          <p class="class-desc">Tibetanska skålar, gong och kristallskålar guider dig in i djup meditation.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Pris:</strong> 220 kr</span></div>
+        </article>
+        <article class="class-item">
+          <div class="class-badge">Nybörjare · 75 min</div>
+          <h3 class="class-name">Yoga Nidra</h3>
+          <p class="class-desc">Yogisk sömn — tillståndet mellan vaka och sömn. Djup återhämtning.</p>
+          <div class="class-meta-row"><span class="class-meta"><strong>Pris:</strong> 160 kr</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEHANDLINGAR -->
+<section class="beh-section" id="behandlingar" aria-labelledby="beh-h">
+  <div class="section-inner">
+    <p class="eyebrow">Helande</p>
+    <div class="section-hdr">
+      <h2 id="beh-h">Behandlingar och terapi</h2>
+      <a href="#" class="link-sm" onclick="openBoka(null,'Behandling');return false">Boka behandling</a>
+    </div>
+    <div class="beh-grid">
+      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Massage och Bodywork','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Massage och Bodywork','Behandling')">
+        <p class="beh-num">Behandling 01</p>
+        <h3 class="beh-name">Massage och Bodywork</h3>
+        <p class="beh-desc">Helkroppsmassage med fokus på muskelspänningar och djupvävnad. Integreras med aromaterapiolja.</p>
+        <div class="beh-footer"><span class="beh-dur">60 min · 90 min</span><span class="beh-price">895–1 195 kr</span></div>
+      </div>
+      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Kraniosakral Terapi','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Kraniosakral Terapi','Behandling')">
+        <p class="beh-num">Behandling 02</p>
+        <h3 class="beh-name">Kraniosakral Terapi</h3>
+        <p class="beh-desc">Extremt lätt beröring längs ryggraden och kraniet. Arbetar med kroppens subtila rytm.</p>
+        <div class="beh-footer"><span class="beh-dur">75 min</span><span class="beh-price">1 095 kr</span></div>
+      </div>
+      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Akupunktur','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Akupunktur','Behandling')">
+        <p class="beh-num">Behandling 03</p>
+        <h3 class="beh-name">Akupunktur</h3>
+        <p class="beh-desc">Traditionell kinesisk medicin för att balansera kroppens energiflöde.</p>
+        <div class="beh-footer"><span class="beh-dur">60 min</span><span class="beh-price">950 kr</span></div>
+      </div>
+      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Personlig Yogaterapi','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Personlig Yogaterapi','Behandling')">
+        <p class="beh-num">Behandling 04</p>
+        <h3 class="beh-name">Personlig Yogaterapi</h3>
+        <p class="beh-desc">En till en med en yogaterapeut. Skräddarsydd praktik för din kropp och dina mål.</p>
+        <div class="beh-footer"><span class="beh-dur">75 min</span><span class="beh-price">1 295 kr</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UTHYRNING -->
+<section class="uth-section" id="uthyrning" aria-labelledby="uth-h">
+  <div class="uth-inner">
+    <div class="uth-img">
+      <img src="yoga_sit.jpg" alt="Yogapraktik vid vattnet" width="675" height="900">
+    </div>
+    <div class="uth-body">
+      <p class="eyebrow">Hyr lokalen</p>
+      <h2 id="uth-h">Din händelse,<br>vår studio.</h2>
+      <p class="uth-lead">Stillvatten Studio hyrs ut för workshops, retreats, föreläsningar, fotografering och privata event.</p>
+      <ul class="feat-list" aria-label="Vad som ingår">
+        <li>120 kvm öppen yta med björkträgolv och takfönster</li>
+        <li>Professionellt ljud- och ljussystem ingår</li>
+        <li>Fullutrustat omklädningsrum och dusch</li>
+        <li>Mattor, bolsters, kuddar och props tillgängliga</li>
+        <li>Köksyta med kaffe och te ingår</li>
+      </ul>
+      <div class="price-strip">
+        <div><p class="price-strip-label">Från</p><p class="price-strip-val">1 800 kr / timme</p></div>
+        <a href="#" class="btn-primary" onclick="openBoka(null,'Uthyrning');return false">Skicka förfrågan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEMA -->
+<section class="schema-section" id="schema" aria-labelledby="schema-h">
+  <div class="section-inner">
+    <p class="eyebrow">Denna vecka</p>
+    <div class="section-hdr">
+      <h2 id="schema-h">Veckoschemat</h2>
+      <div class="week-nav" aria-label="Bläddra i veckor">
+        <button class="week-btn" aria-label="Föregående vecka">‹</button>
+        <span class="week-lbl">Vecka 22 · Maj 2026</span>
+        <button class="week-btn" aria-label="Nästa vecka">›</button>
+      </div>
+    </div>
+    <div class="schema-grid" role="table" aria-label="Veckoschemat">
+      <div class="day-col today"><div class="day-head"><span class="day-name">Mån</span><span class="day-num">25</span></div><div class="day-slots">
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">5 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Pranayama 10:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Pranayama 10:00','Andning')"><span class="slot-time">10:00</span><span class="slot-name">Pranayama</span><span class="slot-spots">8 platser kvar</span></div>
+        <div class="slot full" aria-disabled="true"><span class="slot-time">18:30</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">Fullbokat</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Yin Yoga 20:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Yin Yoga 20:00','Yoga')"><span class="slot-time">20:00</span><span class="slot-name">Yin Yoga</span><span class="slot-spots">3 platser kvar</span></div>
+      </div></div>
+      <div class="day-col"><div class="day-head"><span class="day-name">Tis</span><span class="day-num">26</span></div><div class="day-slots">
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">7 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Hatha Grunder 12:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Hatha Grunder 12:00','Yoga')"><span class="slot-time">12:00</span><span class="slot-name">Hatha Grunder</span><span class="slot-spots">10 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Yoga Nidra 19:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Yoga Nidra 19:00','Meditation')"><span class="slot-time">19:00</span><span class="slot-name">Yoga Nidra</span><span class="slot-spots">4 platser kvar</span></div>
+      </div></div>
+      <div class="day-col"><div class="day-head"><span class="day-name">Ons</span><span class="day-num">27</span></div><div class="day-slots">
+        <div class="slot full" aria-disabled="true"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">Fullbokat</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Stillhet 10:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Stillhet 10:00','Meditation')"><span class="slot-time">10:00</span><span class="slot-name">Stillhet</span><span class="slot-spots">9 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Ashtanga 18:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Ashtanga 18:00','Yoga')"><span class="slot-time">18:00</span><span class="slot-name">Ashtanga</span><span class="slot-spots">2 platser kvar</span></div>
+      </div></div>
+      <div class="day-col"><div class="day-head"><span class="day-name">Tor</span><span class="day-num">28</span></div><div class="day-slots">
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">6 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Breathwork 12:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Breathwork 12:00','Andning')"><span class="slot-time">12:00</span><span class="slot-name">Breathwork</span><span class="slot-spots">5 platser kvar</span></div>
+        <div class="slot full" aria-disabled="true"><span class="slot-time">18:30</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">Fullbokat</span></div>
+      </div></div>
+      <div class="day-col"><div class="day-head"><span class="day-name">Fre</span><span class="day-num">29</span></div><div class="day-slots">
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">8 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Restorative Yoga 12:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Restorative Yoga 12:00','Yoga')"><span class="slot-time">12:00</span><span class="slot-name">Restorative Yoga</span><span class="slot-spots">11 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Ljudbad 19:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Ljudbad 19:00','Meditation')"><span class="slot-time">19:00</span><span class="slot-name">Ljudbad</span><span class="slot-spots">3 platser kvar</span></div>
+      </div></div>
+      <div class="day-col"><div class="day-head"><span class="day-name">Lör</span><span class="day-num">30</span></div><div class="day-slots">
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Vinyasa Flow 09:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Vinyasa Flow 09:00','Yoga')"><span class="slot-time">09:00</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">4 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Andningsworkshop 11:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Andningsworkshop 11:00','Andning')"><span class="slot-time">11:00</span><span class="slot-name">Andningsworkshop</span><span class="slot-spots">7 platser kvar</span></div>
+      </div></div>
+      <div class="day-col"><div class="day-head"><span class="day-name">Sön</span><span class="day-num">31</span></div><div class="day-slots">
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Restorative Yoga 10:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Restorative Yoga 10:00','Yoga')"><span class="slot-time">10:00</span><span class="slot-name">Restorative Yoga</span><span class="slot-spots">10 platser kvar</span></div>
+        <div class="slot full" aria-disabled="true"><span class="slot-time">12:00</span><span class="slot-name">Ljudbad</span><span class="slot-spots">Fullbokat</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="openBoka('Yoga Nidra 15:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Yoga Nidra 15:00','Meditation')"><span class="slot-time">15:00</span><span class="slot-name">Yoga Nidra</span><span class="slot-spots">5 platser kvar</span></div>
+      </div></div>
+    </div>
+    <p style="margin-top:1.5rem;font-size:.78rem;color:var(--text-soft)">Klicka på en tidslucka för att boka. Fullbokade klasser — ställ dig på väntelista via kontaktformuläret.</p>
+  </div>
+</section>
+
+<!-- PRISER -->
+<section class="priser-section" id="priser" aria-labelledby="pris-h">
+  <div class="section-inner">
+    <p class="eyebrow">Priser och medlemskap</p>
+    <div class="section-hdr"><h2 id="pris-h">Välj det som passar dig</h2></div>
+    <div class="priser-grid">
+      <div class="pris-card"><p class="pris-tag">Enstaka</p><p class="pris-name">Drop-in</p><p class="pris-amount">120–220</p><p class="pris-per">kr per klass</p><div class="pris-div"></div><ul class="pris-list"><li>Valfri klass varje dag</li><li>Matta ingår alltid</li><li>Boka upp till 7 dagar i förväg</li></ul><a href="#" class="pris-cta" onclick="openBoka(null,'Drop-in');return false">Boka nu</a></div>
+      <div class="pris-card featured" aria-label="Populärast"><p class="pris-tag">Populärast</p><p class="pris-name">Månadsmedlem</p><p class="pris-amount">895</p><p class="pris-per">kr per månad, obegränsat</p><div class="pris-div"></div><ul class="pris-list"><li>Obegränsat antal klasser</li><li>Prioriterad bokning</li><li>20 procent rabatt på behandlingar</li><li>Matta ingår alltid</li></ul><a href="#" class="pris-cta" onclick="openBoka(null,'Månadsmedlemskap');return false">Bli medlem</a></div>
+      <div class="pris-card"><p class="pris-tag">Klippkort</p><p class="pris-name">10 klasser</p><p class="pris-amount">1 100</p><p class="pris-per">kr, giltigt 6 månader</p><div class="pris-div"></div><ul class="pris-list"><li>10 valfria klasser</li><li>Kan delas med en vän</li><li>Matta ingår</li></ul><a href="#" class="pris-cta" onclick="openBoka(null,'Klippkort');return false">Köp klippkort</a></div>
+      <div class="pris-card"><p class="pris-tag">Årsmedlem</p><p class="pris-name">Årspass</p><p class="pris-amount">7 900</p><p class="pris-per">kr per år, spara 25 procent</p><div class="pris-div"></div><ul class="pris-list"><li>Allt i månadsmedlemskapet</li><li>En gratis behandling per kvartal</li><li>Inbjudan till exklusiva events</li></ul><a href="#" class="pris-cta" onclick="openBoka(null,'Årspass');return false">Välj årspass</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="kontakt-section" id="kontakt" aria-labelledby="kontakt-h">
+  <div class="kontakt-inner">
+    <div>
+      <p class="eyebrow">Kontakt</p>
+      <h2 class="kontakt-h" id="kontakt-h">Vi hörs.</h2>
+      <p class="kontakt-lead">Frågor om klasser, behandlingar, uthyrning eller medlemskap? Vi svarar inom 24 timmar.</p>
+      <dl class="kontakt-list">
+        <div><dt class="kontakt-lbl">Adress</dt><dd class="kontakt-val">Strandvägen 12, 114 56 Stockholm</dd></div>
+        <div><dt class="kontakt-lbl">E-post</dt><dd class="kontakt-val">hej@stillvattenstudio.se</dd></div>
+        <div><dt class="kontakt-lbl">Telefon</dt><dd class="kontakt-val">08-123 45 67</dd></div>
+        <div><dt class="kontakt-lbl">Öppettider</dt><dd class="kontakt-val">Mån–Fre 06:30–21:00 &middot; Lör–Sön 08:00–18:00</dd></div>
+      </dl>
+    </div>
+    <div class="form-box">
+      <h3>Skicka ett meddelande</h3>
+      <form onsubmit="handleKontakt(event)" aria-label="Kontaktformulär" novalidate>
+        <div class="f-row">
+          <div class="f-group"><label class="f-label" for="k-namn">Namn</label><input type="text" id="k-namn" class="f-input" placeholder="Ditt namn" autocomplete="name" required aria-required="true"></div>
+          <div class="f-group"><label class="f-label" for="k-email">E-post</label><input type="email" id="k-email" class="f-input" placeholder="din@email.se" autocomplete="email" required aria-required="true"></div>
+        </div>
+        <div class="f-group"><label class="f-label" for="k-amne">Ämne</label><select id="k-amne" class="f-select"><option value="">Välj ämne</option><option>Klasser</option><option>Behandlingar</option><option>Uthyrning</option><option>Medlemskap</option><option>Övrigt</option></select></div>
+        <div class="f-group"><label class="f-label" for="k-msg">Meddelande</label><textarea id="k-msg" class="f-input" rows="4" placeholder="Berätta mer…"></textarea></div>
+        <button type="submit" class="sub-btn">Skicka meddelande</button>
+        <p class="f-note">Vi svarar inom ett dygn på vardagar.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer role="contentinfo">
+  <span class="f-logo">Stillvatten Studio</span>
+  <ul class="f-links" role="list">
+    <li><a href="#om">Om oss</a></li><li><a href="#klasser">Klasser</a></li>
+    <li><a href="#schema">Schema</a></li><li><a href="#priser">Priser</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <span class="f-credit">Design av Jasmin Hedlund</span>
+</footer>
+
+<!-- BOKNINGSMODAL -->
+<div class="boka-overlay" id="boka-overlay" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="boka-modal">
+    <button class="m-close" id="m-close" aria-label="Stäng">Stäng</button>
+    <div id="m-form-wrap">
+      <p class="m-eye" id="m-eye">Yoga</p>
+      <h2 class="m-title" id="m-title">Boka din plats</h2>
+      <form onsubmit="handleBoka(event)" novalidate>
+        <div class="f-row">
+          <div class="f-group"><label class="f-label" for="b-namn">Namn</label><input type="text" id="b-namn" class="f-input" placeholder="Ditt namn" required></div>
+          <div class="f-group"><label class="f-label" for="b-email">E-post</label><input type="email" id="b-email" class="f-input" placeholder="din@email.se" required></div>
+        </div>
+        <div class="f-group"><label class="f-label" for="b-klass">Klass</label><input type="text" id="b-klass" class="f-input" placeholder="Välj klass"></div>
+        <div class="f-group"><label class="f-label" for="b-medl">Betalningssätt</label><select id="b-medl" class="f-select"><option>Drop-in</option><option>Klippkort</option><option>Månadsmedlem</option></select></div>
+        <button type="submit" class="sub-btn">Bekräfta bokning</button>
+        <p class="f-note">Avbokning senast 4 timmar före klassen.</p>
+      </form>
+    </div>
+    <div id="m-success" style="display:none;text-align:center;padding:1.5rem">
+      <div class="m-success-icon" aria-hidden="true">+</div>
+      <h2 class="m-success-h2" style="font-family:Lora,serif;font-size:1.4rem;font-weight:400;color:var(--text);margin-bottom:.5rem">Bokning mottagen</h2>
+      <p style="font-size:.88rem;color:var(--text-soft)">Vi skickar en bekräftelse till din e-post. Välkommen.</p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const ham=document.getElementById('ham'),mobNav=document.getElementById('mob-nav');
+document.getElementById('mob-close').addEventListener('click',closeMob);
+ham.addEventListener('click',()=>{const o=mobNav.classList.toggle('open');ham.setAttribute('aria-expanded',String(o));});
+mobNav.querySelectorAll('a').forEach(l=>l.addEventListener('click',closeMob));
+function closeMob(){mobNav.classList.remove('open');ham.setAttribute('aria-expanded','false');}
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
+    document.querySelectorAll('.panel').forEach(p=>{p.classList.remove('active');p.hidden=true;});
+    btn.classList.add('active');btn.setAttribute('aria-selected','true');
+    const p=document.getElementById('p-'+btn.dataset.tab);p.classList.add('active');p.hidden=false;
+  });
+  btn.addEventListener('keydown',e=>{
+    const tabs=[...document.querySelectorAll('.tab-btn')],i=tabs.indexOf(btn);
+    if(e.key==='ArrowRight'){tabs[(i+1)%tabs.length].focus();tabs[(i+1)%tabs.length].click();}
+    if(e.key==='ArrowLeft'){tabs[(i-1+tabs.length)%tabs.length].focus();tabs[(i-1+tabs.length)%tabs.length].click();}
+  });
+});
+
+const overlay=document.getElementById('boka-overlay');
+document.getElementById('m-close').addEventListener('click',closeBoka);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeBoka();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBoka();});
+function openBoka(klass,typ){
+  document.getElementById('m-form-wrap').style.display='block';
+  document.getElementById('m-success').style.display='none';
+  if(klass)document.getElementById('b-klass').value=klass;
+  if(typ)document.getElementById('m-eye').textContent=typ;
+  overlay.classList.add('open');document.body.style.overflow='hidden';
+  document.getElementById('m-close').focus();
+}
+function closeBoka(){overlay.classList.remove('open');document.body.style.overflow='';}
+function handleBoka(e){e.preventDefault();document.getElementById('m-form-wrap').style.display='none';document.getElementById('m-success').style.display='block';}
+function handleKontakt(e){e.preventDefault();e.target.reset();showToast('Meddelande skickat. Vi hörs av oss!');}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+</script>
+</body>
+</html>

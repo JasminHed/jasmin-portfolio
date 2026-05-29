@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier Studio — Design och Inredning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/butik.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Hoppa till innehåll</a>
+
+<!-- CART -->
+<div class="cart-overlay" id="cart-overlay" role="dialog" aria-modal="true" aria-label="Varukorg">
+  <div class="cart-drawer">
+    <div class="cart-head">
+      <span class="cart-head-title">Varukorg (<span id="cart-count">0</span>)</span>
+      <button class="cart-x" id="cart-x" aria-label="Stäng varukorg">Stäng</button>
+    </div>
+    <div class="cart-body" id="cart-body">
+      <div class="cart-empty"><div class="cart-empty-line"></div><p>Din varukorg är tom</p></div>
+    </div>
+    <div class="cart-foot" id="cart-foot">
+      <div class="cart-total-row"><span class="cart-total-lbl">Totalt</span><span class="cart-total-val" id="cart-total">0 kr</span></div>
+      <button class="checkout-btn" onclick="handleCheckout()">Till kassan</button>
+      <p class="cart-ship">Fri frakt från 1 500 kr · Retur 30 dagar</p>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav role="navigation" aria-label="Huvudnavigation">
+  <ul class="nav-left" role="list">
+    <li><a href="#shop">Kollektion</a></li>
+    <li><a href="#om">Om oss</a></li>
+    <li><a href="#kvalitet">Kvalitet</a></li>
+  </ul>
+  <a class="nav-logo" href="#" aria-label="Atelier Studio startsida">ATELIER</a>
+  <div class="nav-right">
+    <button class="cart-btn" id="open-cart" aria-label="Öppna varukorg">
+      Varukorg <span class="cart-badge" id="cart-badge" aria-live="polite" aria-atomic="true"></span>
+    </button>
+    <button class="hamburger" id="ham" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mob-nav" id="mob-nav" role="dialog" aria-modal="true" aria-label="Meny">
+  <button class="mob-close" id="mob-close" aria-label="Stäng meny">Stäng</button>
+  <a href="#shop">Kollektion</a>
+  <a href="#om">Om oss</a>
+  <a href="#kvalitet">Kvalitet</a>
+  <a href="#" id="mob-cart-link">Varukorg</a>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-label="Välkommen till Atelier Studio">
+  <div class="hero-text">
+    <p class="hero-season">Kollektion 2025</p>
+    <h1>Form<br>möter<br>funktion.</h1>
+    <p class="hero-desc">Svensk designbutik med noggrant utvalt sortiment. Tidlösa möbler, belysning och tillörehörigheter för hemmet.</p>
+    <div class="hero-ctas">
+      <a href="#shop" class="btn-light">Se kollektion</a>
+      <a href="#om" class="btn-ghost-dark">Om oss</a>
+    </div>
+  </div>
+  <div class="hero-img-col">
+    <div class="hero-placeholder" role="img" aria-label="Bildutrymme för hero-bild"></div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip" role="complementary" aria-label="Information">
+  <span>Handplockat sortiment</span>
+  <span class="strip-sep" aria-hidden="true">+</span>
+  <span>Fri frakt från 1 500 kr</span>
+  <span class="strip-sep" aria-hidden="true">+</span>
+  <span>Retur 30 dagar</span>
+  <span class="strip-sep" aria-hidden="true">+</span>
+  <span>Kundtjänst på vardagar</span>
+</div>
+
+<!-- SHOP -->
+<section class="section shop-section" id="shop" aria-labelledby="shop-h">
+  <div class="section-inner">
+    <p class="eyebrow">Kollektion</p>
+    <div class="section-hdr">
+      <h2 id="shop-h">Alla produkter</h2>
+      <div class="filters" role="group" aria-label="Filtrera efter kategori">
+        <button class="filter active" data-filter="all" aria-pressed="true">Alla</button>
+        <button class="filter" data-filter="mobler" aria-pressed="false">Möbler</button>
+        <button class="filter" data-filter="belysning" aria-pressed="false">Belysning</button>
+        <button class="filter" data-filter="textil" aria-pressed="false">Textil</button>
+        <button class="filter" data-filter="dekor" aria-pressed="false">Dekor</button>
+      </div>
+    </div>
+    <div class="product-grid" id="product-grid" aria-live="polite" aria-label="Produkter"></div>
+  </div>
+</section>
+
+<!-- EDITORIAL / OM OSS -->
+<section class="editorial" id="om" aria-labelledby="om-h">
+  <div class="editorial-img">
+    <div class="editorial-placeholder" role="img" aria-label="Bildutrymme för studio-bild"></div>
+  </div>
+  <div class="editorial-text">
+    <p class="eyebrow eyebrow-dark">Om Atelier</p>
+    <h2 class="on-dark" id="om-h">Vi tror på<br>det bestående.</h2>
+    <p class="editorial-body">Atelier Studio grundades med en tro på att bra designöverläver trender. Vi väljer varje produkt med omsorg — för material, hantverk och ärläktighet.</p>
+    <p class="editorial-body">Vårt sortiment innehåller svenska och nordiska designers som delar vår övertygelse om att hemmet ska kännas som en plats av lugn.</p>
+    <ul class="promise-list" aria-label="Våra löften">
+      <li>Noggrant utvalt sortiment</li>
+      <li>Hjälp med inredning och rådgivning</li>
+      <li>Fri frakt och enkel retur</li>
+      <li>Kundtjänst på svenska</li>
+    </ul>
+    <a href="#shop" class="btn-light" style="align-self:flex-start;display:inline-block">Se kollektion</a>
+  </div>
+</section>
+
+<!-- KVALITET / MATERIAL -->
+<section class="quality-section" id="kvalitet" aria-labelledby="kval-h">
+  <div class="section-inner">
+    <p class="eyebrow">Vår filosofi</p>
+    <div class="section-hdr">
+      <h2 id="kval-h">Det vi står för</h2>
+    </div>
+    <div class="quality-grid">
+      <div class="quality-item">
+        <p class="quality-num" aria-hidden="true">01</p>
+        <p class="quality-name">Hållbarhet</p>
+        <p class="quality-desc">Vi väljer produkter som håller år efter år. Material och produktion granskas för att minimera miljöpåverkan.</p>
+      </div>
+      <div class="quality-item">
+        <p class="quality-num" aria-hidden="true">02</p>
+        <p class="quality-name">Hantverk</p>
+        <p class="quality-desc">Många av våra produkter tillverkas för hand eller i små serier. Det syns — i detalj, känsla och idéntitet.</p>
+      </div>
+      <div class="quality-item">
+        <p class="quality-num" aria-hidden="true">03</p>
+        <p class="quality-name">Enkelhet</p>
+        <p class="quality-desc">Tidlös form överlever trender. Vi söker produkter som känns rätta även om tio år.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NYHETSBREV -->
+<section class="nl-section" aria-labelledby="nl-h">
+  <div class="nl-inner">
+    <p class="eyebrow" style="justify-content:center;display:flex">Nyhetsbrev</p>
+    <h2 id="nl-h">Var först med nyheterna</h2>
+    <p class="nl-sub">Prenumerera och få reda på nya produkter, exklusiva erbjudanden och inspiration direkt i inkorgen.</p>
+    <form class="nl-form" onsubmit="handleNl(event)" aria-label="Prenumerera på nyhetsbrev">
+      <label for="nl-email" style="position:absolute;clip:rect(0,0,0,0)">Din e-postadress</label>
+      <input type="email" id="nl-email" class="nl-input" placeholder="Din e-postadress" autocomplete="email" required aria-required="true">
+      <button type="submit" class="nl-btn">Prenumerera</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand">ATELIER</p>
+        <p class="footer-tagline">Svensk designbutik med noggrant utvalt sortiment. Tidlös design för hemmet.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Shoppa</p>
+        <ul class="footer-links">
+          <li><a href="#shop">Alla produkter</a></li>
+          <li><a href="#shop">Möbler</a></li>
+          <li><a href="#shop">Belysning</a></li>
+          <li><a href="#shop">Textil</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Kundservice</p>
+        <ul class="footer-links">
+          <li><a href="#">Frakt och retur</a></li>
+          <li><a href="#">Kontakta oss</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Atelier</p>
+        <ul class="footer-links">
+          <li><a href="#om">Om oss</a></li>
+          <li><a href="#kvalitet">Kvalitet</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2025 Atelier Studio</span>
+      <span>Design av Jasmin Hedlund</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const products=[
+  {id:1,name:'Lounge Chair',cat:'mobler',mat:'Ek och ull',price:8900,badge:'Nyhet'},
+  {id:2,name:'Side Table',cat:'mobler',mat:'Massiv ek',price:3200,badge:''},
+  {id:3,name:'Golvlampa Arc',cat:'belysning',mat:'Metall och marmor',price:4800,badge:'Få kvar'},
+  {id:4,name:'Lin Kudde',cat:'textil',mat:'100% lin',price:640,badge:''},
+  {id:5,name:'Keramikvas',cat:'dekor',mat:'Handgjord keramik',price:890,badge:'Nyhet'},
+  {id:6,name:'Väggspegel',cat:'dekor',mat:'Trä och glas',price:2100,badge:''},
+  {id:7,name:'Bordslampa',cat:'belysning',mat:'Mässing och glas',price:1800,badge:''},
+  {id:8,name:'Ullpläd',cat:'textil',mat:'Merino ull',price:1290,badge:'Begränsad'},
+];
+let cart=[],activeFilter='all';
+
+function renderProducts(){
+  const g=document.getElementById('product-grid');
+  const list=activeFilter==='all'?products:products.filter(p=>p.cat===activeFilter);
+  g.innerHTML=list.map(p=>{
+    const inCart=cart.find(c=>c.id===p.id);
+    return `<article class="product-card" aria-label="${p.name}, ${p.price.toLocaleString('sv-SE')} kronor">
+      <div class="product-img-wrap">
+        <div class="product-placeholder" data-label="${p.name}" role="img" aria-label="${p.name}"></div>
+        ${p.badge?`<div class="product-badge-wrap"><span class="product-badge">${p.badge}</span></div>`:''}
+      </div>
+      <div class="product-info">
+        <p class="product-name">${p.name}</p>
+        <p class="product-material">${p.mat}</p>
+        <p class="product-price">${p.price.toLocaleString('sv-SE')} kr</p>
+        <button class="add-to-cart${inCart?' added':''}" data-id="${p.id}" aria-label="${inCart?'Tillagd i varukorg':'Lägg '+p.name+' i varukorg'}">${inCart?'Tillagd':'Lägg i varukorg'}</button>
+      </div>
+    </article>`;
+  }).join('');
+  g.querySelectorAll('.add-to-cart:not(.added)').forEach(btn=>
+    btn.addEventListener('click',()=>addToCart(+btn.dataset.id))
+  );
+}
+
+document.querySelectorAll('.filter').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});
+    btn.classList.add('active');btn.setAttribute('aria-pressed','true');
+    activeFilter=btn.dataset.filter;renderProducts();
+  });
+});
+
+function addToCart(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  cart.push({...p});updateBadge();renderCart();renderProducts();openCart();
+}
+function removeFromCart(i){cart.splice(i,1);updateBadge();renderCart();renderProducts();}
+function updateBadge(){
+  const n=cart.length;
+  document.getElementById('cart-count').textContent=n;
+  const b=document.getElementById('cart-badge');
+  b.textContent=n;n>0?b.classList.add('show'):b.classList.remove('show');
+}
+function renderCart(){
+  const body=document.getElementById('cart-body'),foot=document.getElementById('cart-foot');
+  if(!cart.length){
+    body.innerHTML='<div class="cart-empty"><div class="cart-empty-line"></div><p>Din varukorg är tom</p></div>';
+    foot.style.display='none';return;
+  }
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  document.getElementById('cart-total').textContent=total.toLocaleString('sv-SE')+' kr';
+  foot.style.display='block';
+  body.innerHTML=cart.map((p,i)=>`
+    <div class="cart-item">
+      <div class="cart-item-img" role="img" aria-label="${p.name}"></div>
+      <div><p class="cart-item-name">${p.name}</p><p class="cart-item-detail">${p.mat}</p><p class="cart-item-price">${p.price.toLocaleString('sv-SE')} kr</p></div>
+      <button class="cart-rm" data-i="${i}" aria-label="Ta bort ${p.name}">Ta bort</button>
+    </div>`).join('');
+  body.querySelectorAll('.cart-rm').forEach(btn=>btn.addEventListener('click',()=>removeFromCart(+btn.dataset.i)));
+}
+function openCart(){document.getElementById('cart-overlay').classList.add('open');document.body.style.overflow='hidden';document.getElementById('cart-x').focus();}
+function closeCart(){document.getElementById('cart-overlay').classList.remove('open');document.body.style.overflow='';}
+function handleCheckout(){cart=[];updateBadge();renderCart();renderProducts();closeCart();showToast('Tack för din beställning.');}
+
+document.getElementById('open-cart').addEventListener('click',openCart);
+document.getElementById('cart-x').addEventListener('click',closeCart);
+document.getElementById('cart-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('cart-overlay'))closeCart();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCart();});
+
+const ham=document.getElementById('ham'),mobNav=document.getElementById('mob-nav');
+document.getElementById('mob-close').addEventListener('click',closeMob);
+document.getElementById('mob-cart-link').addEventListener('click',e=>{e.preventDefault();closeMob();openCart();});
+ham.addEventListener('click',()=>{const o=mobNav.classList.toggle('open');ham.setAttribute('aria-expanded',String(o));});
+mobNav.querySelectorAll('a:not(#mob-cart-link)').forEach(l=>l.addEventListener('click',closeMob));
+function closeMob(){mobNav.classList.remove('open');ham.setAttribute('aria-expanded','false');}
+
+function handleNl(e){e.preventDefault();e.target.reset();showToast('Tack. Du är nu prenumerant.');}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+
+renderProducts();
+</script>
+</body>
+</html>
