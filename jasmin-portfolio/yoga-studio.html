@@ -333,6 +333,7 @@
   </div>
 </section>
 
+<a href="index.html" class="back-btn" aria-label="Tillbaka till portfölj">← Portfölj</a>
 </main>
 
 <footer role="contentinfo">
@@ -780,6 +781,19 @@ function handleKontakt(e){
   showToast('Meddelande skickat. Vi hörs av oss!');
 }
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+</script>
+
+<script>
+(function(){
+  var btn=document.getElementById('theme-btn');
+  var html=document.documentElement;
+  function apply(dark){
+    if(dark){html.classList.add('dark');btn.textContent='Ljust';btn.setAttribute('aria-label','Byt till ljust l\u00e4ge');btn.setAttribute('aria-pressed','true');}
+    else{html.classList.remove('dark');btn.textContent='M\u00f6rkt';btn.setAttribute('aria-label','Byt till m\u00f6rkt l\u00e4ge');btn.setAttribute('aria-pressed','false');}
+  }
+  apply(localStorage.getItem('theme')==='dark');
+  btn.addEventListener('click',function(){var d=!html.classList.contains('dark');apply(d);localStorage.setItem('theme',d?'dark':'light');});
+})();
 </script>
 </body>
 </html>

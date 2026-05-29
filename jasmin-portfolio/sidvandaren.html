@@ -703,6 +703,39 @@
       flex-shrink: 0;
     }
     .theme-btn:hover { background: rgba(255,255,255,0.28); }
+
+    /* BOKSTAVS-ANIMATION för logotypen */
+    .nav-logo .letter {
+      display: inline-block;
+      animation: letterPop 0.5s cubic-bezier(.175,.885,.32,1.275) both;
+    }
+    @keyframes letterPop {
+      from { transform: translateY(-12px) scale(.7); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Kontakt-ikoner utan emoji */
+    .ci-dot {
+      display: block; width: 8px; height: 8px;
+      background: var(--raspberry); border-radius: 50%;
+    }
+    .contact-icon {
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Tillbaka-knapp */
+    .back-btn {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 300;
+      background: white; border: 1.5px solid var(--border);
+      color: var(--muted); font-size: .7rem; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .5rem 1rem; text-decoration: none;
+      transition: all .15s; display: flex; align-items: center; gap: .4rem;
+      box-shadow: 0 2px 8px rgba(28,22,16,.08);
+    }
+    .back-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+    html.dark .back-btn { background: var(--warm-white); color: var(--muted); }
+    @media(max-width:600px) { .back-btn { bottom:1rem; left:1rem; font-size:.65rem; padding:.4rem .85rem; } }
   </style>
 </head>
 <body>
@@ -721,7 +754,7 @@
   </ul>
   <div class="cart-wrap">
     <button class="cart-btn" id="cart-open-btn" aria-label="Öppna varukorg" aria-haspopup="true">
-      🛒 Varukorg
+      Varukorg
       <span class="cart-count" id="cart-count" aria-live="polite" aria-atomic="true"></span>
     </button>
   </div>
@@ -738,7 +771,7 @@
   <a href="#evenemang">Evenemang</a>
   <a href="#om">Om oss</a>
   <a href="#kontakt">Kontakt</a>
-  <a href="#" id="mob-cart-btn" style="color:white;font-weight:500">🛒 Varukorg (<span id="mob-cart-count">0</span>)</a>
+  <a href="#" id="mob-cart-btn" style="color:white;font-weight:500">Varukorg (<span id="mob-cart-count">0</span>)</a>
 </div>
 
 <main id="main">
@@ -759,7 +792,7 @@
     <div class="hero-card-stack">
       <div class="info-card">
         <div class="floating-tag">Öppet idag</div>
-        <div class="info-card-icon" aria-hidden="true">🕐</div>
+        <div class="info-card-icon" aria-hidden="true"></div>
         <p class="info-card-title">Öppettider</p>
         <p class="info-card-sub">Välkommen in — vi finns på Hornsgatan 64, Södermalm.</p>
         <div class="info-card-detail">
@@ -768,7 +801,7 @@
           <div class="detail-row"><span class="detail-day">Söndag</span><span class="detail-time">12:00–16:00</span></div>
         </div>
       </div>
-      <div class="sally-note">Sally Jones hälsar välkommen ☺</div>
+      <div class="sally-note">Sally Jones hälsar välkommen</div>
     </div>
   </div>
 </section>
@@ -929,19 +962,19 @@
       <h2 id="kontakt-heading">Välkommen <em>in.</em></h2>
       <div class="contact-detail">
         <div class="contact-row">
-          <div class="contact-icon" aria-hidden="true">📍</div>
+          <div class="contact-icon" aria-hidden="true"><span class="ci-dot"></span></div>
           <div><p class="contact-row-label">Adress</p><p class="contact-row-val">Hornsgatan 64<br>117 21 Stockholm</p></div>
         </div>
         <div class="contact-row">
-          <div class="contact-icon" aria-hidden="true">📞</div>
+          <div class="contact-icon" aria-hidden="true"><span class="ci-dot"></span></div>
           <div><p class="contact-row-label">Telefon</p><p class="contact-row-val"><a href="tel:0871233990" style="color:var(--raspberry);text-decoration:none;font-weight:500">08-712 33 90</a></p></div>
         </div>
         <div class="contact-row">
-          <div class="contact-icon" aria-hidden="true">✉️</div>
+          <div class="contact-icon" aria-hidden="true"><span class="ci-dot"></span></div>
           <div><p class="contact-row-label">E-post</p><p class="contact-row-val"><a href="mailto:info@sidvandaren.com" style="color:var(--raspberry);text-decoration:none;font-weight:500">info@sidvandaren.com</a></p></div>
         </div>
         <div class="contact-row">
-          <div class="contact-icon" aria-hidden="true">🕐</div>
+          <div class="contact-icon" aria-hidden="true"><span class="ci-dot"></span></div>
           <div>
             <p class="contact-row-label">Öppettider</p>
             <div class="hours-grid">
@@ -1019,7 +1052,7 @@
     </div>
     <div class="cart-items" id="cart-items-list">
       <div class="cart-empty" id="cart-empty-msg">
-        <div class="cart-empty-icon" aria-hidden="true">📚</div>
+        <div class="cart-empty-icon" aria-hidden="true"></div>
         <p>Varukorgen är tom. Utforska våra böcker och lägg till något!</p>
       </div>
     </div>
@@ -1075,7 +1108,7 @@ function renderBooks() {
         <div class="book-footer">
           <span class="book-price">${b.price} kr</span>
           ${inCart
-            ? `<span class="added-btn" aria-label="Tillagd i varukorgen">✓ Tillagd</span>`
+            ? `<span class="added-btn" aria-label="Tillagd i varukorgen">Tillagd</span>`
             : `<button class="add-btn" onclick="addToCart(${b.id})" aria-label="Lägg till ${b.title} i varukorgen">+ Lägg till</button>`
           }
         </div>
@@ -1106,7 +1139,7 @@ function addToCart(id) {
   updateCartUI();
   renderBooks();
   renderCartItems();
-  showToast(`"${book.title}" lagd i varukorgen 📚`);
+  showToast(`"${book.title}" lagd i varukorgen`);
 }
 
 function removeFromCart(id) {
@@ -1170,7 +1203,7 @@ function handleCheckout() {
   updateCartUI();
   renderBooks();
   closeCart();
-  showToast('Tack för din beställning! 🎉 Bekräftelse skickas via e-post.');
+  showToast('Tack för din beställning. Bekräftelse skickas via e-post.');
 }
 
 document.getElementById('cart-open-btn').addEventListener('click', openCart);
@@ -1215,6 +1248,22 @@ renderBooks();
 </script>
 
 <script>
+
+/* BOKSTAVSANIMATION */
+(function(){
+  var logo = document.querySelector('.nav-logo');
+  if(!logo) return;
+  var text = logo.textContent.trim();
+  logo.textContent = '';
+  text.split('').forEach(function(c, i){
+    var span = document.createElement('span');
+    span.className = 'letter';
+    span.style.animationDelay = (i * 0.045) + 's';
+    span.textContent = c === ' ' ? '\u00a0' : c;
+    logo.appendChild(span);
+  });
+})();
+
 (function(){
   var btn = document.getElementById('theme-btn');
   var html = document.documentElement;
