@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="hero-right">
-    <img src="yoga_pose1.jpg" alt="Yogapraktik utomhus vid vattnet" width="900" height="1200">
+    <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=800&q=80" alt="Kvinna i yogapose med naturligt ljus" width="900" height="1200">
   </div>
 </section>
 
@@ -215,7 +215,7 @@
 <section class="uth-section" id="uthyrning" aria-labelledby="uth-h">
   <div class="uth-inner">
     <div class="uth-img">
-      <img src="yoga_sit.jpg" alt="Yogapraktik vid vattnet" width="675" height="900">
+      <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=900&q=80" alt="Ljust yogastudio med trägolv och stora fönster" width="675" height="900">
     </div>
     <div class="uth-body">
       <p class="eyebrow">Hyr lokalen</p>
@@ -345,33 +345,131 @@
   <span class="f-credit">Design av Jasmin Hedlund</span>
 </footer>
 
-<!-- BOKNINGSMODAL -->
-<div class="boka-overlay" id="boka-overlay" role="dialog" aria-modal="true" aria-labelledby="m-title">
+<!-- BOKNINGSSYSTEM — FLERSTEGIG MODAL -->
+<div class="boka-overlay" id="boka-overlay" role="dialog" aria-modal="true" aria-label="Boka klass">
   <div class="boka-modal">
-    <button class="m-close" id="m-close" aria-label="Stäng">Stäng</button>
-    <div id="m-form-wrap">
-      <p class="m-eye" id="m-eye">Yoga</p>
-      <h2 class="m-title" id="m-title">Boka din plats</h2>
-      <form onsubmit="handleBoka(event)" novalidate>
-        <div class="f-row">
-          <div class="f-group"><label class="f-label" for="b-namn">Namn</label><input type="text" id="b-namn" class="f-input" placeholder="Ditt namn" required></div>
-          <div class="f-group"><label class="f-label" for="b-email">E-post</label><input type="email" id="b-email" class="f-input" placeholder="din@email.se" required></div>
+
+    <!-- Sidhuvud med steg-indikator -->
+    <div class="boka-hdr">
+      <div class="boka-hdr-top">
+        <span class="boka-title" id="boka-title">Boka klass</span>
+        <button class="m-close" id="m-close" aria-label="Stäng">Stäng</button>
+      </div>
+      <div class="steps-row" role="list" aria-label="Steg i bokningsprocessen">
+        <div class="step-item active" id="si-1" role="listitem">
+          <div class="step-num">1</div>
+          <span class="step-label">Välj klass</span>
         </div>
-        <div class="f-group"><label class="f-label" for="b-klass">Klass</label><input type="text" id="b-klass" class="f-input" placeholder="Välj klass"></div>
-        <div class="f-group"><label class="f-label" for="b-medl">Betalningssätt</label><select id="b-medl" class="f-select"><option>Drop-in</option><option>Klippkort</option><option>Månadsmedlem</option></select></div>
-        <button type="submit" class="sub-btn">Bekräfta bokning</button>
-        <p class="f-note">Avbokning senast 4 timmar före klassen.</p>
-      </form>
+        <div class="step-divider"></div>
+        <div class="step-item" id="si-2" role="listitem">
+          <div class="step-num">2</div>
+          <span class="step-label">Datum och tid</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step-item" id="si-3" role="listitem">
+          <div class="step-num">3</div>
+          <span class="step-label">Uppgifter</span>
+        </div>
+      </div>
     </div>
-    <div id="m-success" style="display:none;text-align:center;padding:1.5rem">
-      <div class="m-success-icon" aria-hidden="true">+</div>
-      <h2 class="m-success-h2" style="font-family:Lora,serif;font-size:1.4rem;font-weight:400;color:var(--text);margin-bottom:.5rem">Bokning mottagen</h2>
-      <p style="font-size:.88rem;color:var(--text-soft)">Vi skickar en bekräftelse till din e-post. Välkommen.</p>
+
+    <!-- Kropp -->
+    <div class="boka-body">
+
+      <!-- STEG 1: Välj klass -->
+      <div class="boka-step active" id="step-1" role="tabpanel" aria-label="Välj klass">
+        <div class="step-tabs" role="tablist">
+          <button class="step-tab active" data-cat="yoga" role="tab" aria-selected="true">Yoga</button>
+          <button class="step-tab" data-cat="andning" role="tab" aria-selected="false">Andning</button>
+          <button class="step-tab" data-cat="meditation" role="tab" aria-selected="false">Meditation</button>
+        </div>
+        <div class="class-list" id="class-list" aria-live="polite"></div>
+      </div>
+
+      <!-- STEG 2: Kalender + tider -->
+      <div class="boka-step" id="step-2" role="tabpanel" aria-label="Välj datum och tid">
+        <div class="chosen-class-bar" id="chosen-bar">
+          <div><p class="chosen-class-name" id="chosen-name"></p><p class="chosen-class-info" id="chosen-info"></p></div>
+          <span style="font-size:.7rem;color:var(--text-soft);cursor:pointer" onclick="goToStep(1)">Byt</span>
+        </div>
+        <div class="cal-container">
+          <div class="cal-nav">
+            <button class="cal-arrow" id="cal-prev" aria-label="Föregående månad">‹</button>
+            <span class="cal-month" id="cal-month-label"></span>
+            <button class="cal-arrow" id="cal-next" aria-label="Nästa månad">›</button>
+          </div>
+          <div class="cal-weekdays" aria-hidden="true">
+            <span class="cal-wday">M</span><span class="cal-wday">T</span><span class="cal-wday">O</span>
+            <span class="cal-wday">T</span><span class="cal-wday">F</span><span class="cal-wday">L</span>
+            <span class="cal-wday">S</span>
+          </div>
+          <div class="cal-grid" id="cal-grid" role="grid" aria-label="Kalender"></div>
+        </div>
+        <div id="time-section" style="display:none">
+          <p class="slots-title" id="slots-title">Tillgängliga tider</p>
+          <div class="slots-grid" id="slots-grid" role="group" aria-label="Tidsluckor"></div>
+        </div>
+      </div>
+
+      <!-- STEG 3: Uppgifter -->
+      <div class="boka-step" id="step-3" role="tabpanel" aria-label="Dina uppgifter">
+        <div class="booking-recap" id="booking-recap" aria-label="Din bokning"></div>
+        <form class="detail-form" id="detail-form" novalidate>
+          <div class="detail-row">
+            <div class="detail-group">
+              <label class="detail-label" for="d-namn">Namn</label>
+              <input type="text" id="d-namn" class="detail-input" placeholder="Ditt namn" autocomplete="name" required aria-required="true">
+            </div>
+            <div class="detail-group">
+              <label class="detail-label" for="d-email">E-post</label>
+              <input type="email" id="d-email" class="detail-input" placeholder="din@email.se" autocomplete="email" required aria-required="true">
+            </div>
+          </div>
+          <div class="detail-group">
+            <label class="detail-label" for="d-tel">Telefon (valfritt)</label>
+            <input type="tel" id="d-tel" class="detail-input" placeholder="07X-XXX XX XX" autocomplete="tel">
+          </div>
+          <div class="detail-group">
+            <label class="detail-label" for="d-betalt">Betalningssätt</label>
+            <select id="d-betalt" class="detail-select">
+              <option value="dropin">Drop-in — betala i studion</option>
+              <option value="klipp">Klippkort</option>
+              <option value="manad">Månadsmedlem</option>
+              <option value="ar">Årsmedlem</option>
+            </select>
+          </div>
+          <div class="price-row">
+            <span class="price-lbl">Att betala</span>
+            <span class="price-total" id="price-total">150 kr</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- STEG 4: Bekräftelse -->
+      <div class="boka-step" id="step-4" role="tabpanel" aria-label="Bokning bekräftad">
+        <div class="confirm-wrap">
+          <div class="confirm-icon" aria-hidden="true" role="presentation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 class="confirm-title">Bokning mottagen!</h2>
+          <p class="confirm-sub">Bekräftelse skickas till din e-post.<br>Välkommen till Stillvatten.</p>
+          <div class="confirm-details" id="confirm-details" aria-label="Bokningssammanfattning"></div>
+          <p class="conf-email-note" id="conf-email"></p>
+        </div>
+      </div>
+
+    </div><!-- /boka-body -->
+
+    <!-- Sidfot med navigering -->
+    <div class="boka-footer">
+      <button class="btn-back hidden" id="btn-back" aria-label="Gå tillbaka ett steg">Tillbaka</button>
+      <button class="btn-next" id="btn-next" disabled aria-label="Gå vidare">Välj datum</button>
     </div>
+
   </div>
 </div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div> id="toast" role="status" aria-live="polite"></div>
 
 <script>
 const ham=document.getElementById('ham'),mobNav=document.getElementById('mob-nav');
@@ -412,30 +510,276 @@ function handleKontakt(e){e.preventDefault();e.target.reset();showToast('Meddela
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
 </script>
 
+
 <script>
-(function(){
-  var btn = document.getElementById('theme-btn');
-  var html = document.documentElement;
-  function apply(dark) {
-    if (dark) {
-      html.classList.add('dark');
-      btn.textContent = 'Ljust';
-      btn.setAttribute('aria-label', 'Byt till ljust l\u00e4ge');
-      btn.setAttribute('aria-pressed', 'true');
-    } else {
-      html.classList.remove('dark');
-      btn.textContent = 'M\u00f6rkt';
-      btn.setAttribute('aria-label', 'Byt till m\u00f6rkt l\u00e4ge');
-      btn.setAttribute('aria-pressed', 'false');
-    }
-  }
-  apply(localStorage.getItem('theme') === 'dark');
-  btn.addEventListener('click', function() {
-    var dark = !html.classList.contains('dark');
-    apply(dark);
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
+/* ── NAV ── */
+const ham=document.getElementById('ham'),mobNav=document.getElementById('mob-nav');
+document.getElementById('mob-close').addEventListener('click',closeMob);
+ham.addEventListener('click',()=>{const o=mobNav.classList.toggle('open');ham.setAttribute('aria-expanded',String(o));});
+mobNav.querySelectorAll('a').forEach(l=>l.addEventListener('click',closeMob));
+function closeMob(){mobNav.classList.remove('open');ham.setAttribute('aria-expanded','false');}
+
+/* ── KLASSER FLIKAR ── */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
+    document.querySelectorAll('.panel').forEach(p=>{p.classList.remove('active');p.hidden=true;});
+    btn.classList.add('active');btn.setAttribute('aria-selected','true');
+    const p=document.getElementById('p-'+btn.dataset.tab);p.classList.add('active');p.hidden=false;
   });
-})();
+  btn.addEventListener('keydown',e=>{
+    const tabs=[...document.querySelectorAll('.tab-btn')],i=tabs.indexOf(btn);
+    if(e.key==='ArrowRight'){tabs[(i+1)%tabs.length].focus();tabs[(i+1)%tabs.length].click();}
+    if(e.key==='ArrowLeft'){tabs[(i-1+tabs.length)%tabs.length].focus();tabs[(i-1+tabs.length)%tabs.length].click();}
+  });
+});
+
+/* ── BOKNINGSSYSTEM ── */
+const classes = [
+  {id:'yin',      name:'Yin Yoga',         cat:'yoga',      dur:60,  price:150, inst:'Sofia K.',   level:'Alla nivåer'},
+  {id:'vinyasa',  name:'Vinyasa Flow',      cat:'yoga',      dur:75,  price:150, inst:'Marcus L.',  level:'Medel'},
+  {id:'hatha',    name:'Hatha Grunder',     cat:'yoga',      dur:60,  price:130, inst:'Anna W.',    level:'Nybörjare'},
+  {id:'morgon',   name:'Morgonyoga',        cat:'yoga',      dur:45,  price:120, inst:'Sofia K.',   level:'Alla nivåer'},
+  {id:'ashtanga', name:'Ashtanga',          cat:'yoga',      dur:90,  price:170, inst:'Erik S.',    level:'Avancerad'},
+  {id:'rest',     name:'Restorative Yoga',  cat:'yoga',      dur:75,  price:160, inst:'Anna W.',    level:'Alla nivåer'},
+  {id:'prana',    name:'Pranayama',         cat:'andning',   dur:60,  price:140, inst:'Erik S.',    level:'Alla nivåer'},
+  {id:'breath',   name:'Breathwork',        cat:'andning',   dur:90,  price:190, inst:'Maria T.',   level:'Medel'},
+  {id:'nidra',    name:'Yoga Nidra',        cat:'meditation',dur:75,  price:160, inst:'Anna W.',    level:'Alla nivåer'},
+  {id:'ljud',     name:'Ljudbad',           cat:'meditation',dur:60,  price:220, inst:'Maria T.',   level:'Alla nivåer'},
+  {id:'still',    name:'Stillhet',          cat:'meditation',dur:45,  price:120, inst:'Sofia K.',   level:'Alla nivåer'},
+];
+const classTimes = {
+  yin:['07:30','12:00','18:30','20:00'], vinyasa:['06:30','12:30','18:30'],
+  hatha:['10:00','14:00','18:00'], morgon:['06:30','07:00'],
+  ashtanga:['06:30','18:00'], rest:['12:00','17:00'],
+  prana:['10:00','18:00'], breath:['12:00','19:00'],
+  nidra:['12:00','19:00'], ljud:['12:00','19:00'], still:['08:00','19:30'],
+};
+
+let bs = {step:1, cls:null, date:null, time:null, calYear:0, calMonth:0};
+
+/* Startar modal */
+function openBoka(klassNamn, typ) {
+  const overlay=document.getElementById('boka-overlay');
+  bs = {step:1, cls:null, date:null, time:null, calYear:new Date().getFullYear(), calMonth:new Date().getMonth()};
+  if(klassNamn) {
+    const match = classes.find(c=>c.name===klassNamn||c.id===klassNamn);
+    if(match) { bs.cls=match; bs.step=2; }
+  }
+  renderStep(bs.step);
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('m-close').focus();
+}
+
+document.getElementById('m-close').addEventListener('click',closeBoka);
+document.getElementById('boka-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('boka-overlay'))closeBoka();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('boka-overlay').classList.contains('open'))closeBoka();});
+function closeBoka(){document.getElementById('boka-overlay').classList.remove('open');document.body.style.overflow='';}
+
+/* Navigering */
+document.getElementById('btn-back').addEventListener('click',()=>{
+  if(bs.step>1){bs.step--;renderStep(bs.step);}
+});
+document.getElementById('btn-next').addEventListener('click',()=>{
+  if(bs.step===3){handleConfirm();return;}
+  if(bs.step<4){bs.step++;renderStep(bs.step);}
+});
+
+function renderStep(n) {
+  document.querySelectorAll('.boka-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step-'+n).classList.add('active');
+  // Steg-indikatorer
+  [1,2,3].forEach(i=>{
+    const el=document.getElementById('si-'+i);
+    el.classList.remove('active','done');
+    if(i<n) el.classList.add('done');
+    if(i===n) el.classList.add('active');
+  });
+  // Knappar
+  const back=document.getElementById('btn-back'),next=document.getElementById('btn-next');
+  back.classList.toggle('hidden', n===1||n===4);
+  if(n===1){next.textContent='Välj datum';next.disabled=!bs.cls;}
+  if(n===2){next.textContent='Välj uppgifter';next.disabled=!(bs.date&&bs.time);}
+  if(n===3){next.textContent='Bekräfta bokning';next.disabled=false;}
+  if(n===4){next.textContent='Stäng';next.disabled=false;next.onclick=closeBoka;}
+
+  if(n===1) renderClassList('yoga');
+  if(n===2) renderCalendar();
+  if(n===3) renderRecap();
+  if(n===4) renderConfirm();
+}
+
+/* STEG 1: Klasslista */
+let activeStepCat='yoga';
+function renderClassList(cat) {
+  activeStepCat=cat;
+  const list=document.getElementById('class-list');
+  const filtered=classes.filter(c=>c.cat===cat);
+  list.innerHTML=filtered.map(c=>`
+    <div class="class-row${bs.cls&&bs.cls.id===c.id?' chosen':''}"
+         role="button" tabindex="0"
+         data-id="${c.id}"
+         aria-pressed="${bs.cls&&bs.cls.id===c.id}"
+         aria-label="${c.name}, ${c.price} kronor, ${c.dur} minuter">
+      <div>
+        <p class="class-row-name">${c.name}</p>
+        <div class="class-row-meta">
+          <span>${c.dur} min</span>
+          <span>${c.level}</span>
+          <span>${c.inst}</span>
+        </div>
+      </div>
+      <span class="class-row-price">${c.price} kr</span>
+    </div>`).join('');
+  list.querySelectorAll('.class-row').forEach(row=>{
+    const select=()=>{
+      bs.cls=classes.find(c=>c.id===row.dataset.id);
+      document.getElementById('btn-next').disabled=false;
+      list.querySelectorAll('.class-row').forEach(r=>{r.classList.remove('chosen');r.setAttribute('aria-pressed','false');});
+      row.classList.add('chosen');row.setAttribute('aria-pressed','true');
+    };
+    row.addEventListener('click',select);
+    row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')select();});
+  });
+}
+document.querySelectorAll('.step-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.step-tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false');});
+    tab.classList.add('active');tab.setAttribute('aria-selected','true');
+    renderClassList(tab.dataset.cat);
+  });
+});
+
+/* STEG 2: Kalender */
+function renderCalendar() {
+  if(bs.cls){
+    document.getElementById('chosen-name').textContent=bs.cls.name;
+    document.getElementById('chosen-info').textContent=bs.cls.dur+' min · '+bs.cls.inst+' · '+bs.cls.price+' kr';
+  }
+  buildCalendar(bs.calYear,bs.calMonth);
+}
+document.getElementById('cal-prev').addEventListener('click',()=>{
+  bs.calMonth--;if(bs.calMonth<0){bs.calMonth=11;bs.calYear--;}
+  buildCalendar(bs.calYear,bs.calMonth);
+});
+document.getElementById('cal-next').addEventListener('click',()=>{
+  bs.calMonth++;if(bs.calMonth>11){bs.calMonth=0;bs.calYear++;}
+  buildCalendar(bs.calYear,bs.calMonth);
+});
+function buildCalendar(year,month) {
+  const months=['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
+  document.getElementById('cal-month-label').textContent=months[month]+' '+year;
+  const grid=document.getElementById('cal-grid');
+  const today=new Date(),firstDay=new Date(year,month,1),daysInMonth=new Date(year,month+1,0).getDate();
+  let startDow=firstDay.getDay(); if(startDow===0)startDow=7; // Måndag först
+  let html='';
+  for(let i=1;i<startDow;i++) html+='<div class="cal-day empty" aria-hidden="true"></div>';
+  for(let d=1;d<=daysInMonth;d++){
+    const date=new Date(year,month,d);
+    const isPast=date<new Date(today.getFullYear(),today.getMonth(),today.getDate());
+    const isToday=d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
+    const isSelected=bs.date&&bs.date.d===d&&bs.date.m===month&&bs.date.y===year;
+    let cls='cal-day';
+    if(isPast) cls+=' past';
+    if(isToday) cls+=' today';
+    if(!isPast) cls+=' has-class';
+    if(isSelected) cls+=' selected';
+    html+=`<div class="${cls}" data-d="${d}" data-m="${month}" data-y="${year}"
+      role="gridcell" tabindex="${isPast?-1:0}"
+      aria-label="${d} ${months[month]}${isToday?' (idag)':''}${isSelected?' (vald)':''}"
+      ${isPast?'aria-disabled="true"':''}>${d}</div>`;
+  }
+  grid.innerHTML=html;
+  grid.querySelectorAll('.cal-day.has-class').forEach(el=>{
+    const select=()=>{
+      bs.date={d:+el.dataset.d,m:+el.dataset.m,y:+el.dataset.y};
+      bs.time=null;
+      grid.querySelectorAll('.cal-day').forEach(c=>c.classList.remove('selected'));
+      el.classList.add('selected');
+      renderTimeSlots();
+    };
+    el.addEventListener('click',select);
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')select();});
+  });
+  // Om datum redan valt
+  if(bs.date&&bs.date.m===month&&bs.date.y===year) renderTimeSlots();
+  else {document.getElementById('time-section').style.display='none';}
+}
+function renderTimeSlots() {
+  if(!bs.cls||!bs.date) return;
+  const sec=document.getElementById('time-section');
+  const months=['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
+  document.getElementById('slots-title').textContent='Tider för '+bs.date.d+' '+months[bs.date.m];
+  const times=classTimes[bs.cls.id]||['10:00','18:00'];
+  // Deterministisk "ledig" baserat på datum + tid
+  const hash=(s)=>s.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  const slotsHtml=times.map(t=>{
+    const h=hash(bs.cls.id+bs.date.d+bs.date.m+t)%12;
+    const spots=h===0?0:[2,3,4,5,6,7,8,9,10][h%9];
+    const isFull=spots===0;
+    const isSel=bs.time===t;
+    return`<div class="time-slot${isFull?' full':''}${isSel?' selected':''}"
+      data-time="${t}" role="button" tabindex="${isFull?-1:0}"
+      aria-pressed="${isSel}" aria-label="${t}, ${isFull?'fullbokat':spots+' platser kvar'}">
+      <span class="slot-time">${t}</span>
+      <span class="slot-spots">${isFull?'Fullbokat':spots+' kvar'}</span>
+    </div>`;
+  }).join('');
+  document.getElementById('slots-grid').innerHTML=slotsHtml;
+  sec.style.display='block';
+  document.querySelectorAll('.time-slot:not(.full)').forEach(el=>{
+    const sel=()=>{
+      bs.time=el.dataset.time;
+      document.querySelectorAll('.time-slot').forEach(s=>{s.classList.remove('selected');s.setAttribute('aria-pressed','false');});
+      el.classList.add('selected');el.setAttribute('aria-pressed','true');
+      document.getElementById('btn-next').disabled=false;
+    };
+    el.addEventListener('click',sel);
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')sel();});
+  });
+}
+
+/* STEG 3: Sammanfattning */
+const months2=['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+function renderRecap(){
+  if(!bs.cls||!bs.date||!bs.time) return;
+  document.getElementById('booking-recap').innerHTML=`
+    <div class="recap-item"><p class="recap-label">Klass</p><p class="recap-val">${bs.cls.name}</p></div>
+    <div class="recap-item"><p class="recap-label">Datum</p><p class="recap-val">${bs.date.d} ${months2[bs.date.m]} ${bs.date.y}</p></div>
+    <div class="recap-item"><p class="recap-label">Tid</p><p class="recap-val">${bs.time}</p></div>
+    <div class="recap-item"><p class="recap-label">Lärare</p><p class="recap-val">${bs.cls.inst}</p></div>`;
+  document.getElementById('price-total').textContent=bs.cls.price+' kr';
+}
+
+/* STEG 4: Bekräftelse */
+function handleConfirm(){
+  const name=document.getElementById('d-namn').value.trim();
+  const email=document.getElementById('d-email').value.trim();
+  if(!name||!email){showToast('Fyll i namn och e-post för att bekräfta.');return;}
+  bs.step=4;renderStep(4);
+}
+function renderConfirm(){
+  if(!bs.cls||!bs.date||!bs.time) return;
+  const email=document.getElementById('d-email').value.trim()||'din e-post';
+  document.getElementById('confirm-details').innerHTML=`
+    <div class="conf-item"><p class="conf-label">Klass</p><p class="conf-val">${bs.cls.name}</p></div>
+    <div class="conf-item"><p class="conf-label">Datum</p><p class="conf-val">${bs.date.d} ${months2[bs.date.m]} ${bs.date.y}</p></div>
+    <div class="conf-item"><p class="conf-label">Tid</p><p class="conf-val">${bs.time}</p></div>
+    <div class="conf-item"><p class="conf-label">Lärare</p><p class="conf-val">${bs.cls.inst}</p></div>
+    <div class="conf-item"><p class="conf-label">Pris</p><p class="conf-val">${bs.cls.price} kr</p></div>
+    <div class="conf-item"><p class="conf-label">Varaktighet</p><p class="conf-val">${bs.cls.dur} min</p></div>`;
+  document.getElementById('conf-email').textContent='Bekräftelse skickas till '+email;
+}
+
+function goToStep(n){bs.step=n;renderStep(n);}
+
+/* Kontaktformulär */
+function handleKontakt(e){
+  e.preventDefault();e.target.reset();
+  showToast('Meddelande skickat. Vi hörs av oss!');
+}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
 </script>
 </body>
 </html>
