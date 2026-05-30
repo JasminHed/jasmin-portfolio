@@ -13,17 +13,21 @@
 <a class="skip" href="#main">Hoppa till innehåll</a>
 
 <nav role="navigation" aria-label="Huvudnavigation">
-  <a class="logo" href="#" aria-label="Yoga Studio startsida">Yoga<span> Studio</span></a>
-  <ul class="nav-links" role="list">
+  <ul class="nav-left" role="list">
     <li><a href="#om">Om oss</a></li>
     <li><a href="#klasser">Klasser</a></li>
     <li><a href="#behandlingar">Behandlingar</a></li>
+  </ul>
+  <a class="logo" href="#" aria-label="Yoga Studio startsida">Yoga<span> Studio</span></a>
+  <ul class="nav-right" role="list">
     <li><a href="#schema">Schema</a></li>
     <li><a href="#priser">Priser</a></li>
+    <li>
+      <button class="nav-cart-btn" id="yoga-cart-btn" aria-label="Öppna varukorg">
+        Varukorg <span class="nav-cart-badge" id="yoga-cart-badge"></span>
+      </button>
+    </li>
   </ul>
-  <button class="nav-cart-btn" id="yoga-cart-btn" aria-label="Öppna varukorg">
-    Varukorg <span class="nav-cart-badge" id="yoga-cart-badge"></span>
-  </button>
   <button class="hamburger" id="ham" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav">
     <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
@@ -43,8 +47,10 @@
 <main id="main">
 
 <!-- HERO -->
-<section class="hero" aria-label="Välkommen till Stillvatten Studio">
-  <div class="hero-left">
+<section class="hero" aria-label="Välkommen till Yoga Studio">
+  <img class="hero-bg-img" src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=1600&q=80" alt="" aria-hidden="true">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
     <p class="hero-tag">Stockholm · Östermalm</p>
     <h1>Hitta din<br>inre stillhet.</h1>
     <p class="hero-sub">En liten studio byggd kring närvaro — yoga, andning och helande behandlingar i ett lugnt rum mitt i stan.</p>
@@ -53,8 +59,9 @@
       <a href="#klasser" class="btn-ghost">Utforska klasser</a>
     </div>
   </div>
-  <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=800&q=80" alt="Kvinna i yogapose med naturligt ljus" width="900" height="1200">
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+    <span>Scrolla</span>
   </div>
 </section>
 
@@ -326,10 +333,12 @@
 </main>
 
 <footer role="contentinfo">
-  <span class="f-logo">Stillvatten Studio</span>
+  <a class="f-logo" href="#" aria-label="Yoga Studio">Yoga<span> Studio</span></a>
   <ul class="f-links" role="list">
-    <li><a href="#om">Om oss</a></li><li><a href="#klasser">Klasser</a></li>
-    <li><a href="#schema">Schema</a></li><li><a href="#priser">Priser</a></li>
+    <li><a href="#om">Om oss</a></li>
+    <li><a href="#klasser">Klasser</a></li>
+    <li><a href="#schema">Schema</a></li>
+    <li><a href="#priser">Priser</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
   <span class="f-credit">Design av Jasmin Hedlund</span>
