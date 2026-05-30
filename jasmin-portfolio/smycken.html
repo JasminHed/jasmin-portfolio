@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atelier Studio — Design och Inredning</title>
+<title>Butik — Tema</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles/butik.css">
@@ -19,14 +19,52 @@
       <span class="cart-head-title">Varukorg (<span id="cart-count">0</span>)</span>
       <button class="cart-x" id="cart-x" aria-label="Stäng varukorg">Stäng</button>
     </div>
-    <div class="cart-body" id="cart-body">
-      <div class="cart-empty"><div class="cart-empty-line"></div><p>Din varukorg är tom</p></div>
+    <div class="cart-view" id="cart-view">
+      <div class="cart-body" id="cart-body">
+        <div class="cart-empty"><div class="cart-empty-line"></div><p>Din varukorg är tom</p></div>
+      </div>
+      <div class="cart-foot" id="cart-foot">
+        <div class="cart-total-row"><span class="cart-total-lbl">Totalt</span><span class="cart-total-val" id="cart-total">0 kr</span></div>
+        <button class="checkout-btn" onclick="handleCheckout()">Till kassan</button>
+        <p class="cart-ship">Fri frakt från 1 500 kr · Retur 30 dagar</p>
+      </div>
     </div>
-    <div class="cart-foot" id="cart-foot">
-      <div class="cart-total-row"><span class="cart-total-lbl">Totalt</span><span class="cart-total-val" id="cart-total">0 kr</span></div>
-      <button class="checkout-btn" onclick="handleCheckout()">Till kassan</button>
-      <p class="cart-ship">Fri frakt från 1 500 kr · Retur 30 dagar</p>
+
+    <div class="checkout-step" id="checkout-step">
+      <div class="checkout-step-head">
+        <button class="checkout-back-btn" onclick="showCartView()" aria-label="Tillbaka till varukorg">← Varukorg</button>
+        <p class="checkout-step-title">Dina uppgifter</p>
+      </div>
+      <div class="checkout-summary-list" id="checkout-summary"></div>
+      <div class="checkout-fields-wrap">
+        <div class="co-group">
+          <label class="co-label" for="co-name">Namn</label>
+          <input type="text" id="co-name" class="co-input" placeholder="För- och efternamn" autocomplete="name">
+        </div>
+        <div class="co-group">
+          <label class="co-label" for="co-email">E-post</label>
+          <input type="email" id="co-email" class="co-input" placeholder="din@email.se" autocomplete="email">
+        </div>
+        <div class="co-group">
+          <label class="co-label" for="co-phone">Telefon (valfritt)</label>
+          <input type="tel" id="co-phone" class="co-input" placeholder="07X-XXX XX XX" autocomplete="tel">
+        </div>
+        <div class="co-group">
+          <p class="co-label" id="at-pm-label">Betalmetod</p>
+          <div class="payment-methods" role="radiogroup" aria-labelledby="at-pm-label">
+            <label class="pm-option"><input type="radio" name="at-payment" value="card" checked><span>Kortbetalning</span></label>
+            <label class="pm-option"><input type="radio" name="at-payment" value="swish"><span>Swish</span></label>
+            <label class="pm-option"><input type="radio" name="at-payment" value="invoice"><span>Faktura (30 dagar)</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="checkout-total-bar">
+        <span class="checkout-total-lbl">Totalt att betala</span>
+        <span class="checkout-total-amt" id="checkout-total-val">0 kr</span>
+      </div>
+      <button class="checkout-confirm" onclick="confirmOrder()">Slutför köp</button>
     </div>
+
   </div>
 </div>
 
@@ -37,12 +75,11 @@
     <li><a href="#om">Om oss</a></li>
     <li><a href="#kvalitet">Kvalitet</a></li>
   </ul>
-  <a class="nav-logo" href="#" aria-label="Atelier Studio startsida">ATELIER</a>
+  <a class="nav-logo" href="#" aria-label="Butik startsida">BUTIK</a>
   <div class="nav-right">
     <button class="cart-btn" id="open-cart" aria-label="Öppna varukorg">
       Varukorg <span class="cart-badge" id="cart-badge" aria-live="polite" aria-atomic="true"></span>
     </button>
-    <button class="theme-btn" id="theme-btn" aria-label="Byt till mörkt läge" aria-pressed="false">Mörkt</button>
     <button class="hamburger" id="ham" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav">
       <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
@@ -71,7 +108,7 @@
     </div>
   </div>
   <div class="hero-img-col">
-    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80" alt="Modern soffa i skandinavisk interiör med naturligt ljus" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80" alt="Modern soffa i skandinavisk interiör med naturligt ljus" class="hero-full-img">
   </div>
 </section>
 
@@ -107,7 +144,7 @@
 <!-- EDITORIAL / OM OSS -->
 <section class="editorial" id="om" aria-labelledby="om-h">
   <div class="editorial-img">
-    <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=80" alt="Skandinaviskt minimalistiskt vardagsrum med handplockat inredning" style="width:100%;height:100%;min-height:480px;object-fit:cover;object-position:center;display:block;">
+    <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=80" alt="Skandinaviskt minimalistiskt vardagsrum med handplockat inredning" class="editorial-full-img">
   </div>
   <div class="editorial-text">
     <p class="eyebrow eyebrow-dark">Om Atelier</p>
@@ -120,7 +157,7 @@
       <li>Fri frakt och enkel retur</li>
       <li>Kundtjänst på svenska</li>
     </ul>
-    <a href="#shop" class="btn-light" style="align-self:flex-start;display:inline-block">Se kollektion</a>
+    <a href="#shop" class="btn-light editorial-cta">Se kollektion</a>
   </div>
 </section>
 
@@ -154,11 +191,11 @@
 <!-- NYHETSBREV -->
 <section class="nl-section" aria-labelledby="nl-h">
   <div class="nl-inner">
-    <p class="eyebrow" style="justify-content:center;display:flex">Nyhetsbrev</p>
+    <p class="eyebrow eyebrow-center">Nyhetsbrev</p>
     <h2 id="nl-h">Var först med nyheterna</h2>
     <p class="nl-sub">Prenumerera och få reda på nya produkter, exklusiva erbjudanden och inspiration direkt i inkorgen.</p>
     <form class="nl-form" onsubmit="handleNl(event)" aria-label="Prenumerera på nyhetsbrev">
-      <label for="nl-email" style="position:absolute;clip:rect(0,0,0,0)">Din e-postadress</label>
+      <label for="nl-email" class="visually-hidden">Din e-postadress</label>
       <input type="email" id="nl-email" class="nl-input" placeholder="Din e-postadress" autocomplete="email" required aria-required="true">
       <button type="submit" class="nl-btn">Prenumerera</button>
     </form>
@@ -286,7 +323,26 @@ function renderCart(){
 }
 function openCart(){document.getElementById('cart-overlay').classList.add('open');document.body.style.overflow='hidden';document.getElementById('cart-x').focus();}
 function closeCart(){document.getElementById('cart-overlay').classList.remove('open');document.body.style.overflow='';}
-function handleCheckout(){cart=[];updateBadge();renderCart();renderProducts();closeCart();showToast('Tack för din beställning.');}
+function handleCheckout(){
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  const summaryEl=document.getElementById('checkout-summary');
+  summaryEl.innerHTML=cart.map(p=>`<div class="checkout-summary-item"><span class="checkout-summary-name">${p.name}</span><span class="checkout-summary-price">${p.price.toLocaleString('sv-SE')} kr</span></div>`).join('');
+  document.getElementById('checkout-total-val').textContent=total.toLocaleString('sv-SE')+' kr';
+  document.getElementById('cart-view').style.display='none';
+  document.getElementById('checkout-step').classList.add('active');
+}
+function showCartView(){
+  document.getElementById('cart-view').style.display='';
+  document.getElementById('checkout-step').classList.remove('active');
+}
+function confirmOrder(){
+  const name=document.getElementById('co-name').value.trim();
+  const email=document.getElementById('co-email').value.trim();
+  if(!name||!email){showToast('Fyll i namn och e-post för att fortsätta.');return;}
+  cart=[];updateBadge();renderCart();renderProducts();closeCart();showCartView();
+  document.getElementById('co-name').value='';document.getElementById('co-email').value='';
+  showToast('Tack! Beställningen är mottagen. Bekräftelse skickas till '+email+'.');
+}
 
 document.getElementById('open-cart').addEventListener('click',openCart);
 document.getElementById('cart-x').addEventListener('click',closeCart);
@@ -306,30 +362,5 @@ function showToast(m){const t=document.getElementById('toast');t.textContent=m;t
 renderProducts();
 </script>
 
-<script>
-(function(){
-  var btn = document.getElementById('theme-btn');
-  var html = document.documentElement;
-  function apply(dark) {
-    if (dark) {
-      html.classList.add('dark');
-      btn.textContent = 'Ljust';
-      btn.setAttribute('aria-label', 'Byt till ljust l\u00e4ge');
-      btn.setAttribute('aria-pressed', 'true');
-    } else {
-      html.classList.remove('dark');
-      btn.textContent = 'M\u00f6rkt';
-      btn.setAttribute('aria-label', 'Byt till m\u00f6rkt l\u00e4ge');
-      btn.setAttribute('aria-pressed', 'false');
-    }
-  }
-  apply(localStorage.getItem('theme') === 'dark');
-  btn.addEventListener('click', function() {
-    var dark = !html.classList.contains('dark');
-    apply(dark);
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-  });
-})();
-</script>
 </body>
 </html>

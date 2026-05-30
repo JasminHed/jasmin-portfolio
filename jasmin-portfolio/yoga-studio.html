@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stillvatten Studio — Yoga och Rörelse Stockholm</title>
+<title>Yoga Studio — Tema</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles/yoga.css">
@@ -13,7 +13,7 @@
 <a class="skip" href="#main">Hoppa till innehåll</a>
 
 <nav role="navigation" aria-label="Huvudnavigation">
-  <a class="logo" href="#" aria-label="Stillvatten Studio startsida">Stilla<span>vatten</span></a>
+  <a class="logo" href="#" aria-label="Yoga Studio startsida">Yoga<span> Studio</span></a>
   <ul class="nav-links" role="list">
     <li><a href="#om">Om oss</a></li>
     <li><a href="#klasser">Klasser</a></li>
@@ -21,8 +21,9 @@
     <li><a href="#schema">Schema</a></li>
     <li><a href="#priser">Priser</a></li>
   </ul>
-  <a href="#" class="nav-book" onclick="openBoka(null,'Boka');return false" aria-label="Boka en klass">Boka</a>
-  <button class="theme-btn" id="theme-btn" aria-label="Byt till mörkt läge" aria-pressed="false">Mörkt</button>
+  <button class="nav-cart-btn" id="yoga-cart-btn" aria-label="Öppna varukorg">
+    Varukorg <span class="nav-cart-badge" id="yoga-cart-badge"></span>
+  </button>
   <button class="hamburger" id="ham" aria-label="Öppna meny" aria-expanded="false" aria-controls="mob-nav">
     <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
@@ -74,7 +75,7 @@
     <p class="om-lead">Stillvatten Studio grundades med en enkel idé: skapa en studio som välkomnar alla — oavsett erfarenhet, ålder eller form.</p>
     <p class="om-body">Hos oss hittar du certifierade lärare, litet klassformat med max tolv deltagare och ett schema som passar vardagslivet. Studion finns på Östermalm med fina ljusförhållanden och noga utvald akustik.</p>
     <p class="om-body">Mattan finns på plats. Du behöver bara vara nyfiken.</p>
-    <a href="#kontakt" class="btn-primary" style="display:inline-block;margin-top:1rem">Kontakta oss</a>
+    <a href="#kontakt" class="btn-primary om-cta">Kontakta oss</a>
   </div>
 </section>
 
@@ -180,29 +181,29 @@
     <p class="eyebrow">Helande</p>
     <div class="section-hdr">
       <h2 id="beh-h">Behandlingar och terapi</h2>
-      <a href="#" class="link-sm" onclick="openBoka(null,'Behandling');return false">Boka behandling</a>
+      <a href="#" class="link-sm" onclick="showLoginRequired(null,'Behandling');return false">Boka behandling</a>
     </div>
     <div class="beh-grid">
-      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Massage och Bodywork','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Massage och Bodywork','Behandling')">
-        <p class="beh-num">Behandling 01</p>
+      <div class="beh-card" role="button" tabindex="0" aria-label="Boka Massage och Bodywork, 895–1 195 kronor, 60 till 90 minuter — kräver inloggning" onclick="showLoginRequired('Massage och Bodywork','Behandling')" onkeydown="if(event.key==='Enter')showLoginRequired('Massage och Bodywork','Behandling')">
+        <p class="beh-num" aria-hidden="true">Behandling 01</p>
         <h3 class="beh-name">Massage och Bodywork</h3>
         <p class="beh-desc">Helkroppsmassage med fokus på muskelspänningar och djupvävnad. Integreras med aromaterapiolja.</p>
         <div class="beh-footer"><span class="beh-dur">60 min · 90 min</span><span class="beh-price">895–1 195 kr</span></div>
       </div>
-      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Kraniosakral Terapi','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Kraniosakral Terapi','Behandling')">
-        <p class="beh-num">Behandling 02</p>
+      <div class="beh-card" role="button" tabindex="0" aria-label="Boka Kraniosakral Terapi, 1 095 kronor, 75 minuter — kräver inloggning" onclick="showLoginRequired('Kraniosakral Terapi','Behandling')" onkeydown="if(event.key==='Enter')showLoginRequired('Kraniosakral Terapi','Behandling')">
+        <p class="beh-num" aria-hidden="true">Behandling 02</p>
         <h3 class="beh-name">Kraniosakral Terapi</h3>
         <p class="beh-desc">Extremt lätt beröring längs ryggraden och kraniet. Arbetar med kroppens subtila rytm.</p>
         <div class="beh-footer"><span class="beh-dur">75 min</span><span class="beh-price">1 095 kr</span></div>
       </div>
-      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Akupunktur','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Akupunktur','Behandling')">
-        <p class="beh-num">Behandling 03</p>
+      <div class="beh-card" role="button" tabindex="0" aria-label="Boka Akupunktur, 950 kronor, 60 minuter — kräver inloggning" onclick="showLoginRequired('Akupunktur','Behandling')" onkeydown="if(event.key==='Enter')showLoginRequired('Akupunktur','Behandling')">
+        <p class="beh-num" aria-hidden="true">Behandling 03</p>
         <h3 class="beh-name">Akupunktur</h3>
         <p class="beh-desc">Traditionell kinesisk medicin för att balansera kroppens energiflöde.</p>
         <div class="beh-footer"><span class="beh-dur">60 min</span><span class="beh-price">950 kr</span></div>
       </div>
-      <div class="beh-card" role="button" tabindex="0" onclick="openBoka('Personlig Yogaterapi','Behandling')" onkeydown="if(event.key==='Enter')openBoka('Personlig Yogaterapi','Behandling')">
-        <p class="beh-num">Behandling 04</p>
+      <div class="beh-card" role="button" tabindex="0" aria-label="Boka Personlig Yogaterapi, 1 295 kronor, 75 minuter — kräver inloggning" onclick="showLoginRequired('Personlig Yogaterapi','Behandling')" onkeydown="if(event.key==='Enter')showLoginRequired('Personlig Yogaterapi','Behandling')">
+        <p class="beh-num" aria-hidden="true">Behandling 04</p>
         <h3 class="beh-name">Personlig Yogaterapi</h3>
         <p class="beh-desc">En till en med en yogaterapeut. Skräddarsydd praktik för din kropp och dina mål.</p>
         <div class="beh-footer"><span class="beh-dur">75 min</span><span class="beh-price">1 295 kr</span></div>
@@ -230,7 +231,7 @@
       </ul>
       <div class="price-strip">
         <div><p class="price-strip-label">Från</p><p class="price-strip-val">1 800 kr / timme</p></div>
-        <a href="#" class="btn-primary" onclick="openBoka(null,'Uthyrning');return false">Skicka förfrågan</a>
+        <a href="#" class="btn-primary" onclick="showLoginRequired(null,'Uthyrning');return false">Skicka förfrågan</a>
       </div>
     </div>
   </div>
@@ -248,44 +249,44 @@
         <button class="week-btn" aria-label="Nästa vecka">›</button>
       </div>
     </div>
-    <div class="schema-grid" role="table" aria-label="Veckoschemat">
+    <div class="schema-grid" role="group" aria-label="Veckoschemat — klicka på en klass för att boka">
       <div class="day-col today"><div class="day-head"><span class="day-name">Mån</span><span class="day-num">25</span></div><div class="day-slots">
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">5 platser kvar</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Pranayama 10:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Pranayama 10:00','Andning')"><span class="slot-time">10:00</span><span class="slot-name">Pranayama</span><span class="slot-spots">8 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">5 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Pranayama 10:00','Andning')" onkeydown="if(event.key==='Enter')showLoginRequired('Pranayama 10:00','Andning')"><span class="slot-time">10:00</span><span class="slot-name">Pranayama</span><span class="slot-spots">8 platser kvar</span></div>
         <div class="slot full" aria-disabled="true"><span class="slot-time">18:30</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">Fullbokat</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Yin Yoga 20:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Yin Yoga 20:00','Yoga')"><span class="slot-time">20:00</span><span class="slot-name">Yin Yoga</span><span class="slot-spots">3 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Yin Yoga 20:00','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Yin Yoga 20:00','Yoga')"><span class="slot-time">20:00</span><span class="slot-name">Yin Yoga</span><span class="slot-spots">3 platser kvar</span></div>
       </div></div>
       <div class="day-col"><div class="day-head"><span class="day-name">Tis</span><span class="day-num">26</span></div><div class="day-slots">
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">7 platser kvar</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Hatha Grunder 12:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Hatha Grunder 12:00','Yoga')"><span class="slot-time">12:00</span><span class="slot-name">Hatha Grunder</span><span class="slot-spots">10 platser kvar</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Yoga Nidra 19:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Yoga Nidra 19:00','Meditation')"><span class="slot-time">19:00</span><span class="slot-name">Yoga Nidra</span><span class="slot-spots">4 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">7 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Hatha Grunder 12:00','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Hatha Grunder 12:00','Yoga')"><span class="slot-time">12:00</span><span class="slot-name">Hatha Grunder</span><span class="slot-spots">10 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Yoga Nidra 19:00','Meditation')" onkeydown="if(event.key==='Enter')showLoginRequired('Yoga Nidra 19:00','Meditation')"><span class="slot-time">19:00</span><span class="slot-name">Yoga Nidra</span><span class="slot-spots">4 platser kvar</span></div>
       </div></div>
       <div class="day-col"><div class="day-head"><span class="day-name">Ons</span><span class="day-num">27</span></div><div class="day-slots">
         <div class="slot full" aria-disabled="true"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">Fullbokat</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Stillhet 10:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Stillhet 10:00','Meditation')"><span class="slot-time">10:00</span><span class="slot-name">Stillhet</span><span class="slot-spots">9 platser kvar</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Ashtanga 18:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Ashtanga 18:00','Yoga')"><span class="slot-time">18:00</span><span class="slot-name">Ashtanga</span><span class="slot-spots">2 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Stillhet 10:00','Meditation')" onkeydown="if(event.key==='Enter')showLoginRequired('Stillhet 10:00','Meditation')"><span class="slot-time">10:00</span><span class="slot-name">Stillhet</span><span class="slot-spots">9 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Ashtanga 18:00','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Ashtanga 18:00','Yoga')"><span class="slot-time">18:00</span><span class="slot-name">Ashtanga</span><span class="slot-spots">2 platser kvar</span></div>
       </div></div>
       <div class="day-col"><div class="day-head"><span class="day-name">Tor</span><span class="day-num">28</span></div><div class="day-slots">
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">6 platser kvar</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Breathwork 12:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Breathwork 12:00','Andning')"><span class="slot-time">12:00</span><span class="slot-name">Breathwork</span><span class="slot-spots">5 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">6 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Breathwork 12:00','Andning')" onkeydown="if(event.key==='Enter')showLoginRequired('Breathwork 12:00','Andning')"><span class="slot-time">12:00</span><span class="slot-name">Breathwork</span><span class="slot-spots">5 platser kvar</span></div>
         <div class="slot full" aria-disabled="true"><span class="slot-time">18:30</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">Fullbokat</span></div>
       </div></div>
       <div class="day-col"><div class="day-head"><span class="day-name">Fre</span><span class="day-num">29</span></div><div class="day-slots">
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">8 platser kvar</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Restorative Yoga 12:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Restorative Yoga 12:00','Yoga')"><span class="slot-time">12:00</span><span class="slot-name">Restorative Yoga</span><span class="slot-spots">11 platser kvar</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Ljudbad 19:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Ljudbad 19:00','Meditation')"><span class="slot-time">19:00</span><span class="slot-name">Ljudbad</span><span class="slot-spots">3 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Morgonyoga 06:30','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Morgonyoga 06:30','Yoga')"><span class="slot-time">06:30</span><span class="slot-name">Morgonyoga</span><span class="slot-spots">8 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Restorative Yoga 12:00','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Restorative Yoga 12:00','Yoga')"><span class="slot-time">12:00</span><span class="slot-name">Restorative Yoga</span><span class="slot-spots">11 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Ljudbad 19:00','Meditation')" onkeydown="if(event.key==='Enter')showLoginRequired('Ljudbad 19:00','Meditation')"><span class="slot-time">19:00</span><span class="slot-name">Ljudbad</span><span class="slot-spots">3 platser kvar</span></div>
       </div></div>
       <div class="day-col"><div class="day-head"><span class="day-name">Lör</span><span class="day-num">30</span></div><div class="day-slots">
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Vinyasa Flow 09:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Vinyasa Flow 09:00','Yoga')"><span class="slot-time">09:00</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">4 platser kvar</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Andningsworkshop 11:00','Andning')" onkeydown="if(event.key==='Enter')openBoka('Andningsworkshop 11:00','Andning')"><span class="slot-time">11:00</span><span class="slot-name">Andningsworkshop</span><span class="slot-spots">7 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Vinyasa Flow 09:00','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Vinyasa Flow 09:00','Yoga')"><span class="slot-time">09:00</span><span class="slot-name">Vinyasa Flow</span><span class="slot-spots">4 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Andningsworkshop 11:00','Andning')" onkeydown="if(event.key==='Enter')showLoginRequired('Andningsworkshop 11:00','Andning')"><span class="slot-time">11:00</span><span class="slot-name">Andningsworkshop</span><span class="slot-spots">7 platser kvar</span></div>
       </div></div>
       <div class="day-col"><div class="day-head"><span class="day-name">Sön</span><span class="day-num">31</span></div><div class="day-slots">
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Restorative Yoga 10:00','Yoga')" onkeydown="if(event.key==='Enter')openBoka('Restorative Yoga 10:00','Yoga')"><span class="slot-time">10:00</span><span class="slot-name">Restorative Yoga</span><span class="slot-spots">10 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Restorative Yoga 10:00','Yoga')" onkeydown="if(event.key==='Enter')showLoginRequired('Restorative Yoga 10:00','Yoga')"><span class="slot-time">10:00</span><span class="slot-name">Restorative Yoga</span><span class="slot-spots">10 platser kvar</span></div>
         <div class="slot full" aria-disabled="true"><span class="slot-time">12:00</span><span class="slot-name">Ljudbad</span><span class="slot-spots">Fullbokat</span></div>
-        <div class="slot" role="button" tabindex="0" onclick="openBoka('Yoga Nidra 15:00','Meditation')" onkeydown="if(event.key==='Enter')openBoka('Yoga Nidra 15:00','Meditation')"><span class="slot-time">15:00</span><span class="slot-name">Yoga Nidra</span><span class="slot-spots">5 platser kvar</span></div>
+        <div class="slot" role="button" tabindex="0" onclick="showLoginRequired('Yoga Nidra 15:00','Meditation')" onkeydown="if(event.key==='Enter')showLoginRequired('Yoga Nidra 15:00','Meditation')"><span class="slot-time">15:00</span><span class="slot-name">Yoga Nidra</span><span class="slot-spots">5 platser kvar</span></div>
       </div></div>
     </div>
-    <p style="margin-top:1.5rem;font-size:.78rem;color:var(--text-soft)">Klicka på en tidslucka för att boka. Fullbokade klasser — ställ dig på väntelista via kontaktformuläret.</p>
+    <p class="schema-note">Klicka på en tidslucka för att boka. Fullbokade klasser — kontakta oss via e-post för väntelista.</p>
   </div>
 </section>
 
@@ -295,10 +296,10 @@
     <p class="eyebrow">Priser och medlemskap</p>
     <div class="section-hdr"><h2 id="pris-h">Välj det som passar dig</h2></div>
     <div class="priser-grid">
-      <div class="pris-card"><p class="pris-tag">Enstaka</p><p class="pris-name">Drop-in</p><p class="pris-amount">120–220</p><p class="pris-per">kr per klass</p><div class="pris-div"></div><ul class="pris-list"><li>Valfri klass varje dag</li><li>Matta ingår alltid</li><li>Boka upp till 7 dagar i förväg</li></ul><a href="#" class="pris-cta" onclick="openBoka(null,'Drop-in');return false">Boka nu</a></div>
-      <div class="pris-card featured" aria-label="Populärast"><p class="pris-tag">Populärast</p><p class="pris-name">Månadsmedlem</p><p class="pris-amount">895</p><p class="pris-per">kr per månad, obegränsat</p><div class="pris-div"></div><ul class="pris-list"><li>Obegränsat antal klasser</li><li>Prioriterad bokning</li><li>20 procent rabatt på behandlingar</li><li>Matta ingår alltid</li></ul><a href="#" class="pris-cta" onclick="openBoka(null,'Månadsmedlemskap');return false">Bli medlem</a></div>
-      <div class="pris-card"><p class="pris-tag">Klippkort</p><p class="pris-name">10 klasser</p><p class="pris-amount">1 100</p><p class="pris-per">kr, giltigt 6 månader</p><div class="pris-div"></div><ul class="pris-list"><li>10 valfria klasser</li><li>Kan delas med en vän</li><li>Matta ingår</li></ul><a href="#" class="pris-cta" onclick="openBoka(null,'Klippkort');return false">Köp klippkort</a></div>
-      <div class="pris-card"><p class="pris-tag">Årsmedlem</p><p class="pris-name">Årspass</p><p class="pris-amount">7 900</p><p class="pris-per">kr per år, spara 25 procent</p><div class="pris-div"></div><ul class="pris-list"><li>Allt i månadsmedlemskapet</li><li>En gratis behandling per kvartal</li><li>Inbjudan till exklusiva events</li></ul><a href="#" class="pris-cta" onclick="openBoka(null,'Årspass');return false">Välj årspass</a></div>
+      <div class="pris-card"><p class="pris-tag">Enstaka</p><p class="pris-name">Drop-in</p><p class="pris-amount">170</p><p class="pris-per">kr per klass</p><div class="pris-div"></div><ul class="pris-list"><li>Valfri klass varje dag</li><li>Matta ingår alltid</li><li>Boka upp till 7 dagar i förväg</li></ul><button class="pris-cta" onclick="addToCart('dropin')">Lägg i varukorg</button></div>
+      <div class="pris-card featured" aria-label="Populärast"><p class="pris-tag">Populärast</p><p class="pris-name">Månadsmedlem</p><p class="pris-amount">895</p><p class="pris-per">kr per månad, obegränsat</p><div class="pris-div"></div><ul class="pris-list"><li>Obegränsat antal klasser</li><li>Prioriterad bokning</li><li>20 procent rabatt på behandlingar</li><li>Matta ingår alltid</li></ul><button class="pris-cta" onclick="addToCart('manad')">Lägg i varukorg</button></div>
+      <div class="pris-card"><p class="pris-tag">Klippkort</p><p class="pris-name">10 klasser</p><p class="pris-amount">1 100</p><p class="pris-per">kr, giltigt 6 månader</p><div class="pris-div"></div><ul class="pris-list"><li>10 valfria klasser</li><li>Kan delas med en vän</li><li>Matta ingår</li></ul><button class="pris-cta" onclick="addToCart('klipp')">Lägg i varukorg</button></div>
+      <div class="pris-card"><p class="pris-tag">Årsmedlem</p><p class="pris-name">Årspass</p><p class="pris-amount">7 900</p><p class="pris-per">kr per år, spara 25 procent</p><div class="pris-div"></div><ul class="pris-list"><li>Allt i månadsmedlemskapet</li><li>En gratis behandling per kvartal</li><li>Inbjudan till exklusiva events</li></ul><button class="pris-cta" onclick="addToCart('ar')">Lägg i varukorg</button></div>
     </div>
   </div>
 </section>
@@ -306,29 +307,17 @@
 <!-- KONTAKT -->
 <section class="kontakt-section" id="kontakt" aria-labelledby="kontakt-h">
   <div class="kontakt-inner">
-    <div>
-      <p class="eyebrow">Kontakt</p>
-      <h2 class="kontakt-h" id="kontakt-h">Vi hörs.</h2>
-      <p class="kontakt-lead">Frågor om klasser, behandlingar, uthyrning eller medlemskap? Vi svarar inom 24 timmar.</p>
-      <dl class="kontakt-list">
-        <div><dt class="kontakt-lbl">Adress</dt><dd class="kontakt-val">Strandvägen 12, 114 56 Stockholm</dd></div>
-        <div><dt class="kontakt-lbl">E-post</dt><dd class="kontakt-val">hej@stillvattenstudio.se</dd></div>
-        <div><dt class="kontakt-lbl">Telefon</dt><dd class="kontakt-val">08-123 45 67</dd></div>
-        <div><dt class="kontakt-lbl">Öppettider</dt><dd class="kontakt-val">Mån–Fre 06:30–21:00 &middot; Lör–Sön 08:00–18:00</dd></div>
-      </dl>
-    </div>
-    <div class="form-box">
-      <h3>Skicka ett meddelande</h3>
-      <form onsubmit="handleKontakt(event)" aria-label="Kontaktformulär" novalidate>
-        <div class="f-row">
-          <div class="f-group"><label class="f-label" for="k-namn">Namn</label><input type="text" id="k-namn" class="f-input" placeholder="Ditt namn" autocomplete="name" required aria-required="true"></div>
-          <div class="f-group"><label class="f-label" for="k-email">E-post</label><input type="email" id="k-email" class="f-input" placeholder="din@email.se" autocomplete="email" required aria-required="true"></div>
-        </div>
-        <div class="f-group"><label class="f-label" for="k-amne">Ämne</label><select id="k-amne" class="f-select"><option value="">Välj ämne</option><option>Klasser</option><option>Behandlingar</option><option>Uthyrning</option><option>Medlemskap</option><option>Övrigt</option></select></div>
-        <div class="f-group"><label class="f-label" for="k-msg">Meddelande</label><textarea id="k-msg" class="f-input" rows="4" placeholder="Berätta mer…"></textarea></div>
-        <button type="submit" class="sub-btn">Skicka meddelande</button>
-        <p class="f-note">Vi svarar inom ett dygn på vardagar.</p>
-      </form>
+    <p class="eyebrow">Kontakt</p>
+    <h2 class="kontakt-h" id="kontakt-h">Vi hörs.</h2>
+    <p class="kontakt-lead">Frågor om klasser, behandlingar, uthyrning eller medlemskap? Vi svarar inom 24 timmar på vardagar.</p>
+    <dl class="kontakt-list">
+      <div><dt class="kontakt-lbl">Adress</dt><dd class="kontakt-val">Strandvägen 12, 114 56 Stockholm</dd></div>
+      <div><dt class="kontakt-lbl">Telefon</dt><dd class="kontakt-val"><a href="tel:0812345678">08-123 45 67</a></dd></div>
+      <div><dt class="kontakt-lbl">Öppettider</dt><dd class="kontakt-val">Mån–Fre 06:30–21:00 &middot; Lör–Sön 08:00–18:00</dd></div>
+    </dl>
+    <div class="kontakt-mail-block">
+      <p class="kontakt-mail-label">Maila oss</p>
+      <a href="mailto:hej@stillvattenstudio.se" class="kontakt-mail-link">hej@stillvattenstudio.se</a>
     </div>
   </div>
 </section>
@@ -391,7 +380,7 @@
       <div class="boka-step" id="step-2" role="tabpanel" aria-label="Välj datum och tid">
         <div class="chosen-class-bar" id="chosen-bar">
           <div><p class="chosen-class-name" id="chosen-name"></p><p class="chosen-class-info" id="chosen-info"></p></div>
-          <span style="font-size:.7rem;color:var(--text-soft);cursor:pointer" onclick="goToStep(1)">Byt</span>
+          <button class="chosen-change-btn" onclick="goToStep(1)">Byt</button>
         </div>
         <div class="cal-container">
           <div class="cal-nav">
@@ -470,47 +459,84 @@
   </div>
 </div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div> id="toast" role="status" aria-live="polite"></div>
+<!-- YOGA CART DRAWER -->
+<div class="yoga-cart-overlay" id="yoga-cart-overlay" role="dialog" aria-modal="true" aria-label="Varukorg">
+  <div class="yoga-cart-drawer">
+    <div class="yoga-cart-head">
+      <p class="yoga-cart-title">Varukorg</p>
+      <button class="yoga-cart-close" id="yoga-cart-close" aria-label="Stäng varukorg">✕</button>
+    </div>
+    <div class="cart-view" id="yoga-cart-view">
+      <div class="yoga-cart-body" id="yoga-cart-body">
+        <div class="yoga-cart-empty" id="yoga-cart-empty">
+          <div class="yoga-cart-empty-icon" aria-hidden="true"></div>
+          <p>Varukorgen är tom. Välj ett kort eller medlemskap nedan.</p>
+        </div>
+      </div>
+      <div class="yoga-cart-foot" id="yoga-cart-foot" style="display:none">
+        <div class="yoga-cart-total">
+          <span class="yoga-cart-total-lbl">Totalt</span>
+          <span class="yoga-cart-total-val" id="yoga-cart-total">0 kr</span>
+        </div>
+        <button class="yoga-cart-checkout-btn" onclick="showYogaCheckout()">Till kassan →</button>
+        <p class="yoga-cart-note">Säker betalning · Bekräftelse skickas via e-post</p>
+      </div>
+    </div>
+    <div class="checkout-step" id="yoga-checkout-step">
+      <div class="checkout-step-head">
+        <button class="checkout-back-btn" onclick="showYogaCartView()" aria-label="Tillbaka">← Varukorg</button>
+        <p class="checkout-step-title">Dina uppgifter</p>
+      </div>
+      <div class="checkout-summary-list" id="yoga-checkout-summary"></div>
+      <div class="checkout-fields-wrap">
+        <div class="co-group">
+          <label class="co-label" for="yco-name">Namn</label>
+          <input type="text" id="yco-name" class="co-input" placeholder="För- och efternamn" autocomplete="name">
+        </div>
+        <div class="co-group">
+          <label class="co-label" for="yco-email">E-post</label>
+          <input type="email" id="yco-email" class="co-input" placeholder="din@email.se" autocomplete="email">
+        </div>
+        <div class="co-group">
+          <label class="co-label" for="yco-phone">Telefon (valfritt)</label>
+          <input type="tel" id="yco-phone" class="co-input" placeholder="07X-XXX XX XX" autocomplete="tel">
+        </div>
+        <div class="co-group">
+          <p class="co-label" id="yg-pm-label">Betalmetod</p>
+          <div class="payment-methods" role="radiogroup" aria-labelledby="yg-pm-label">
+            <label class="pm-option"><input type="radio" name="yg-payment" value="card" checked><span>Kortbetalning</span></label>
+            <label class="pm-option"><input type="radio" name="yg-payment" value="swish"><span>Swish</span></label>
+            <label class="pm-option"><input type="radio" name="yg-payment" value="invoice"><span>Faktura (30 dagar)</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="checkout-total-bar">
+        <span class="checkout-total-lbl">Totalt att betala</span>
+        <span class="checkout-total-amt" id="yoga-checkout-total">0 kr</span>
+      </div>
+      <button class="checkout-confirm" onclick="yogaConfirmOrder()">Slutför köp</button>
+    </div>
+  </div>
+</div>
 
-<script>
-const ham=document.getElementById('ham'),mobNav=document.getElementById('mob-nav');
-document.getElementById('mob-close').addEventListener('click',closeMob);
-ham.addEventListener('click',()=>{const o=mobNav.classList.toggle('open');ham.setAttribute('aria-expanded',String(o));});
-mobNav.querySelectorAll('a').forEach(l=>l.addEventListener('click',closeMob));
-function closeMob(){mobNav.classList.remove('open');ham.setAttribute('aria-expanded','false');}
+<!-- LOGIN REQUIRED -->
+<div class="lr-overlay" id="lr-overlay" role="dialog" aria-modal="true" aria-label="Inloggning krävs">
+  <div class="lr-box">
+    <button class="lr-close" id="lr-close" aria-label="Stäng">Stäng</button>
+    <div class="lr-lock" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <h2 class="lr-title">Logga in för att boka</h2>
+    <p class="lr-text">Du behöver ett konto för att boka klasser och behandlingar. Inloggning ger dig även tillgång till bokningshistorik och enkla avbokningar.</p>
+    <div class="lr-btns">
+      <button class="lr-primary">Skapa konto</button>
+      <button class="lr-ghost">Logga in</button>
+    </div>
+    <p class="lr-note">Gratis och tar under en minut.</p>
+  </div>
+</div>
 
-document.querySelectorAll('.tab-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
-    document.querySelectorAll('.panel').forEach(p=>{p.classList.remove('active');p.hidden=true;});
-    btn.classList.add('active');btn.setAttribute('aria-selected','true');
-    const p=document.getElementById('p-'+btn.dataset.tab);p.classList.add('active');p.hidden=false;
-  });
-  btn.addEventListener('keydown',e=>{
-    const tabs=[...document.querySelectorAll('.tab-btn')],i=tabs.indexOf(btn);
-    if(e.key==='ArrowRight'){tabs[(i+1)%tabs.length].focus();tabs[(i+1)%tabs.length].click();}
-    if(e.key==='ArrowLeft'){tabs[(i-1+tabs.length)%tabs.length].focus();tabs[(i-1+tabs.length)%tabs.length].click();}
-  });
-});
-
-const overlay=document.getElementById('boka-overlay');
-document.getElementById('m-close').addEventListener('click',closeBoka);
-overlay.addEventListener('click',e=>{if(e.target===overlay)closeBoka();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBoka();});
-function openBoka(klass,typ){
-  document.getElementById('m-form-wrap').style.display='block';
-  document.getElementById('m-success').style.display='none';
-  if(klass)document.getElementById('b-klass').value=klass;
-  if(typ)document.getElementById('m-eye').textContent=typ;
-  overlay.classList.add('open');document.body.style.overflow='hidden';
-  document.getElementById('m-close').focus();
-}
-function closeBoka(){overlay.classList.remove('open');document.body.style.overflow='';}
-function handleBoka(e){e.preventDefault();document.getElementById('m-form-wrap').style.display='none';document.getElementById('m-success').style.display='block';}
-function handleKontakt(e){e.preventDefault();e.target.reset();showToast('Meddelande skickat. Vi hörs av oss!');}
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
-</script>
-
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 /* ── NAV ── */
@@ -535,265 +561,131 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
   });
 });
 
-/* ── BOKNINGSSYSTEM ── */
-const classes = [
-  {id:'yin',      name:'Yin Yoga',         cat:'yoga',      dur:60,  price:150, inst:'Sofia K.',   level:'Alla nivåer'},
-  {id:'vinyasa',  name:'Vinyasa Flow',      cat:'yoga',      dur:75,  price:150, inst:'Marcus L.',  level:'Medel'},
-  {id:'hatha',    name:'Hatha Grunder',     cat:'yoga',      dur:60,  price:130, inst:'Anna W.',    level:'Nybörjare'},
-  {id:'morgon',   name:'Morgonyoga',        cat:'yoga',      dur:45,  price:120, inst:'Sofia K.',   level:'Alla nivåer'},
-  {id:'ashtanga', name:'Ashtanga',          cat:'yoga',      dur:90,  price:170, inst:'Erik S.',    level:'Avancerad'},
-  {id:'rest',     name:'Restorative Yoga',  cat:'yoga',      dur:75,  price:160, inst:'Anna W.',    level:'Alla nivåer'},
-  {id:'prana',    name:'Pranayama',         cat:'andning',   dur:60,  price:140, inst:'Erik S.',    level:'Alla nivåer'},
-  {id:'breath',   name:'Breathwork',        cat:'andning',   dur:90,  price:190, inst:'Maria T.',   level:'Medel'},
-  {id:'nidra',    name:'Yoga Nidra',        cat:'meditation',dur:75,  price:160, inst:'Anna W.',    level:'Alla nivåer'},
-  {id:'ljud',     name:'Ljudbad',           cat:'meditation',dur:60,  price:220, inst:'Maria T.',   level:'Alla nivåer'},
-  {id:'still',    name:'Stillhet',          cat:'meditation',dur:45,  price:120, inst:'Sofia K.',   level:'Alla nivåer'},
-];
-const classTimes = {
-  yin:['07:30','12:00','18:30','20:00'], vinyasa:['06:30','12:30','18:30'],
-  hatha:['10:00','14:00','18:00'], morgon:['06:30','07:00'],
-  ashtanga:['06:30','18:00'], rest:['12:00','17:00'],
-  prana:['10:00','18:00'], breath:['12:00','19:00'],
-  nidra:['12:00','19:00'], ljud:['12:00','19:00'], still:['08:00','19:30'],
-};
-
-let bs = {step:1, cls:null, date:null, time:null, calYear:0, calMonth:0};
-
-/* Startar modal */
-function openBoka(klassNamn, typ) {
-  const overlay=document.getElementById('boka-overlay');
-  bs = {step:1, cls:null, date:null, time:null, calYear:new Date().getFullYear(), calMonth:new Date().getMonth()};
-  if(klassNamn) {
-    const match = classes.find(c=>c.name===klassNamn||c.id===klassNamn);
-    if(match) { bs.cls=match; bs.step=2; }
-  }
-  renderStep(bs.step);
-  overlay.classList.add('open');
+/* ── LOGIN REQUIRED ── */
+function showLoginRequired() {
+  document.getElementById('lr-overlay').classList.add('open');
   document.body.style.overflow='hidden';
-  document.getElementById('m-close').focus();
+  document.getElementById('lr-close').focus();
 }
-
-document.getElementById('m-close').addEventListener('click',closeBoka);
-document.getElementById('boka-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('boka-overlay'))closeBoka();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('boka-overlay').classList.contains('open'))closeBoka();});
-function closeBoka(){document.getElementById('boka-overlay').classList.remove('open');document.body.style.overflow='';}
-
-/* Navigering */
-document.getElementById('btn-back').addEventListener('click',()=>{
-  if(bs.step>1){bs.step--;renderStep(bs.step);}
-});
-document.getElementById('btn-next').addEventListener('click',()=>{
-  if(bs.step===3){handleConfirm();return;}
-  if(bs.step<4){bs.step++;renderStep(bs.step);}
+function closeLoginRequired() {
+  document.getElementById('lr-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('lr-close').addEventListener('click',closeLoginRequired);
+document.getElementById('lr-overlay').addEventListener('click',e=>{
+  if(e.target===document.getElementById('lr-overlay'))closeLoginRequired();
 });
 
-function renderStep(n) {
-  document.querySelectorAll('.boka-step').forEach(s=>s.classList.remove('active'));
-  document.getElementById('step-'+n).classList.add('active');
-  // Steg-indikatorer
-  [1,2,3].forEach(i=>{
-    const el=document.getElementById('si-'+i);
-    el.classList.remove('active','done');
-    if(i<n) el.classList.add('done');
-    if(i===n) el.classList.add('active');
-  });
-  // Knappar
-  const back=document.getElementById('btn-back'),next=document.getElementById('btn-next');
-  back.classList.toggle('hidden', n===1||n===4);
-  if(n===1){next.textContent='Välj datum';next.disabled=!bs.cls;}
-  if(n===2){next.textContent='Välj uppgifter';next.disabled=!(bs.date&&bs.time);}
-  if(n===3){next.textContent='Bekräfta bokning';next.disabled=false;}
-  if(n===4){next.textContent='Stäng';next.disabled=false;next.onclick=closeBoka;}
+/* ── YOGA CART ── */
+const memberships = [
+  {id:'dropin', name:'Drop-in (1 klass)',    price:170,  desc:'Valfri klass · Matta ingår'},
+  {id:'manad',  name:'Månadsmedlemskap',      price:895,  desc:'Obegränsat · Prioriterad bokning'},
+  {id:'klipp',  name:'Klippkort (10 klasser)',price:1100, desc:'Giltigt 6 månader · Kan delas'},
+  {id:'ar',     name:'Årspass',               price:7900, desc:'Spara 25% · Gratis behandling/kvartal'},
+];
 
-  if(n===1) renderClassList('yoga');
-  if(n===2) renderCalendar();
-  if(n===3) renderRecap();
-  if(n===4) renderConfirm();
+let yogaCart=[];
+
+function addToCart(id){
+  if(yogaCart.find(i=>i.id===id)){showToast('Redan tillagt i varukorgen.');return;}
+  const item=memberships.find(m=>m.id===id);
+  if(!item)return;
+  yogaCart.push({...item});
+  updateYogaCartUI();
+  openYogaCart();
+  showToast(item.name+' tillagd i varukorgen.');
 }
 
-/* STEG 1: Klasslista */
-let activeStepCat='yoga';
-function renderClassList(cat) {
-  activeStepCat=cat;
-  const list=document.getElementById('class-list');
-  const filtered=classes.filter(c=>c.cat===cat);
-  list.innerHTML=filtered.map(c=>`
-    <div class="class-row${bs.cls&&bs.cls.id===c.id?' chosen':''}"
-         role="button" tabindex="0"
-         data-id="${c.id}"
-         aria-pressed="${bs.cls&&bs.cls.id===c.id}"
-         aria-label="${c.name}, ${c.price} kronor, ${c.dur} minuter">
+function removeFromYogaCart(id){
+  yogaCart=yogaCart.filter(i=>i.id!==id);
+  updateYogaCartUI();
+}
+
+function updateYogaCartUI(){
+  const n=yogaCart.length;
+  const badge=document.getElementById('yoga-cart-badge');
+  badge.textContent=n;
+  n>0?badge.classList.add('show'):badge.classList.remove('show');
+
+  const body=document.getElementById('yoga-cart-body');
+  const foot=document.getElementById('yoga-cart-foot');
+  const empty=document.getElementById('yoga-cart-empty');
+  const total=yogaCart.reduce((s,i)=>s+i.price,0);
+  document.getElementById('yoga-cart-total').textContent=total.toLocaleString('sv-SE')+' kr';
+
+  if(!yogaCart.length){
+    empty.style.display='flex';
+    foot.style.display='none';
+    body.innerHTML='';
+    body.appendChild(empty);
+    return;
+  }
+  empty.style.display='none';
+  foot.style.display='block';
+  body.innerHTML=yogaCart.map(i=>`
+    <div class="yoga-cart-item">
       <div>
-        <p class="class-row-name">${c.name}</p>
-        <div class="class-row-meta">
-          <span>${c.dur} min</span>
-          <span>${c.level}</span>
-          <span>${c.inst}</span>
-        </div>
+        <p class="yoga-cart-item-name">${i.name}</p>
+        <p class="yoga-cart-item-desc">${i.desc}</p>
       </div>
-      <span class="class-row-price">${c.price} kr</span>
+      <div class="yoga-cart-item-right">
+        <p class="yoga-cart-item-price">${i.price.toLocaleString('sv-SE')} kr</p>
+        <button class="yoga-cart-item-rm" onclick="removeFromYogaCart('${i.id}')" aria-label="Ta bort ${i.name}">Ta bort</button>
+      </div>
     </div>`).join('');
-  list.querySelectorAll('.class-row').forEach(row=>{
-    const select=()=>{
-      bs.cls=classes.find(c=>c.id===row.dataset.id);
-      document.getElementById('btn-next').disabled=false;
-      list.querySelectorAll('.class-row').forEach(r=>{r.classList.remove('chosen');r.setAttribute('aria-pressed','false');});
-      row.classList.add('chosen');row.setAttribute('aria-pressed','true');
-    };
-    row.addEventListener('click',select);
-    row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')select();});
-  });
 }
-document.querySelectorAll('.step-tab').forEach(tab=>{
-  tab.addEventListener('click',()=>{
-    document.querySelectorAll('.step-tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false');});
-    tab.classList.add('active');tab.setAttribute('aria-selected','true');
-    renderClassList(tab.dataset.cat);
-  });
-});
 
-/* STEG 2: Kalender */
-function renderCalendar() {
-  if(bs.cls){
-    document.getElementById('chosen-name').textContent=bs.cls.name;
-    document.getElementById('chosen-info').textContent=bs.cls.dur+' min · '+bs.cls.inst+' · '+bs.cls.price+' kr';
+function openYogaCart(){
+  document.getElementById('yoga-cart-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('yoga-cart-close').focus();
+}
+function closeYogaCart(){
+  document.getElementById('yoga-cart-overlay').classList.remove('open');
+  document.body.style.overflow='';
+  showYogaCartView();
+}
+
+function showYogaCheckout(){
+  const total=yogaCart.reduce((s,i)=>s+i.price,0);
+  document.getElementById('yoga-checkout-summary').innerHTML=yogaCart.map(i=>
+    `<div class="checkout-summary-item"><span class="checkout-summary-name">${i.name}</span><span class="checkout-summary-price">${i.price.toLocaleString('sv-SE')} kr</span></div>`
+  ).join('');
+  document.getElementById('yoga-checkout-total').textContent=total.toLocaleString('sv-SE')+' kr';
+  document.getElementById('yoga-cart-view').style.display='none';
+  document.getElementById('yoga-checkout-step').classList.add('active');
+}
+
+function showYogaCartView(){
+  document.getElementById('yoga-cart-view').style.display='';
+  document.getElementById('yoga-checkout-step').classList.remove('active');
+}
+
+function yogaConfirmOrder(){
+  const name=document.getElementById('yco-name').value.trim();
+  const email=document.getElementById('yco-email').value.trim();
+  if(!name||!email){showToast('Fyll i namn och e-post för att fortsätta.');return;}
+  yogaCart=[];
+  updateYogaCartUI();
+  closeYogaCart();
+  document.getElementById('yco-name').value='';
+  document.getElementById('yco-email').value='';
+  showToast('Tack! Beställningen är mottagen. Bekräftelse skickas till '+email+'.');
+}
+
+document.getElementById('yoga-cart-btn').addEventListener('click',openYogaCart);
+document.getElementById('yoga-cart-close').addEventListener('click',closeYogaCart);
+document.getElementById('yoga-cart-overlay').addEventListener('click',e=>{
+  if(e.target===document.getElementById('yoga-cart-overlay'))closeYogaCart();
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(document.getElementById('lr-overlay').classList.contains('open'))closeLoginRequired();
+    else if(document.getElementById('yoga-cart-overlay').classList.contains('open'))closeYogaCart();
   }
-  buildCalendar(bs.calYear,bs.calMonth);
-}
-document.getElementById('cal-prev').addEventListener('click',()=>{
-  bs.calMonth--;if(bs.calMonth<0){bs.calMonth=11;bs.calYear--;}
-  buildCalendar(bs.calYear,bs.calMonth);
 });
-document.getElementById('cal-next').addEventListener('click',()=>{
-  bs.calMonth++;if(bs.calMonth>11){bs.calMonth=0;bs.calYear++;}
-  buildCalendar(bs.calYear,bs.calMonth);
-});
-function buildCalendar(year,month) {
-  const months=['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
-  document.getElementById('cal-month-label').textContent=months[month]+' '+year;
-  const grid=document.getElementById('cal-grid');
-  const today=new Date(),firstDay=new Date(year,month,1),daysInMonth=new Date(year,month+1,0).getDate();
-  let startDow=firstDay.getDay(); if(startDow===0)startDow=7; // Måndag först
-  let html='';
-  for(let i=1;i<startDow;i++) html+='<div class="cal-day empty" aria-hidden="true"></div>';
-  for(let d=1;d<=daysInMonth;d++){
-    const date=new Date(year,month,d);
-    const isPast=date<new Date(today.getFullYear(),today.getMonth(),today.getDate());
-    const isToday=d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
-    const isSelected=bs.date&&bs.date.d===d&&bs.date.m===month&&bs.date.y===year;
-    let cls='cal-day';
-    if(isPast) cls+=' past';
-    if(isToday) cls+=' today';
-    if(!isPast) cls+=' has-class';
-    if(isSelected) cls+=' selected';
-    html+=`<div class="${cls}" data-d="${d}" data-m="${month}" data-y="${year}"
-      role="gridcell" tabindex="${isPast?-1:0}"
-      aria-label="${d} ${months[month]}${isToday?' (idag)':''}${isSelected?' (vald)':''}"
-      ${isPast?'aria-disabled="true"':''}>${d}</div>`;
-  }
-  grid.innerHTML=html;
-  grid.querySelectorAll('.cal-day.has-class').forEach(el=>{
-    const select=()=>{
-      bs.date={d:+el.dataset.d,m:+el.dataset.m,y:+el.dataset.y};
-      bs.time=null;
-      grid.querySelectorAll('.cal-day').forEach(c=>c.classList.remove('selected'));
-      el.classList.add('selected');
-      renderTimeSlots();
-    };
-    el.addEventListener('click',select);
-    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')select();});
-  });
-  // Om datum redan valt
-  if(bs.date&&bs.date.m===month&&bs.date.y===year) renderTimeSlots();
-  else {document.getElementById('time-section').style.display='none';}
-}
-function renderTimeSlots() {
-  if(!bs.cls||!bs.date) return;
-  const sec=document.getElementById('time-section');
-  const months=['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
-  document.getElementById('slots-title').textContent='Tider för '+bs.date.d+' '+months[bs.date.m];
-  const times=classTimes[bs.cls.id]||['10:00','18:00'];
-  // Deterministisk "ledig" baserat på datum + tid
-  const hash=(s)=>s.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
-  const slotsHtml=times.map(t=>{
-    const h=hash(bs.cls.id+bs.date.d+bs.date.m+t)%12;
-    const spots=h===0?0:[2,3,4,5,6,7,8,9,10][h%9];
-    const isFull=spots===0;
-    const isSel=bs.time===t;
-    return`<div class="time-slot${isFull?' full':''}${isSel?' selected':''}"
-      data-time="${t}" role="button" tabindex="${isFull?-1:0}"
-      aria-pressed="${isSel}" aria-label="${t}, ${isFull?'fullbokat':spots+' platser kvar'}">
-      <span class="slot-time">${t}</span>
-      <span class="slot-spots">${isFull?'Fullbokat':spots+' kvar'}</span>
-    </div>`;
-  }).join('');
-  document.getElementById('slots-grid').innerHTML=slotsHtml;
-  sec.style.display='block';
-  document.querySelectorAll('.time-slot:not(.full)').forEach(el=>{
-    const sel=()=>{
-      bs.time=el.dataset.time;
-      document.querySelectorAll('.time-slot').forEach(s=>{s.classList.remove('selected');s.setAttribute('aria-pressed','false');});
-      el.classList.add('selected');el.setAttribute('aria-pressed','true');
-      document.getElementById('btn-next').disabled=false;
-    };
-    el.addEventListener('click',sel);
-    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')sel();});
-  });
-}
 
-/* STEG 3: Sammanfattning */
-const months2=['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
-function renderRecap(){
-  if(!bs.cls||!bs.date||!bs.time) return;
-  document.getElementById('booking-recap').innerHTML=`
-    <div class="recap-item"><p class="recap-label">Klass</p><p class="recap-val">${bs.cls.name}</p></div>
-    <div class="recap-item"><p class="recap-label">Datum</p><p class="recap-val">${bs.date.d} ${months2[bs.date.m]} ${bs.date.y}</p></div>
-    <div class="recap-item"><p class="recap-label">Tid</p><p class="recap-val">${bs.time}</p></div>
-    <div class="recap-item"><p class="recap-label">Lärare</p><p class="recap-val">${bs.cls.inst}</p></div>`;
-  document.getElementById('price-total').textContent=bs.cls.price+' kr';
-}
-
-/* STEG 4: Bekräftelse */
-function handleConfirm(){
-  const name=document.getElementById('d-namn').value.trim();
-  const email=document.getElementById('d-email').value.trim();
-  if(!name||!email){showToast('Fyll i namn och e-post för att bekräfta.');return;}
-  bs.step=4;renderStep(4);
-}
-function renderConfirm(){
-  if(!bs.cls||!bs.date||!bs.time) return;
-  const email=document.getElementById('d-email').value.trim()||'din e-post';
-  document.getElementById('confirm-details').innerHTML=`
-    <div class="conf-item"><p class="conf-label">Klass</p><p class="conf-val">${bs.cls.name}</p></div>
-    <div class="conf-item"><p class="conf-label">Datum</p><p class="conf-val">${bs.date.d} ${months2[bs.date.m]} ${bs.date.y}</p></div>
-    <div class="conf-item"><p class="conf-label">Tid</p><p class="conf-val">${bs.time}</p></div>
-    <div class="conf-item"><p class="conf-label">Lärare</p><p class="conf-val">${bs.cls.inst}</p></div>
-    <div class="conf-item"><p class="conf-label">Pris</p><p class="conf-val">${bs.cls.price} kr</p></div>
-    <div class="conf-item"><p class="conf-label">Varaktighet</p><p class="conf-val">${bs.cls.dur} min</p></div>`;
-  document.getElementById('conf-email').textContent='Bekräftelse skickas till '+email;
-}
-
-function goToStep(n){bs.step=n;renderStep(n);}
-
-/* Kontaktformulär */
-function handleKontakt(e){
-  e.preventDefault();e.target.reset();
-  showToast('Meddelande skickat. Vi hörs av oss!');
-}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
-</script>
-
-<script>
-(function(){
-  var btn=document.getElementById('theme-btn');
-  var html=document.documentElement;
-  function apply(dark){
-    if(dark){html.classList.add('dark');btn.textContent='Ljust';btn.setAttribute('aria-label','Byt till ljust l\u00e4ge');btn.setAttribute('aria-pressed','true');}
-    else{html.classList.remove('dark');btn.textContent='M\u00f6rkt';btn.setAttribute('aria-label','Byt till m\u00f6rkt l\u00e4ge');btn.setAttribute('aria-pressed','false');}
-  }
-  apply(localStorage.getItem('theme')==='dark');
-  btn.addEventListener('click',function(){var d=!html.classList.contains('dark');apply(d);localStorage.setItem('theme',d?'dark':'light');});
-})();
 </script>
 </body>
 </html>
