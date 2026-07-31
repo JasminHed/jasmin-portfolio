@@ -291,6 +291,32 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   align-self: flex-start;
 }
 
+.work-open {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+.widget-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.widget-list strong {
+  color: #111;
+  font-weight: 600;
+}
+
 .scope {
   padding: 4rem 6vw 1rem;
   max-width: 640px;
