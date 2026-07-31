@@ -3,53 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jasmin Hedlund — Webbsidor</title>
+<title>Jasmin Hedlund | Webbsidor</title>
 <meta name="description" content="Ett urval av webbsidor byggda av Jasmin Hedlund.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="site-header">
   <span class="wordmark">Jasmin Hedlund</span>
-  <a href="#kontakt" class="header-link">Kontakt</a>
+  <nav class="site-nav">
+    <a href="#arbete" data-en="Work">Arbete</a>
+    <a href="#tjanster" data-en="Services">Tjänster</a>
+    <a href="#priser" data-en="Pricing">Priser</a>
+  </nav>
+  <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch to English">EN</button>
+  <a href="mailto:jasminhedlund@gmail.com" class="header-cta" data-en="Contact me">Kontakta mig</a>
 </header>
 
 <main>
 
   <section class="hero">
-    <h1>Webbsidor, byggda med omsorg.</h1>
-    <p class="hero-sub">Ett urval av sidor jag designat och byggt — se dem live nedan.</p>
+    <span class="hero-eyebrow" data-en="Freelance web designer">Frilansande webbdesigner</span>
+    <h1 data-en="Websites, built with care.">Webbsidor, byggda med omsorg.</h1>
+    <p class="hero-sub" data-en="I design and build simple, clean websites for small businesses, from idea to a live site.">Jag designar och bygger enkla, snygga webbsidor för småföretag, från idé till färdig sida online.</p>
+    <div class="hero-tags">
+      <span data-en="Web design">Webbdesign</span>
+      <span data-en="Responsive design">Responsiv design</span>
+      <span data-en="Fast delivery">Snabb leverans</span>
+      <span data-en="Maintenance">Underhåll</span>
+    </div>
   </section>
 
-  <section class="work" id="arbete" aria-label="Arbeten">
-
-    <a class="work-item" href="https://healthbyjasmin.netlify.app" target="_blank" rel="noopener">
-      <span class="work-label">Hälsa &amp; wellness</span>
-      <h2 class="work-title">Health by Jasmin</h2>
-      <p class="work-desc">Min egen sida för hälsocoaching.</p>
-      <span class="work-link">Se sidan ↗</span>
-    </a>
-
-    <a class="work-item" href="#" aria-disabled="true">
-      <span class="work-label">Yoga</span>
-      <h2 class="work-title">Yogastudio</h2>
-      <p class="work-desc">Kommer snart.</p>
-      <span class="work-link">Se sidan ↗</span>
-    </a>
-
-    <a class="work-item" href="#" aria-disabled="true">
-      <span class="work-label">Bokhandel</span>
-      <h2 class="work-title">Bokhandel</h2>
-      <p class="work-desc">Kommer snart.</p>
-      <span class="work-link">Se sidan ↗</span>
-    </a>
-
+  <section class="services reveal" id="tjanster" aria-label="Tjänster">
+    <span class="section-label" data-en="What I offer">Vad jag erbjuder</span>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3 data-en="Web design">Webbdesign</h3>
+        <p data-en="A custom site built from scratch, tailored to you and your business.">Skräddarsydd sida byggd från grunden, anpassad efter dig och din verksamhet.</p>
+      </div>
+      <div class="service-item">
+        <h3 data-en="Responsive design">Responsiv design</h3>
+        <p data-en="Works just as well on mobile, tablet and desktop.">Fungerar lika bra på mobil, surfplatta och dator.</p>
+      </div>
+      <div class="service-item">
+        <h3 data-en="Fast delivery">Snabb leverans</h3>
+        <p data-en="From first contact to a finished, live site in no time.">Från första kontakt till en färdig, live sida på kort tid.</p>
+      </div>
+      <div class="service-item">
+        <h3 data-en="Maintenance">Underhåll</h3>
+        <p data-en="Ongoing help with text, images and small changes after launch.">Löpande hjälp med text, bilder och mindre ändringar efter lansering.</p>
+      </div>
+      <div class="service-item">
+        <h3 data-en="Booking system">Bokningssystem</h3>
+        <p data-en="A custom-built booking system: both you and the customer get an email confirmation.">Ett egenbyggt bokningssystem: både du och kunden får en bekräftelse via mejl.</p>
+      </div>
+    </div>
   </section>
 
-  <section class="pricing" id="kontakt">
-    <p class="pricing-line">Webbsida (upp till 3 sidor): <strong>3 000 kr</strong></p>
-    <p class="pricing-line">Underhåll — text, bilder, mindre ändringar: <strong>800 kr/mån</strong></p>
-    <a class="contact-email" href="mailto:jasminhedlund@gmail.com">jasminhedlund@gmail.com</a>
+  <section class="process reveal" id="process" aria-label="Så går det till">
+    <span class="section-label" data-en="How it works">Så går det till</span>
+    <ol class="process-list">
+      <li>
+        <h3 data-en="Inspiration">Inspiration</h3>
+        <p data-en="You look through my examples: simple websites without accounts or e-commerce, adaptable to many types of businesses, with animations and smooth scrolling, to find a style you like.">Du tittar igenom mina exempel: enkla webbsidor utan konto eller e-handel, anpassningsbara för många olika verksamheter, med animationer och behaglig scrollning, för att hitta en stil du gillar.</p>
+      </li>
+      <li>
+        <h3 data-en="Meeting">Möte</h3>
+        <p data-en="We have a meeting where you tell me about your business and your wishes.">Vi tar ett möte där du berättar om din verksamhet och dina önskemål.</p>
+      </li>
+      <li>
+        <h3 data-en="Build">Bygge</h3>
+        <p data-en="I build the site based on what we've agreed on.">Jag bygger sidan utifrån det vi kommit överens om.</p>
+      </li>
+      <li>
+        <h3 data-en="Delivery">Leverans</h3>
+        <p data-en="The site is finished in about 2 weeks and handed over to you.">Sidan blir klar inom ca 2 veckor och överlämnas till dig.</p>
+      </li>
+      <li>
+        <h3 data-en="Maintenance">Underhåll</h3>
+        <p data-en="We then continue with ongoing maintenance. Contact is by email.">Vi fortsätter sedan med löpande underhåll. Kontakt sker via mejl.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="work-section reveal" id="arbete" aria-label="Arbeten">
+    <span class="section-label" data-en="Example work">Exempel på arbete</span>
+    <div class="work">
+
+      <a class="work-item" href="https://healthbyjasmin.netlify.app" target="_blank" rel="noopener">
+        <span class="work-label" data-en="Health &amp; wellness">Hälsa &amp; wellness</span>
+        <h2 class="work-title">Health by Jasmin</h2>
+        <p class="work-desc" data-en="My own site for health coaching, with a custom-built booking system.">Min egen sida för hälsocoaching, med ett egenbyggt bokningssystem.</p>
+        <span class="work-link" data-en="View site ↗">Se sidan ↗</span>
+      </a>
+
+      <a class="work-item" href="https://yogastudiod.netlify.app/" target="_blank" rel="noopener">
+        <span class="work-label">Yoga</span>
+        <h2 class="work-title">Yogastudio</h2>
+        <p class="work-desc" data-en="Shows a site for a smaller studio, for example yoga, jewelry or photography, extendable with widgets for booking and the full customer journey.">Visar en sida för en mindre studio, till exempel yoga, smycken eller fotografering, som kan byggas ut med widgets för bokning och hela kundresan.</p>
+        <span class="work-link" data-en="View site ↗">Se sidan ↗</span>
+      </a>
+
+      <a class="work-item" href="#" aria-disabled="true">
+        <span class="work-label" data-en="E-commerce">E-handel</span>
+        <h2 class="work-title" data-en="Bookstore">Bokhandel</h2>
+        <p class="work-desc" data-en="Shows how a simple e-shop can be built, with widgets for cart and payment. Coming soon.">Visar hur en enkel e-handel kan byggas, med widgets för kundvagn och betalning. Kommer snart.</p>
+        <span class="work-link" data-en="View site ↗">Se sidan ↗</span>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="testimonials reveal" id="referenser" aria-label="Vad kunder säger">
+    <span class="section-label" data-en="What clients say">Vad kunder säger</span>
+    <div class="testimonial-grid">
+      <blockquote class="testimonial">
+        <p data-en="Jasmin understood exactly what we wanted and delivered a site we're really happy with. Smooth and professional the whole way.">Jasmin förstod precis vad vi ville ha och levererade en sida vi är jättenöjda med. Smidigt och proffsigt hela vägen.</p>
+        <cite>Zikki Design</cite>
+      </blockquote>
+      <blockquote class="testimonial">
+        <p data-en="Fast, clear communication and a site that turned out exactly as we imagined. Highly recommended!">Snabb och tydlig kommunikation, och en sida som blev precis som vi tänkt oss. Rekommenderas varmt!</p>
+        <cite>Kodcentrum</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="scope reveal" id="bra-att-veta" aria-label="Bra att veta">
+    <span class="section-label" data-en="Good to know">Bra att veta</span>
+    <ul class="scope-list">
+      <li><strong data-en="One page.">En sida.</strong> <span data-en="Just like my examples above: all content on one page, no sub-pages.">Precis som mina exempel ovan: allt innehåll samlat på en sida, inga undersidor.</span></li>
+      <li><strong data-en="Images &amp; text.">Bilder &amp; text.</strong> <span data-en="You provide the images and text for the site. They need to be ready before we start building.">Du står för bilder och text till sidan. De behöver vara klara innan vi börjar bygga.</span></li>
+      <li><strong data-en="Domain.">Domän.</strong> <span data-en="You provide and own your own domain.">Du står för och äger din egen domän.</span></li>
+      <li><strong data-en="Widgets.">Widgets.</strong> <span data-en="Want more than a simple booking confirmation, like a full customer journey, a webshop, a map or payments? That's done with third-party widgets. Just like the domain, you pay for the widget you order. It's not an extra fee from me, it's the cost of the service itself.">Vill du ha mer än en enkel bokningsbekräftelse, som en hel kundresa, en webbshop, karta eller betalning? Det löses med tredjepartswidgets. Precis som med domänen betalar du för widgeten du beställer. Det är ingen extra kostnad från mig, utan kostnaden för själva tjänsten.</span></li>
+    </ul>
+  </section>
+
+  <section class="pricing reveal" id="priser">
+    <span class="section-label" data-en="Pricing">Priser</span>
+    <p class="pricing-line" data-en="Website (one page): <strong>3 000 kr</strong>">Webbsida (en sida): <strong>3 000 kr</strong></p>
+    <p class="pricing-line" data-en="Maintenance (text, images, small changes): <strong>800 kr/month</strong>">Underhåll (text, bilder, mindre ändringar): <strong>800 kr/mån</strong></p>
+    <p class="pricing-line" data-en="Delivery time: about 2 weeks">Leveranstid: ca 2 veckor</p>
+    <p class="pricing-line" data-en="Payment: invoice via Frilans Finans, sent afterwards">Betalning: faktura via Frilans Finans, skickas i efterhand</p>
+    <a class="contact-email" id="kontakt" href="mailto:jasminhedlund@gmail.com">jasminhedlund@gmail.com</a>
   </section>
 
 </main>
@@ -57,6 +155,8 @@
 <footer class="site-footer">
   <span>Jasmin Hedlund</span>
 </footer>
+
+<script src="script.js" defer></script>
 
 </body>
 </html>
